@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 
     private ModelSurfaceView gLView;  // 这个就是真正的view
     private TouchController touchController;
-    private SceneLoader  scene;
     private ModelViewerGUI gui;
     private CollisionController collisionController;
 
@@ -103,31 +102,41 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 //
 //        }
 
-        handler = new Handler(getMainLooper());
+
 
         setContentView(R.layout.activity_main);
 
-        gLView = findViewById(R.id.backView);
+        handler = new Handler(getMainLooper());
+        gLView = (ModelSurfaceView)findViewById(R.id.backView);
 
         // Create our 3D scenario
         Log.i("ModelActivity", "Loading Scene...");
-        scene = new SceneLoader(this, paramUri, paramType, gLView);
-        if (paramUri == null) {
-            final LoaderTask task = new DemoLoaderTask(this, null, scene);
-            task.execute();
-        }
+//        scene = new SceneLoader(this, paramUri, paramType, gLView);
+//        if (paramUri == null) {
+//            final LoaderTask task = new DemoLoaderTask(this, null, scene);
+//            task.execute();
+//        }
 
         try {
             Log.i("ModelActivity", "Loading GLSurfaceView...");
 //            gLView = new ModelSurfaceView(this, backgroundColor, this.scene);
 //            gLView.addListener(this);
 //            setContentView(gLView);
-            scene.setView(gLView);
+//            scene.setView(gLView);
         } catch (Exception e) {
             Log.e("ModelActivity", e.getMessage(), e);
             Toast.makeText(this, "Error loading OpenGL view:\n" + e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
+
+        Log.i("ModelActivity", "Finished loading");
+
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         try {
             Log.i("ModelActivity", "Loading TouchController...");
             touchController = new TouchController(this);
@@ -139,10 +148,10 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 
         try {
             Log.i("ModelActivity", "Loading CollisionController...");
-            collisionController = new CollisionController(gLView, scene);
-            collisionController.addListener(scene);
+            collisionController = new CollisionController(gLView, gLView.getScene());
+            collisionController.addListener(gLView.getScene());
             touchController.addListener(collisionController);
-            touchController.addListener(scene);
+            touchController.addListener(gLView.getScene());
         } catch (Exception e) {
             Log.e("ModelActivity", e.getMessage(), e);
             Toast.makeText(this, "Error loading CollisionController\n" + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -150,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 
         try {
             Log.i("ModelActivity", "Loading CameraController...");
-            cameraController = new CameraController(scene.getCamera());
+            cameraController = new CameraController(gLView.getScene().getCamera());
             gLView.getModelRenderer().addListener(cameraController);
             touchController.addListener(cameraController);
         } catch (Exception e) {
@@ -163,19 +172,16 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 
         setupOnSystemVisibilityChangeListener();
 
+        try {
+            gLView.setTouchController(touchController);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
         // load model
-        scene.init();
-
-        Log.i("ModelActivity", "Finished loading");
-
-    }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-//        touchController.setSize(viewEvent.getWidth(), viewEvent.getHeight());
-//        gLView.setTouchController(touchController);
+//        gLView.getScene().init();
     }
 
     /**
@@ -235,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                     Log.i("ModelActivity", "Loading texture '" + uri + "'");
                     try {
                         ContentUtils.setThreadActivity(this);
-                        scene.loadTexture(null, uri);
+                        gLView.getScene().loadTexture(null, uri);
                     } catch (IOException ex) {
                         Log.e("ModelActivity", "Error loading texture: " + ex.getMessage(), ex);
                         Toast.makeText(this, "Error loading texture '" + uri + "'. " + ex

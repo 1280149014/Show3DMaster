@@ -1,6 +1,5 @@
 package org.andresoviedo.android_3d_model_engine.view;
 
-import android.app.Activity;
 import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
@@ -27,7 +26,7 @@ import java.util.List;
  */
 public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 
-	private final ModelRenderer mRenderer;
+	private ModelRenderer mRenderer;
 
 	private TouchController touchController;
 
@@ -44,7 +43,11 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 		this(context, null);
 	}
 
-	private SceneLoader  scene;
+	private SceneLoader scene;
+
+	public SceneLoader getScene(){
+		return  scene;
+	}
 	/**
 	 * Type of model if file name has no extension (provided though content provider)
 	 */
@@ -55,35 +58,52 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 	private URI paramUri;    //
 
 	public ModelSurfaceView(Context context, AttributeSet attrs) {
-
-		this(context, null,null);
-
+		super(context, attrs);
+		//this(context, null,null);
+		init(context);
 	}
 
 	/** 初始化 */
-	private void init(Context context) {
-		// 设置OpenGL的版本号2.0
-//		this.setEGLContextClientVersion(2);
-//		mRenderer = new ModelRenderer(context);
-//		setRenderer(mRenderer);
-//		setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+	private void init(Context parent) {
 
-		scene = new SceneLoader(context, paramUri, paramType,this);
+		scene = new SceneLoader(parent, paramUri, paramType,this);
 		if (paramUri == null) {
-			final LoaderTask task = new DemoLoaderTask(context, null, scene);
+			final LoaderTask task = new DemoLoaderTask(parent, null, scene);
 			task.execute();
 		}
+
+		try{
+			Log.i("ModelSurfaceView","Loading [OpenGL 2] ModelSurfaceView...");
+
+			// Create an OpenGL ES 2.0 context. 设置OpenGL的版本号2.0
+			setEGLContextClientVersion(2);
+
+			// This is the actual renderer of the 3D space
+			mRenderer = new ModelRenderer(parent, this, backgroundColor, scene);
+			mRenderer.addListener(this);
+			setRenderer(mRenderer);
+		}catch (Exception e){
+			Log.e("ModelActivity",e.getMessage(),e);
+			Toast.makeText(parent, "Error loading shaders:\n" +e.getMessage(), Toast.LENGTH_LONG).show();
+			throw new RuntimeException(e);
+		}
+		scene.setView(this);
 
 	}
 
 
 	public ModelSurfaceView(Context parent, float[] backgroundColorOld, SceneLoader sceneOld){
 		super(parent);
-		init(parent);
+		scene = new SceneLoader(parent, paramUri, paramType,this);
+		if (paramUri == null) {
+			final LoaderTask task = new DemoLoaderTask(parent, null, scene);
+			task.execute();
+		}
+
 		try{
 			Log.i("ModelSurfaceView","Loading [OpenGL 2] ModelSurfaceView...");
 
-			// Create an OpenGL ES 2.0 context.
+			// Create an OpenGL ES 2.0 context. 设置OpenGL的版本号2.0
 			setEGLContextClientVersion(2);
 
 			// This is the actual renderer of the 3D space
@@ -102,9 +122,7 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 		this.touchController = touchController;
 	}
 
-	public void addListener(EventListener listener){
-		listeners.add(listener);
-	}
+
 
 	public float[] getProjectionMatrix() {
 		return mRenderer.getProjectionMatrix();
