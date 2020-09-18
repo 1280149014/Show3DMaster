@@ -173,7 +173,8 @@ public class SceneLoader implements LoadListener, EventListener {
      */
     private Object3DData selectedObject = null;
     /**
-     * Light bulb 3d data
+     * Light bulb 3d data  ,,  设置白点光源
+     *
      */
 //    private final Object3DData lightBulb = Point.build(new float[]{0, 0, 0}).setId("light");
     /**
@@ -255,7 +256,7 @@ public class SceneLoader implements LoadListener, EventListener {
         // smooth camera transition
         camera.animate();
 
-        // 通过这里可以控制旋转
+        // 通过这里可以控制旋转   -----
         // initial camera animation. animate if user didn't touch the screen
         if (!userHasInteracted) {
 //            animateCamera();
