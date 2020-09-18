@@ -1,16 +1,20 @@
 package org.andresoviedo.android_3d_model_engine.view;
 
 import android.app.Activity;
+import android.content.Context;
 import android.opengl.GLSurfaceView;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
 import org.andresoviedo.android_3d_model_engine.controller.TouchController;
+import org.andresoviedo.android_3d_model_engine.services.LoaderTask;
 import org.andresoviedo.android_3d_model_engine.services.SceneLoader;
 import org.andresoviedo.util.android.AndroidUtils;
 import org.andresoviedo.util.event.EventListener;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.List;
@@ -29,8 +33,53 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 
 	private final List<EventListener> listeners = new ArrayList<>();
 
-	public ModelSurfaceView(Activity parent, float[] backgroundColor, SceneLoader scene){
+	/**
+	 * 背景
+	 * Background GL clear color. Default is light gray
+	 */
+	private float[] backgroundColor = new float[]{1f, 1f, 1f, 0f};
+
+
+	public ModelSurfaceView(Context context) {
+		this(context, null);
+	}
+
+	private SceneLoader  scene;
+	/**
+	 * Type of model if file name has no extension (provided though content provider)
+	 */
+	private int paramType;    //文件类型
+	/**
+	 * The file to load. Passed as input parameter
+	 */
+	private URI paramUri;    //
+
+	public ModelSurfaceView(Context context, AttributeSet attrs) {
+
+		this(context, null,null);
+
+	}
+
+	/** 初始化 */
+	private void init(Context context) {
+		// 设置OpenGL的版本号2.0
+//		this.setEGLContextClientVersion(2);
+//		mRenderer = new ModelRenderer(context);
+//		setRenderer(mRenderer);
+//		setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+
+		scene = new SceneLoader(context, paramUri, paramType,this);
+		if (paramUri == null) {
+			final LoaderTask task = new DemoLoaderTask(context, null, scene);
+			task.execute();
+		}
+
+	}
+
+
+	public ModelSurfaceView(Context parent, float[] backgroundColorOld, SceneLoader sceneOld){
 		super(parent);
+		init(parent);
 		try{
 			Log.i("ModelSurfaceView","Loading [OpenGL 2] ModelSurfaceView...");
 
@@ -46,6 +95,7 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 			Toast.makeText(parent, "Error loading shaders:\n" +e.getMessage(), Toast.LENGTH_LONG).show();
 			throw new RuntimeException(e);
 		}
+		scene.setView(this);
 	}
 
 	public void setTouchController(TouchController touchController){

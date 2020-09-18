@@ -1,6 +1,7 @@
-package com.demo.show3dmaster.load;
+package org.andresoviedo.android_3d_model_engine.view;
 
 import android.app.Activity;
+import android.content.Context;
 import android.opengl.GLES20;
 import android.util.Log;
 
@@ -11,7 +12,6 @@ import org.andresoviedo.android_3d_model_engine.services.LoadListenerAdapter;
 import org.andresoviedo.android_3d_model_engine.services.LoaderTask;
 import org.andresoviedo.android_3d_model_engine.services.collada.ColladaLoader;
 import org.andresoviedo.android_3d_model_engine.services.wavefront.WavefrontLoader;
-import org.andresoviedo.android_3d_model_engine.util.Exploder;
 import org.andresoviedo.android_3d_model_engine.util.Rescaler;
 import org.andresoviedo.util.android.ContentUtils;
 import org.andresoviedo.util.io.IOUtils;
@@ -36,7 +36,7 @@ public class DemoLoaderTask extends LoaderTask {
      * @param uri      the URL pointing to the 3d model
      * @param callback listener
      */
-    public DemoLoaderTask(Activity parent, URI uri, LoadListener callback) {
+    public DemoLoaderTask(Context parent, URI uri, LoadListener callback) {
         super(parent, uri, callback);
         ContentUtils.provideAssets(parent);
     }
@@ -175,23 +175,23 @@ public class DemoLoaderTask extends LoaderTask {
             }
 
             // test loading object made of polygonal faces
-            try {
-                // this has heterogeneous faces
-                Object3DData obj53 = new ColladaLoader().load(new URI("assets://assets/models/cowboy.dae"), new LoadListenerAdapter(){
-                    @Override
-                    public void onLoad(Object3DData obj53) {
-                        obj53.setLocation(new float[] { 0f, -1f, 0f});
-                        obj53.setColor(new float[] { 1.0f, 1.0f, 1f, 1.0f });
-                        obj53.setRotation(new float[]{-90,0,0});
-                        Rescaler.rescale(obj53, 2f);
-                        DemoLoaderTask.this.onLoad(obj53);
-                    }
-                }).get(0);
-
-                //super.onLoad(obj53);
-            } catch (Exception ex) {
-                errors.add(ex);
-            }
+//            try {
+//                // this has heterogeneous faces
+//                Object3DData obj53 = new ColladaLoader().load(new URI("assets://assets/models/cowboy.dae"), new LoadListenerAdapter(){
+//                    @Override
+//                    public void onLoad(Object3DData obj53) {
+//                        obj53.setLocation(new float[] { 0f, -1f, 0f});
+//                        obj53.setColor(new float[] { 1.0f, 1.0f, 1f, 1.0f });
+//                        obj53.setRotation(new float[]{-90,0,0});
+//                        Rescaler.rescale(obj53, 2f);
+//                        DemoLoaderTask.this.onLoad(obj53);
+//                    }
+//                }).get(0);
+//
+//                //super.onLoad(obj53);
+//            } catch (Exception ex) {
+//                errors.add(ex);
+//            }
 
 
             // test loading object without normals

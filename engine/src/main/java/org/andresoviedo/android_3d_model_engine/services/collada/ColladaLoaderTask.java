@@ -1,6 +1,7 @@
 package org.andresoviedo.android_3d_model_engine.services.collada;
 
 import android.app.Activity;
+import android.content.Context;
 
 import org.andresoviedo.android_3d_model_engine.model.Object3DData;
 import org.andresoviedo.android_3d_model_engine.services.LoadListener;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class ColladaLoaderTask extends LoaderTask {
 
-    public ColladaLoaderTask(Activity parent, URI uri, LoadListener callback) {
+    public ColladaLoaderTask(Context parent, URI uri, LoadListener callback) {
         super(parent, uri, callback);
     }
 

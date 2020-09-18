@@ -293,8 +293,6 @@ class GLES20Renderer implements Renderer {
     }
 
     private void drawShape(Object3DData obj, int drawMode, int drawSize) {
-
-
         int drawBufferType = -1;
         final Buffer drawOrderBuffer;
         final FloatBuffer vertexBuffer;

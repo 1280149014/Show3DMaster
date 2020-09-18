@@ -1,6 +1,7 @@
 package org.andresoviedo.android_3d_model_engine.services.stl;
 
 import android.app.Activity;
+import android.content.Context;
 import android.opengl.GLES20;
 import android.util.Log;
 
@@ -27,7 +28,7 @@ public final class STLLoaderTask extends LoaderTask {
 
     private STLFileReader stlFileReader;
 
-    public STLLoaderTask(Activity parent, URI uri, LoadListener callback) {
+    public STLLoaderTask(Context parent, URI uri, LoadListener callback) {
         super(parent, uri, callback);
     }
 

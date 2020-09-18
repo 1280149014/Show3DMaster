@@ -5,6 +5,9 @@ import android.opengl.GLES20;
 import org.andresoviedo.android_3d_model_engine.model.Object3DData;
 import org.andresoviedo.util.io.IOUtils;
 
+/**
+ * 轴
+ */
 public final class Axis {
 
     private final static float[] axisVertexLinesData = new float[]{

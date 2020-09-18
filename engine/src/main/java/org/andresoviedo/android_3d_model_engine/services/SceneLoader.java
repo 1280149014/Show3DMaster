@@ -2,6 +2,7 @@ package org.andresoviedo.android_3d_model_engine.services;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.net.Uri;
 import android.opengl.GLSurfaceView;
 import android.os.SystemClock;
@@ -60,7 +61,7 @@ public class SceneLoader implements LoadListener, EventListener {
     /**
      * Parent component
      */
-    protected final Activity parent;
+    protected final Context parent;
     /**
      * Model uri
      */
@@ -195,7 +196,7 @@ public class SceneLoader implements LoadListener, EventListener {
     private Map<Object3DData, Dimensions> originalDimensions = new HashMap<>();
     private Map<Object3DData, Transform> originalTransforms = new HashMap<>();
 
-    public SceneLoader(Activity main, URI uri, int type, GLSurfaceView glView) {
+    public SceneLoader(Context main, URI uri, int type, GLSurfaceView glView) {
         this.parent = main;
         this.uri = uri;
         this.type = type;
@@ -237,7 +238,7 @@ public class SceneLoader implements LoadListener, EventListener {
     }
 
     private final void makeToastText(final String text, final int toastDuration) {
-        parent.runOnUiThread(() -> Toast.makeText(parent.getApplicationContext(), text, toastDuration).show());
+//        parent.runOnUiThread(() -> Toast.makeText(parent.getApplicationContext(), text, toastDuration).show());
     }
 
 //    public final Object3DData getLightBulb() {

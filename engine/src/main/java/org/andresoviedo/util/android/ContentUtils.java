@@ -30,16 +30,16 @@ public class ContentUtils {
      */
     private static Map<String, Uri> documentsProvided = new HashMap<>();
 
-    private static ThreadLocal<Activity> currentActivity = new ThreadLocal<>();
+    private static ThreadLocal<Context> currentActivity = new ThreadLocal<>();
 
     private static File currentDir = null;
 
-    public static void setThreadActivity(Activity currentActivity) {
+    public static void setThreadActivity(Context currentActivity) {
         Log.i("ContentUtils", "Current activity thread: " + Thread.currentThread().getName());
         ContentUtils.currentActivity.set(currentActivity);
     }
 
-    private static Activity getCurrentActivity() {
+    private static Context getCurrentActivity() {
         return ContentUtils.currentActivity.get();
     }
 
@@ -52,7 +52,7 @@ public class ContentUtils {
         documentsProvided.clear();
     }
 
-    public static void provideAssets(Activity activity) {
+    public static void provideAssets(Context activity) {
         documentsProvided.clear();
         try {
             for (String document : activity.getAssets().list("models")) {

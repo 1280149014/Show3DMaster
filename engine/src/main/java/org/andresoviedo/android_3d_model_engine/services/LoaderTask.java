@@ -2,6 +2,7 @@ package org.andresoviedo.android_3d_model_engine.services;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 
 import org.andresoviedo.android_3d_model_engine.model.Object3DData;
@@ -34,7 +35,7 @@ public abstract class LoaderTask extends AsyncTask<Void, String, List<Object3DDa
      * @param uri        the URL pointing to the 3d model
      *
 	 */
-	public LoaderTask(Activity parent, URI uri, LoadListener callback) {
+	public LoaderTask(Context parent, URI uri, LoadListener callback) {
 		this.uri = uri;
 		this.dialog = new ProgressDialog(parent);
 		this.callback = callback; }

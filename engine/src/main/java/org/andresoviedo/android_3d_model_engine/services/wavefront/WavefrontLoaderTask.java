@@ -1,6 +1,7 @@
 package org.andresoviedo.android_3d_model_engine.services.wavefront;
 
 import android.app.Activity;
+import android.content.Context;
 import android.opengl.GLES20;
 
 import org.andresoviedo.android_3d_model_engine.model.Object3DData;
@@ -18,7 +19,7 @@ import java.util.List;
 
 public class WavefrontLoaderTask extends LoaderTask {
 
-    public WavefrontLoaderTask(final Activity parent, final URI uri, final LoadListener callback) {
+    public WavefrontLoaderTask(final Context parent, final URI uri, final LoadListener callback) {
         super(parent, uri, callback);
     }
 

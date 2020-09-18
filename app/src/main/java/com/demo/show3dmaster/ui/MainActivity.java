@@ -30,6 +30,12 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.EventObject;
 
+/**
+ * 2020-9-17   能够显示 obj文件, 并且不会出现
+ *
+ * 2020-9-18   独立出几个obj文件, 通过layout加载, 显示
+ *
+ */
 public class MainActivity extends AppCompatActivity implements EventListener {
 
     private static final int REQUEST_CODE_LOAD_TEXTURE = 1000;
@@ -56,11 +62,11 @@ public class MainActivity extends AppCompatActivity implements EventListener {
      * 背景
      * Background GL clear color. Default is light gray
      */
-    private float[] backgroundColor = new float[]{0.0f, 0.0f, 0.0f, 1.0f};
+    private float[] backgroundColor = new float[]{1f, 1f, 1f, 0f};
 
     private ModelSurfaceView gLView;  // 这个就是真正的view
     private TouchController touchController;
-    private SceneLoader scene;
+    private SceneLoader  scene;
     private ModelViewerGUI gui;
     private CollisionController collisionController;
 
@@ -99,6 +105,10 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 
         handler = new Handler(getMainLooper());
 
+        setContentView(R.layout.activity_main);
+
+        gLView = findViewById(R.id.backView);
+
         // Create our 3D scenario
         Log.i("ModelActivity", "Loading Scene...");
         scene = new SceneLoader(this, paramUri, paramType, gLView);
@@ -109,9 +119,9 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 
         try {
             Log.i("ModelActivity", "Loading GLSurfaceView...");
-            gLView = new ModelSurfaceView(this, backgroundColor, this.scene);
-            gLView.addListener(this);
-            setContentView(gLView);
+//            gLView = new ModelSurfaceView(this, backgroundColor, this.scene);
+//            gLView.addListener(this);
+//            setContentView(gLView);
             scene.setView(gLView);
         } catch (Exception e) {
             Log.e("ModelActivity", e.getMessage(), e);
@@ -148,20 +158,6 @@ public class MainActivity extends AppCompatActivity implements EventListener {
             Toast.makeText(this, "Error loading CameraController" + e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
-
-        //注释掉了 显示针数
-//        try {
-//            // TODO: finish UI implementation
-//            Log.i("ModelActivity", "Loading GUI...");
-//            gui = new ModelViewerGUI(gLView, scene);
-//            touchController.addListener(gui);
-//            gLView.addListener(gui);
-//            scene.addGUIObject(gui);
-//        } catch (Exception e) {
-//            Log.e("ModelActivity", e.getMessage(), e);
-//            Toast.makeText(this, "Error loading GUI" + e.getMessage(), Toast.LENGTH_LONG).show();
-//        }
-
         // Show the Up button in the action bar.
         setupActionBar();
 
@@ -179,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
     protected void onResume() {
         super.onResume();
 //        touchController.setSize(viewEvent.getWidth(), viewEvent.getHeight());
-        gLView.setTouchController(touchController);
+//        gLView.setTouchController(touchController);
     }
 
     /**

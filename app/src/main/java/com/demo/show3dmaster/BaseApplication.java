@@ -12,6 +12,12 @@ public class BaseApplication extends Application {
 
     private static String TAG = "BaseAppliacation";
 
+    private static Application app;
+
+    public static Application get(){
+        return  app;
+    }
+
     // Custom handler: org/andresoviedo/util/android/assets/Handler.class
     static {
         System.setProperty("java.protocol.handler.pkgs", "org.andresoviedo.util.android");
@@ -22,6 +28,8 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        app = this ;
     }
 
 

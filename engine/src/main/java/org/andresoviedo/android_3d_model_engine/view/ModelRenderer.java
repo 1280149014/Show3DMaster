@@ -1,6 +1,7 @@
 package org.andresoviedo.android_3d_model_engine.view;
 
 import android.app.Activity;
+import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
@@ -203,7 +204,7 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
      *
      * @param modelSurfaceView the 3D window
      */
-    public ModelRenderer(Activity parent, ModelSurfaceView modelSurfaceView,
+    public ModelRenderer(Context parent, ModelSurfaceView modelSurfaceView,
                          float[] backgroundColor, SceneLoader scene) throws IOException, IllegalAccessException {
         this.main = modelSurfaceView;
         this.backgroundColor = backgroundColor;
@@ -249,7 +250,9 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
     }
 
     @Override
-    public void onSurfaceCreated(GL10 unused, EGLConfig config) {
+    public void
+
+    onSurfaceCreated(GL10 unused, EGLConfig config) {
         // log event
         Log.d(TAG, "onSurfaceCreated. config: "+config);
 
