@@ -1,6 +1,7 @@
 package org.andresoviedo.android_3d_model_engine.view;
 
 import android.content.Context;
+import android.graphics.PixelFormat;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -36,7 +37,7 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 	 * 背景
 	 * Background GL clear color. Default is light gray
 	 */
-	private float[] backgroundColor = new float[]{1f, 1f, 1f, 0f};
+	private float[] backgroundColor = new float[]{0f, 0f, 0f, 0f};
 
 
 	public ModelSurfaceView(Context context) {
@@ -71,6 +72,7 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 			final LoaderTask task = new DemoLoaderTask(parent, null, scene);
 			task.execute();
 		}
+		setTranslucent();
 
 		try{
 			Log.i("ModelSurfaceView","Loading [OpenGL 2] ModelSurfaceView...");
@@ -90,7 +92,18 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 		scene.setView(this);
 
 	}
-
+	/**
+	 * <pre>
+	 *  设置透明背景的方法，根据实际情况，可能setEGLConfigChooser中的alpha可能要设置成0
+	 *  再者就是这个方法需要在setRenderer之前调用才有效
+	 * </pre>
+	 */
+	public void setTranslucent() {
+		// 设置背景透明，否则一般加载时间长的话会先黑一下，但是也有问题，就是在它之上无法再有View了，因为它是top的，用的时候需要注意，必要的时候将其设置为false
+		setEGLConfigChooser(8, 8, 8, 8, 16, 0);
+		getHolder().setFormat(PixelFormat.TRANSLUCENT);
+		setZOrderOnTop(true);
+	}
 
 	public ModelSurfaceView(Context parent, float[] backgroundColorOld, SceneLoader sceneOld){
 		super(parent);

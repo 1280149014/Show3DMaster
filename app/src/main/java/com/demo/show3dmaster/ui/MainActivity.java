@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -62,9 +63,10 @@ public class MainActivity extends AppCompatActivity implements EventListener {
      * 背景
      * Background GL clear color. Default is light gray
      */
-    private float[] backgroundColor = new float[]{1f, 1f, 1f, 0f};
+    private float[] backgroundColor = new float[]{0f, 0f, 0f, 0f};
 
     private ModelSurfaceView gLView;  // 这个就是真正的view
+    private ModelSurfaceView app1View;  //
     private TouchController touchController;
     private ModelViewerGUI gui;
     private CollisionController collisionController;
@@ -72,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 
     private Handler handler;
     private CameraController cameraController;
+
+
 
 
     @Override
@@ -108,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 
         handler = new Handler(getMainLooper());
         gLView = (ModelSurfaceView)findViewById(R.id.backView);
+        app1View = findViewById(R.id.app1);
 
         // Create our 3D scenario
         Log.i("ModelActivity", "Loading Scene...");
@@ -178,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
             e.printStackTrace();
         }
 
-
+        gLView.getHolder().setFormat(PixelFormat.TRANSLUCENT);
 
         // load model
 //        gLView.getScene().init();
