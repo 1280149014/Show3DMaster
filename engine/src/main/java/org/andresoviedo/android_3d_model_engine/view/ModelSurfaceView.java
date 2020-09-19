@@ -1,6 +1,7 @@
 package org.andresoviedo.android_3d_model_engine.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.PixelFormat;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
+import org.andresoviedo.android_3d_model_engine.R;
 import org.andresoviedo.android_3d_model_engine.controller.TouchController;
 import org.andresoviedo.android_3d_model_engine.services.LoaderTask;
 import org.andresoviedo.android_3d_model_engine.services.SceneLoader;
@@ -25,7 +27,20 @@ import java.util.List;
  * @author andresoviedo
  *
  */
+
+/**
+ *
+ * 修改自定义view ,
+ * 使得 能够根据 attr加载不同的 obj 文件,
+ * 响应不同的事件
+ * 是否自定旋转
+ * 是否响应点击事件
+ *
+ */
+
 public class ModelSurfaceView extends GLSurfaceView implements EventListener {
+
+	public static String TAG = ModelSurfaceView.class.getSimpleName();
 
 	private ModelRenderer mRenderer;
 
@@ -61,13 +76,14 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 	public ModelSurfaceView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		//this(context, null,null);
-		init(context);
+		getAttrs(context,attrs);   // 获取自定义属性
+		init(context);     // 初始化scene
 	}
 
 	/** 初始化 */
 	private void init(Context parent) {
-
 		scene = new SceneLoader(parent, paramUri, paramType,this);
+		scene.setAutoAnimation(isAutoAnimation);
 		if (paramUri == null) {
 			final LoaderTask task = new DemoLoaderTask(parent, null, scene);
 			task.execute();
@@ -92,6 +108,19 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 		scene.setView(this);
 
 	}
+
+	Boolean isAutoAnimation;
+	Boolean isClickAble;
+
+	public void getAttrs(Context context, AttributeSet attrs){
+		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ModelSurfaceView);
+		isAutoAnimation = ta.getBoolean(R.styleable.ModelSurfaceView_autoAnimation,false);
+		isClickAble = ta.getBoolean(R.styleable.ModelSurfaceView_clickAble,false);
+		ta.recycle();  //注意回收
+		Log.v(TAG,"ModelSurfaceView:" + isAutoAnimation);
+	}
+
+
 	/**
 	 * <pre>
 	 *  设置透明背景的方法，根据实际情况，可能setEGLConfigChooser中的alpha可能要设置成0
