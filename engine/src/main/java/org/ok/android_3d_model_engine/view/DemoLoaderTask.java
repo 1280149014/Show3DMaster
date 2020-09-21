@@ -24,7 +24,7 @@ import java.util.Objects;
 
 /**
  * This class loads a 3D scene as an example of what can be done with the app
- * 
+ *
  * @author andresoviedo
  *
  */

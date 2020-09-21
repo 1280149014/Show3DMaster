@@ -29,6 +29,7 @@
 
 package org.ok.android_3d_model_engine.services.wavefront;
 
+import android.content.Loader;
 import android.net.Uri;
 import android.opengl.GLES20;
 import androidx.annotation.Nullable;
@@ -116,7 +117,9 @@ public class WavefrontLoader {
             // notify listener
             callback.onProgress("Processing geometries...");
 
-            // proces all meshes
+
+
+//             proces all meshes
             for (MeshData meshData : meshes) {
 
                 // notify listener
