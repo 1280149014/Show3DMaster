@@ -3,6 +3,7 @@ package org.andresoviedo.android_3d_model_engine.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.PixelFormat;
+import android.net.Uri;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -16,7 +17,9 @@ import org.andresoviedo.android_3d_model_engine.services.SceneLoader;
 import org.andresoviedo.util.android.AndroidUtils;
 import org.andresoviedo.util.event.EventListener;
 
+import java.io.File;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.List;
@@ -52,7 +55,7 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 	 * 背景
 	 * Background GL clear color. Default is light gray
 	 */
-	private float[] backgroundColor = new float[]{0f, 0f, 0f, 0f};
+	private float[] backgroundColor = new float[]{0f, 0f, 0f, 0.5f};
 
 
 	public ModelSurfaceView(Context context) {
@@ -75,9 +78,34 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 
 	public ModelSurfaceView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		//this(context, null,null);
 		getAttrs(context,attrs);   // 获取自定义属性
 		init(context);     // 初始化scene
+	}
+
+	Boolean isAutoAnimation;
+	Boolean isClickAble;
+	String objName;
+	public void getAttrs(Context context, AttributeSet attrs){
+		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ModelSurfaceView);
+		isAutoAnimation = ta.getBoolean(R.styleable.ModelSurfaceView_autoAnimation,false);
+		isClickAble = ta.getBoolean(R.styleable.ModelSurfaceView_clickAble,false);
+		objName = ta.getString(R.styleable.ModelSurfaceView_objName);
+		ta.recycle();  //注意回收
+		Log.d(TAG,"ModelSurfaceView:" + isAutoAnimation
+				+ " , isClickAble = " + isClickAble
+				+ " , objName = " + objName);
+		if(objName != null && !objName.equals("")){
+			try {
+				paramUri = new URI(
+						Uri.parse("assets://asserts/models/" + objName).toString()
+				);
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+			paramType = 0;  // 0 代表的是 obj 类型文件
+		}
+		Log.d(TAG,"paramUri:" + paramUri);
+
 	}
 
 	/** 初始化 */
@@ -87,8 +115,12 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 		if (paramUri == null) {
 			final LoaderTask task = new DemoLoaderTask(parent, null, scene);
 			task.execute();
+		}else{
+			// load model
+			scene.init();
 		}
-		setTranslucent();
+
+//		setTranslucent();
 
 		try{
 			Log.i("ModelSurfaceView","Loading [OpenGL 2] ModelSurfaceView...");
@@ -105,21 +137,17 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 			Toast.makeText(parent, "Error loading shaders:\n" +e.getMessage(), Toast.LENGTH_LONG).show();
 			throw new RuntimeException(e);
 		}
+
+
 		scene.setView(this);
 
 	}
 
-	Boolean isAutoAnimation;
-	Boolean isClickAble;
-
-	public void getAttrs(Context context, AttributeSet attrs){
-		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ModelSurfaceView);
-		isAutoAnimation = ta.getBoolean(R.styleable.ModelSurfaceView_autoAnimation,false);
-		isClickAble = ta.getBoolean(R.styleable.ModelSurfaceView_clickAble,false);
-		ta.recycle();  //注意回收
-		Log.v(TAG,"ModelSurfaceView:" + isAutoAnimation);
+	public void animateFast(){
+		if(isClickAble){
+			scene.setClicked(true);
+		}
 	}
-
 
 	/**
 	 * <pre>
@@ -176,8 +204,13 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
+
 		try {
-			return touchController.onTouchEvent(event);
+			if(!isClickAble){
+				return touchController.onTouchEvent(event);
+			}else{
+				super.onTouchEvent(event);
+			}
 		} catch (Exception ex) {
 			Log.e("ModelSurfaceView","Exception: "+ ex.getMessage(),ex);
 		}

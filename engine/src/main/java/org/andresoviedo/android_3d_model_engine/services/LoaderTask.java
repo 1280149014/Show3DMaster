@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import org.andresoviedo.android_3d_model_engine.model.Object3DData;
+import org.andresoviedo.util.android.ContentUtils;
 
 import java.net.URI;
 import java.util.List;
@@ -38,7 +39,8 @@ public abstract class LoaderTask extends AsyncTask<Void, String, List<Object3DDa
 	public LoaderTask(Context parent, URI uri, LoadListener callback) {
 		this.uri = uri;
 		this.dialog = new ProgressDialog(parent);
-		this.callback = callback; }
+		this.callback = callback;
+	}
 
 
 	@Override
