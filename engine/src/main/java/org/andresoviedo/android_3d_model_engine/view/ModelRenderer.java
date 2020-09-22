@@ -250,7 +250,9 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
     }
 
     @Override
-    public void onSurfaceCreated(GL10 unused, EGLConfig config) {
+    public void
+
+    onSurfaceCreated(GL10 unused, EGLConfig config) {
         // log event
         Log.d(TAG, "onSurfaceCreated. config: "+config);
 

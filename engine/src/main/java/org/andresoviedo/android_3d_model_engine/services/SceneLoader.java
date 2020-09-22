@@ -47,6 +47,10 @@ public class SceneLoader implements LoadListener, EventListener {
      */
     private static final float DEFAULT_MAX_MODEL_SIZE = 100;
     /**
+     *
+     */
+    public static final float[] DEFAULT_MODEL_SCALE = {DEFAULT_MAX_MODEL_SIZE, DEFAULT_MAX_MODEL_SIZE, DEFAULT_MAX_MODEL_SIZE};
+    /**
      * Camera position on Z axis
      */
     private static final float DEFAULT_CAMERA_POSITION = DEFAULT_MAX_MODEL_SIZE / 2 + 25;
@@ -181,17 +185,6 @@ public class SceneLoader implements LoadListener, EventListener {
      * Did the user touched the model for the first time?
      */
     private boolean userHasInteracted;
-
-    /**
-     *  新增自定义属性, 判断是否需要有动画想过
-     */
-    private boolean isAutoAnimation = false;
-
-    /**
-     *  新增自定义属性, 点击之后会旋转一圈
-     */
-    private boolean isClicked = false;
-
     /**
      * time when model loading has started (for stats)
      */
@@ -249,14 +242,9 @@ public class SceneLoader implements LoadListener, EventListener {
 //        parent.runOnUiThread(() -> Toast.makeText(parent.getApplicationContext(), text, toastDuration).show());
     }
 
-    public void setAutoAnimation(boolean autoAnimation) {
-        isAutoAnimation = autoAnimation;
-    }
-
-    public void setClicked(boolean flag){
-        isClicked = flag;
-    }
-
+//    public final Object3DData getLightBulb() {
+//        return lightBulb;
+//    }
 
     /**
      * Hook for animating the objects before the rendering
@@ -273,16 +261,6 @@ public class SceneLoader implements LoadListener, EventListener {
         if (!userHasInteracted) {
 //            animateCamera();
         }
-
-        if(isAutoAnimation){
-            animateCamera();
-        }
-
-        if(isClicked){
-            animateCameraFast();
-        }
-
-
 
         if (objects.isEmpty()) return;
 
@@ -304,22 +282,8 @@ public class SceneLoader implements LoadListener, EventListener {
     }
 
     private void animateCamera() {
-        camera.translateCamera(0.005f, 0f);
+        camera.translateCamera(0.0005f, 0f);
     }
-
-
-    int i = 0;
-    private static String TAG = SceneLoader.class.getSimpleName();
-    private void animateCameraFast() {
-        Log.d(TAG,"animateCameraFast i = " + i++ );
-        if(i <= 400){
-            camera.translateCamera(0.1f, 0f);
-        }else{
-            i = 0;
-            isClicked = false;
-        }
-    }
-
 
     public final synchronized void addObject(Object3DData obj) {
         Log.i("SceneLoader", "Adding object to scene... " + obj);

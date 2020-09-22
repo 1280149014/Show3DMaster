@@ -9,12 +9,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.demo.show3dmaster.R;
+import com.demo.show3dmaster.load.DemoLoaderTask;
 import com.demo.show3dmaster.widget.ModelViewerGUI;
 
 import org.andresoviedo.android_3d_model_engine.camera.CameraController;
@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
      */
     private URI paramUri;    //
 
+
     /**
      * 沉浸模式
      * Enter into Android Immersive mode so the renderer is full screen or not
@@ -66,34 +67,60 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 
     private ModelSurfaceView gLView;  // 这个就是真正的view
     private ModelSurfaceView app1View;  //
-    private View mLayout;
-
     private TouchController touchController;
     private ModelViewerGUI gui;
     private CollisionController collisionController;
+
+
     private Handler handler;
     private CameraController cameraController;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Try to get input parameters
+//        Bundle b = getIntent().getExtras();
+//        if (b != null) {
+//            try {
+//                if (b.getString("uri") != null) {
+//                    this.paramUri = new URI(b.getString("uri"));
+//                    Log.i("ModelActivity", "Params: uri '" + paramUri + "'");
+//                }
+//                this.paramType = b.getString("type") != null ? Integer.parseInt(b.getString("type")) : -1;
+//                this.immersiveMode = "true".equalsIgnoreCase(b.getString("immersiveMode"));
+//
+//                if (b.getString("backgroundColor") != null) {
+//                    String[] backgroundColors = b.getString("backgroundColor").split(" ");
+//                    backgroundColor[0] = Float.parseFloat(backgroundColors[0]);
+//                    backgroundColor[1] = Float.parseFloat(backgroundColors[1]);
+//                    backgroundColor[2] = Float.parseFloat(backgroundColors[2]);
+//                    backgroundColor[3] = Float.parseFloat(backgroundColors[3]);
+//                }
+//            } catch (Exception ex) {
+//                Log.e("ModelActivity", "Error parsing activity parameters: " + ex.getMessage(), ex);
+//            }
+//
+//        }
+
+
 
         setContentView(R.layout.activity_main);
 
         handler = new Handler(getMainLooper());
         gLView = (ModelSurfaceView)findViewById(R.id.backView);
         app1View = findViewById(R.id.app1);
-        app1View.setOnClickListener(v -> {
-            Log.d(TAG,"clicked");
-            app1View.animateFast();
-        });
-        mLayout = findViewById(R.id.appLayout);
-        mLayout.setOnClickListener(v -> {
-            Log.d(TAG,"mLayout clicked");
-            app1View.animateFast();
-        });
+
         // Create our 3D scenario
         Log.i("ModelActivity", "Loading Scene...");
+//        scene = new SceneLoader(this, paramUri, paramType, gLView);
+//        if (paramUri == null) {
+//            final LoaderTask task = new DemoLoaderTask(this, null, scene);
+//            task.execute();
+//        }
 
         try {
             Log.i("ModelActivity", "Loading GLSurfaceView...");
@@ -145,6 +172,9 @@ public class MainActivity extends AppCompatActivity implements EventListener {
             Toast.makeText(this, "Error loading CameraController" + e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
+        // Show the Up button in the action bar.
+        setupActionBar();
+
         setupOnSystemVisibilityChangeListener();
 
         try {
@@ -159,6 +189,15 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 //        gLView.getScene().init();
     }
 
+    /**
+     * Set up the {@link android.app.ActionBar}, if the API is available.
+     */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    private void setupActionBar() {
+        // if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+        // getActionBar().setDisplayHomeAsUpEnabled(true);
+        // }
+    }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void setupOnSystemVisibilityChangeListener() {
