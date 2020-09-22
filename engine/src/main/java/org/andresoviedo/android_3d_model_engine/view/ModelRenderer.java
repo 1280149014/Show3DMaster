@@ -250,9 +250,7 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
     }
 
     @Override
-    public void
-
-    onSurfaceCreated(GL10 unused, EGLConfig config) {
+    public void  onSurfaceCreated(GL10 unused, EGLConfig config) {
         // log event
         Log.d(TAG, "onSurfaceCreated. config: "+config);
 
@@ -322,6 +320,10 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
 
             // animate scene
             scene.onDrawFrame();
+
+//            unused.glTranslatef(0.0f, 0.0f, -7.0f); // 设置初始位置
+//            unused.glRotatef(10, 0f, 1.0f, 0.0f); // 设置旋转切面
+
 
             // recalculate mvp matrix according to where we are looking at now
             Camera camera = scene.getCamera();

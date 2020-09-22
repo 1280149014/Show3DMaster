@@ -8,6 +8,7 @@ import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Toast;
 
 import org.andresoviedo.android_3d_model_engine.R;
@@ -96,7 +97,6 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 		Log.d(TAG,"paramUri:" + paramUri);
 	}
 
-
 	/** 初始化 */
 	private void init(Context parent) {
 
@@ -128,7 +128,7 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 		scene.setAutoAnimation(isAutoAnimation);
 	}
 
-	public void animateFast(){
+	public void rotateAnimate(){
 		if(isClickAble){
 			scene.setClicked(true);
 		}
@@ -178,6 +178,11 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 	}
 
 
+	@Override
+	public boolean callOnClick() {
+		Log.d(TAG,"111111111111 ");
+		return super.callOnClick();
+	}
 
 	public float[] getProjectionMatrix() {
 		return mRenderer.getProjectionMatrix();
@@ -190,7 +195,7 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		try {
-			if(!isClickAble){
+			if(isClickAble){
 				return touchController.onTouchEvent(event);
 			}else{
 				super.onTouchEvent(event);
@@ -243,4 +248,5 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 	public boolean isLightsEnabled() {
 		return mRenderer.isLightsEnabled();
 	}
+
 }

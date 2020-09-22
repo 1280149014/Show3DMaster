@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ import com.demo.show3dmaster.widget.ModelViewerGUI;
 import org.andresoviedo.android_3d_model_engine.camera.CameraController;
 import org.andresoviedo.android_3d_model_engine.collision.CollisionController;
 import org.andresoviedo.android_3d_model_engine.controller.TouchController;
+import org.andresoviedo.android_3d_model_engine.controller.TouchEvent;
 import org.andresoviedo.android_3d_model_engine.services.LoaderTask;
 import org.andresoviedo.android_3d_model_engine.services.SceneLoader;
 import org.andresoviedo.android_3d_model_engine.view.ModelRenderer;
@@ -40,73 +42,24 @@ import java.util.EventObject;
 public class MainActivity extends AppCompatActivity implements EventListener {
 
     private static final int REQUEST_CODE_LOAD_TEXTURE = 1000;
-    private static final int FULLSCREEN_DELAY = 10000;
+
     private static final String TAG = MainActivity.class.getSimpleName();
-
-    /**
-     * Type of model if file name has no extension (provided though content provider)
-     */
-    private int paramType;    //文件类型
-    /**
-     * The file to load. Passed as input parameter
-     */
-    private URI paramUri;    //
-
-
-    /**
-     * 沉浸模式
-     * Enter into Android Immersive mode so the renderer is full screen or not
-     */
-    private boolean immersiveMode;
-
-    /**
-     * 背景
-     * Background GL clear color. Default is light gray
-     */
-    private float[] backgroundColor = new float[]{0f, 0f, 0f, 0f};
 
     private ModelSurfaceView gLView;  // 这个就是真正的view
     private ModelSurfaceView app1View;  //
     private TouchController touchController;
-    private ModelViewerGUI gui;
     private CollisionController collisionController;
 
 
     private Handler handler;
     private CameraController cameraController;
 
-
-
+    View app1Layout ;
+    View app2Layout ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Try to get input parameters
-//        Bundle b = getIntent().getExtras();
-//        if (b != null) {
-//            try {
-//                if (b.getString("uri") != null) {
-//                    this.paramUri = new URI(b.getString("uri"));
-//                    Log.i("ModelActivity", "Params: uri '" + paramUri + "'");
-//                }
-//                this.paramType = b.getString("type") != null ? Integer.parseInt(b.getString("type")) : -1;
-//                this.immersiveMode = "true".equalsIgnoreCase(b.getString("immersiveMode"));
-//
-//                if (b.getString("backgroundColor") != null) {
-//                    String[] backgroundColors = b.getString("backgroundColor").split(" ");
-//                    backgroundColor[0] = Float.parseFloat(backgroundColors[0]);
-//                    backgroundColor[1] = Float.parseFloat(backgroundColors[1]);
-//                    backgroundColor[2] = Float.parseFloat(backgroundColors[2]);
-//                    backgroundColor[3] = Float.parseFloat(backgroundColors[3]);
-//                }
-//            } catch (Exception ex) {
-//                Log.e("ModelActivity", "Error parsing activity parameters: " + ex.getMessage(), ex);
-//            }
-//
-//        }
-
-
 
         setContentView(R.layout.activity_main);
 
@@ -114,13 +67,18 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         gLView = (ModelSurfaceView)findViewById(R.id.backView);
         app1View = findViewById(R.id.app1);
 
-        // Create our 3D scenario
-        Log.i("ModelActivity", "Loading Scene...");
-//        scene = new SceneLoader(this, paramUri, paramType, gLView);
-//        if (paramUri == null) {
-//            final LoaderTask task = new DemoLoaderTask(this, null, scene);
-//            task.execute();
-//        }
+        app1Layout = findViewById(R.id.app1Layout);
+
+        app1Layout.setOnClickListener(v -> {
+            app1View.rotateAnimate();
+        });
+
+        gLView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG, "1111111111111 ");
+            }
+        });
 
         try {
             Log.i("ModelActivity", "Loading GLSurfaceView...");
@@ -153,7 +111,18 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 
         try {
             Log.i("ModelActivity", "Loading CollisionController...");
-            collisionController = new CollisionController(gLView, gLView.getScene());
+            collisionController = new CollisionController(gLView, gLView.getScene()){
+                @Override
+                public boolean onEvent(EventObject event) {
+                    if(event instanceof TouchEvent){
+                        TouchEvent touchEvent = (TouchEvent)event;
+                        if (touchEvent.getAction() == TouchEvent.CLICK) {
+                            gLView.rotateAnimate();
+                        }
+                    }
+                    return super.onEvent(event);
+                }
+            };
             collisionController.addListener(gLView.getScene());
             touchController.addListener(collisionController);
             touchController.addListener(gLView.getScene());
@@ -172,9 +141,6 @@ public class MainActivity extends AppCompatActivity implements EventListener {
             Toast.makeText(this, "Error loading CameraController" + e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
-        // Show the Up button in the action bar.
-        setupActionBar();
-
         setupOnSystemVisibilityChangeListener();
 
         try {
@@ -183,20 +149,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
             e.printStackTrace();
         }
 
-        gLView.getHolder().setFormat(PixelFormat.TRANSLUCENT);
 
-        // load model
-//        gLView.getScene().init();
-    }
-
-    /**
-     * Set up the {@link android.app.ActionBar}, if the API is available.
-     */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private void setupActionBar() {
-        // if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-        // getActionBar().setDisplayHomeAsUpEnabled(true);
-        // }
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -226,9 +179,6 @@ public class MainActivity extends AppCompatActivity implements EventListener {
     }
 
     public void hideSystemUIDelayed() {
-        if (!this.immersiveMode) {
-            return;
-        }
         handler.removeCallbacksAndMessages(null);
 //        handler.postDelayed(this::hideSystemUI, FULLSCREEN_DELAY);
     }

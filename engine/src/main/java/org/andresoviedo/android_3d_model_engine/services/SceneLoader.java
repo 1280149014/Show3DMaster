@@ -131,7 +131,7 @@ public class SceneLoader implements LoadListener, EventListener {
     /**
      * Light toggle feature: we have 3 states: no light, light, light + rotation
      */
-    private boolean rotatingLight = true;
+    private boolean rotatingLight = false;
     /**
      * Light toggle feature: whether to draw using lights
      */
@@ -267,26 +267,16 @@ public class SceneLoader implements LoadListener, EventListener {
      */
     public final void onDrawFrame() {
 
-        animateLight();
-
         // smooth camera transition
         camera.animate();
-
-        // 通过这里可以控制旋转   -----
-        // initial camera animation. animate if user didn't touch the screen
-        if (!userHasInteracted) {
-//            animateCamera();
-        }
 
         if(isAutoAnimation){
             animateCamera();
         }
 
         if(isClicked){
-            animateCameraFast();
+            rotateAnimation();
         }
-
-
 
         if (objects.isEmpty()) return;
 
@@ -298,6 +288,11 @@ public class SceneLoader implements LoadListener, EventListener {
         }
     }
 
+    /**
+     * 这里它 封装了一个 旋转的动画
+     *
+     *
+     */
     private void animateLight() {
         if (!rotatingLight) return;
 
@@ -307,23 +302,46 @@ public class SceneLoader implements LoadListener, EventListener {
 //        lightBulb.setRotation1(new float[]{0, angleInDegrees, 0});
     }
 
+    private static String TAG = SceneLoader.class.getSimpleName();
+
+    //为了保证 旋转的是360度, 需要最后一步加上之前的步, 总共360度
+    boolean lastStep = false;
+    float angleInit = -1;
+    private void rotateAnimation() {
+
+        // 正常的旋转角度, 应该是 从 0 到 360度
+        // animate light - Do a complete rotation every 5 seconds.
+        long time = SystemClock.uptimeMillis() % 2000L;
+        float angleInDegrees = ((360.0f) /2000.0f) * ((int) time);
+        if(angleInit == -1){
+            angleInit = angleInDegrees;
+        }else{
+            angleInDegrees = ((360.0f + angleInit) /2000.0f) * ((int) time);
+        }
+
+        for(Object3DData o : objects){
+            o.setRotation1(new float[]{0, angleInDegrees - angleInit, 0});
+        }
+        Log.d(TAG,"angleInDegrees = " + (angleInDegrees- angleInit)
+                + " ,angleInit = " + angleInit);
+        if(angleInDegrees - angleInit >= 360.0f - 10){
+            for(Object3DData o : objects){
+                o.setRotation1(new float[]{0,angleInit + 360.0f - angleInDegrees, 0});
+            }
+            lastStep = true;
+        }
+        if(lastStep){
+            isClicked = false;
+            lastStep = false;
+            angleInit = -1;
+        }
+
+    }
+
+
     private void animateCamera() {
         camera.translateCamera(0.0005f, 0f);
     }
-
-
-    int i = 0;
-    private static String TAG = SceneLoader.class.getSimpleName();
-    private void animateCameraFast() {
-        Log.d(TAG,"animateCameraFast i = " + i++ );
-        if(i <= 400){
-            camera.translateCamera(0.1f, 0f);
-        }else{
-            i = 0;
-            isClicked = false;
-        }
-    }
-
 
     public final synchronized void addObject(Object3DData obj) {
         Log.i("SceneLoader", "Adding object to scene... " + obj);
@@ -918,30 +936,7 @@ public class SceneLoader implements LoadListener, EventListener {
         }
 
 
-        /*for (Object3DData data : datas){
-            if (data instanceof AnimatedModel && ((AnimatedModel)data).getRootJoint() != null){
-                ((AnimatedModel) data).getRootJoint().setLocation(globalDifference);
-                ((AnimatedModel) data).getRootJoint().setScale(finalScale);
-                //data.setScale(null);
-                //data.setPosition(null);
-            } else {
 
-                // rescale
-                float localScaleX = scaleFactor * data.getScale()[0];
-                float localScaleY = scaleFactor * data.getScale()[1];
-                float localScaleZ = scaleFactor * data.getScale()[2];
-                data.setScale(new float[]{localScaleX, localScaleY, localScaleZ});
-
-                // relocate
-                float localTranlactionX = data.getLocation()[0] * scaleFactor;
-                float localTranlactionY = data.getLocation()[1] * scaleFactor;
-                float localTranlactionZ = data.getLocation()[2] * scaleFactor;
-                data.setLocation(new float[]{localTranlactionX, localTranlactionY, localTranlactionZ});
-
-                // center
-                data.translate(globalDifference);
-            }
-        }*/
     }
 
 

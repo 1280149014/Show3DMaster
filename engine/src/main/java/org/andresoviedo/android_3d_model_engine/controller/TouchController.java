@@ -99,6 +99,7 @@ public class TouchController {
 
 		switch (motionEvent.getActionMasked()) {
 			case MotionEvent.ACTION_UP:
+
 			case MotionEvent.ACTION_CANCEL:
 			case MotionEvent.ACTION_POINTER_UP:
 			case MotionEvent.ACTION_HOVER_EXIT:
@@ -203,7 +204,8 @@ public class TouchController {
 					&& rotationVector[2] != 0;
 		}
 
-		if (pointerCount == 1 && simpleTouch) {
+		if (pointerCount == 1 ) {
+			Log.d(TAG,"click");
 			fireEvent(new TouchEvent(this, TouchEvent.CLICK, width, height, x1, y1));
 		}
 
@@ -242,7 +244,7 @@ public class TouchController {
 			gestureChanged = false;
 			Log.v(TAG, "Fin");
 		}
-		return true;
+		return false;
 	}
 }
 
