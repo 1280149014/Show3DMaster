@@ -10,7 +10,7 @@
     <org.andresoviedo.android_3d_model_engine.view.ModelSurfaceView
         android:id="@+id/backView"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
