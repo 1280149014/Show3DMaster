@@ -321,10 +321,6 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
             // animate scene
             scene.onDrawFrame();
 
-//            unused.glTranslatef(0.0f, 0.0f, -7.0f); // 设置初始位置
-//            unused.glRotatef(10, 0f, 1.0f, 0.0f); // 设置旋转切面
-
-
             // recalculate mvp matrix according to where we are looking at now
             Camera camera = scene.getCamera();
             cameraPosInWorldSpace[0] = camera.xPos;
@@ -369,7 +365,6 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
                     Matrix.multiplyMM(viewProjectionMatrixRight, 0, projectionMatrixRight, 0, viewMatrixRight, 0);
 
                 }
-
                 camera.setChanged(false);
 
             }

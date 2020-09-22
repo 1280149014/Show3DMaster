@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,15 +14,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.demo.show3dmaster.R;
-import com.demo.show3dmaster.load.DemoLoaderTask;
-import com.demo.show3dmaster.widget.ModelViewerGUI;
 
 import org.andresoviedo.android_3d_model_engine.camera.CameraController;
 import org.andresoviedo.android_3d_model_engine.collision.CollisionController;
 import org.andresoviedo.android_3d_model_engine.controller.TouchController;
 import org.andresoviedo.android_3d_model_engine.controller.TouchEvent;
-import org.andresoviedo.android_3d_model_engine.services.LoaderTask;
-import org.andresoviedo.android_3d_model_engine.services.SceneLoader;
 import org.andresoviedo.android_3d_model_engine.view.ModelRenderer;
 import org.andresoviedo.android_3d_model_engine.view.ModelSurfaceView;
 import org.andresoviedo.util.android.ContentUtils;

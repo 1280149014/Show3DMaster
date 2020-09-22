@@ -971,8 +971,6 @@ public class SceneLoader implements LoadListener, EventListener {
             Log.v("SceneLoader", "Mew model translated: " + Arrays.toString(data.getLocation()));
         }
 
-
-
     }
 
 
