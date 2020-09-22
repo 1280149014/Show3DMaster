@@ -371,7 +371,7 @@ public abstract class Widget extends Object3DData implements EventListener {
 
     @Override
     public boolean onEvent(EventObject event) {
-        return true;
+        return false;
     }
 
     public void setRatio(float ratio){

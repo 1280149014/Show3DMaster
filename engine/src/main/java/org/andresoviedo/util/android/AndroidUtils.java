@@ -18,11 +18,6 @@ import java.util.List;
 
 public class AndroidUtils {
 
-    @FunctionalInterface
-    public interface Callback {
-        void onClick(File file);
-    }
-
     public static void fireEvent(List<EventListener> listeners, EventObject eventObject){
         for (int i=0; i<listeners.size(); i++) listeners.get(i).onEvent(eventObject);
     }

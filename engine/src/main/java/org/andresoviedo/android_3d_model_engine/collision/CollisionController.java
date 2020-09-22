@@ -74,7 +74,7 @@ public class CollisionController implements EventListener {
                 }
             }
         }
-        return true;
+        return false;
     }
 
 }

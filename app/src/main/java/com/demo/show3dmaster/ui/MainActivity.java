@@ -73,12 +73,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
             app1View.rotateAnimate();
         });
 
-        gLView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "1111111111111 ");
-            }
-        });
+        gLView.setOnClickListener(v -> Log.i(TAG, "1111111111111 "));
 
         try {
             Log.i("ModelActivity", "Loading GLSurfaceView...");

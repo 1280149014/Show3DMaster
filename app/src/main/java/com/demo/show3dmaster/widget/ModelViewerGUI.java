@@ -199,6 +199,6 @@ final public class ModelViewerGUI extends GUI {
             newPosition[1]+=dy;
             ((MoveEvent) event).getWidget().setLocation(newPosition);
         }
-        return true;
+        return false;
     }
 }

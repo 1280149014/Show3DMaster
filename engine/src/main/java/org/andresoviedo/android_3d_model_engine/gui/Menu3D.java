@@ -186,7 +186,7 @@ public class Menu3D extends Widget {
             Log.i("Menu3D","select: "+idx);
             fireEvent(new ItemSelected(this, items, idx));
         }
-        return true;
+        return false;
     }
 
     private int getSelected() {

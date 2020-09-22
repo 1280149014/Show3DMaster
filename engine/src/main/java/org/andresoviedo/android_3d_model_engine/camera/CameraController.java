@@ -51,6 +51,6 @@ public final class CameraController implements EventListener {
                     break;
             }
         }
-        return true;
+        return false;
     }
 }

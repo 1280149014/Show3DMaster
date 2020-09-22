@@ -124,7 +124,7 @@ public class CheckList extends Widget {
 
             set(idx, !states.get(idx));
         }
-        return true;
+        return false;
     }
 
     public void set(int idx, boolean state) {

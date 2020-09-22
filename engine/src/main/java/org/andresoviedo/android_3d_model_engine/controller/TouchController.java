@@ -105,7 +105,7 @@ public class TouchController {
 			case MotionEvent.ACTION_HOVER_EXIT:
 			case MotionEvent.ACTION_OUTSIDE:
 				// this to handle "1 simple touch"
-				if (lastActionTime > SystemClock.uptimeMillis() - 250000) {
+				if (lastActionTime > SystemClock.uptimeMillis() - 500) {
 					Log.v(TAG, "Simple touch !");
 					simpleTouch = true;
 				} else {

@@ -44,7 +44,7 @@ public class Quad extends Widget {
             this.setRotation2(source.getRotation2(), source.getRotation2Location());
             this.setVisible(source.isVisible());
         }
-        return true;
+        return false;
     }
 
     private static void build(FloatBuffer vertexBuffer, Dimensions dimensions) {

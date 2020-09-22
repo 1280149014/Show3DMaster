@@ -94,7 +94,7 @@ public class Rotator extends Widget {
                 widget.animate(start, end, 125);
             }*/
         }
-        return true;
+        return false;
     }
 
     private static void build(FloatBuffer vertexBuffer, FloatBuffer colorBuffer, float[] color, Dimensions dimensions) {
