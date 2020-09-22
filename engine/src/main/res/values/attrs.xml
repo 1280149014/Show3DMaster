@@ -6,6 +6,7 @@
     <declare-styleable name="ModelSurfaceView">
         <attr name="clickAble" format="boolean" />
         <attr name="autoAnimation" format="boolean" />
+        <attr name="objName" format="string" />
     </declare-styleable>
 
 

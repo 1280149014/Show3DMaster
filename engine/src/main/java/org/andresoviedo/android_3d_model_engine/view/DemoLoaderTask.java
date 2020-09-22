@@ -105,74 +105,74 @@ public class DemoLoaderTask extends LoaderTask {
             //      y 为 正, 往上, 为负, 往下
             // 文理是门的 cube , 切每个面的颜色不一样
             // test cube with texture & colors
-            try {
-                InputStream open =  ContentUtils.getInputStream("cube.bmp");
-                Object3DData obj4 = Cube.buildCubeV4(IOUtils.read(open));
-                open.close();
-                obj4.setColor(new float[] { 1f, 1f, 1f, 1f });
-                obj4.setLocation(new float[] { 0f, -2f, 0f });
-                obj4.setScale(0.5f, 0.5f, 0.5f);
-                super.onLoad(obj4);
-            } catch (Exception ex) {
-                errors.add(ex);
-            }
+//            try {
+//                InputStream open =  ContentUtils.getInputStream("cube.bmp");
+//                Object3DData obj4 = Cube.buildCubeV4(IOUtils.read(open));
+//                open.close();
+//                obj4.setColor(new float[] { 1f, 1f, 1f, 1f });
+//                obj4.setLocation(new float[] { 0f, -2f, 0f });
+//                obj4.setScale(0.5f, 0.5f, 0.5f);
+//                super.onLoad(obj4);
+//            } catch (Exception ex) {
+//                errors.add(ex);
+//            }
 
             //
             // test loading object
-            try {
-                // this has no color array
-                Object3DData obj51 = new WavefrontLoader(GLES20.GL_TRIANGLE_FAN, new LoadListenerAdapter(){
-                    @Override
-                    public void onLoad(Object3DData obj53) {
-                        obj53.setLocation(new float[] { -2f, 0f, 0f });
-                        obj53.setColor(new float[] { 1.0f, 1.0f, 0f, 1.0f });
-                        Rescaler.rescale(obj53, 2f);
-                        DemoLoaderTask.this.onLoad(obj53);
-                    }
-                }).load(new URI("assets://assets/models/teapot.obj")).get(0);
-
-                //obj51.setScale(2f,2f,2f);
-                //obj51.setSize(0.5f);
-                //super.onLoad(obj51);
-            } catch (Exception ex) {
-                errors.add(ex);
-            }
+//            try {
+//                // this has no color array
+//                Object3DData obj51 = new WavefrontLoader(GLES20.GL_TRIANGLE_FAN, new LoadListenerAdapter(){
+//                    @Override
+//                    public void onLoad(Object3DData obj53) {
+//                        obj53.setLocation(new float[] { -2f, 0f, 0f });
+//                        obj53.setColor(new float[] { 1.0f, 1.0f, 0f, 1.0f });
+//                        Rescaler.rescale(obj53, 2f);
+//                        DemoLoaderTask.this.onLoad(obj53);
+//                    }
+//                }).load(new URI("assets://assets/models/teapot.obj")).get(0);
+//
+//                //obj51.setScale(2f,2f,2f);
+//                //obj51.setSize(0.5f);
+//                //super.onLoad(obj51);
+//            } catch (Exception ex) {
+//                errors.add(ex);
+//            }
 
             // test loading object with materials
-            try {
-                // this has color array
-                Object3DData obj52 = new WavefrontLoader(GLES20.GL_TRIANGLE_FAN, new LoadListenerAdapter(){
-                    @Override
-                    public void onLoad(Object3DData obj53) {
-                        obj53.setLocation(new float[] { 1.5f, -2.5f, -0.5f });
-                        obj53.setColor(new float[] { 0.0f, 1.0f, 1f, 1.0f });
-                        DemoLoaderTask.this.onLoad(obj53);
-                    }
-                }).load(new URI("assets://assets/models/cube.obj")).get(0);
-
-                //obj52.setScale(0.5f, 0.5f, 0.5f);
-                //super.onLoad(obj52);
-            } catch (Exception ex) {
-                errors.add(ex);
-            }
+//            try {
+//                // this has color array
+//                Object3DData obj52 = new WavefrontLoader(GLES20.GL_TRIANGLE_FAN, new LoadListenerAdapter(){
+//                    @Override
+//                    public void onLoad(Object3DData obj53) {
+//                        obj53.setLocation(new float[] { 1.5f, -2.5f, -0.5f });
+//                        obj53.setColor(new float[] { 0.0f, 1.0f, 1f, 1.0f });
+//                        DemoLoaderTask.this.onLoad(obj53);
+//                    }
+//                }).load(new URI("assets://assets/models/cube.obj")).get(0);
+//
+//                //obj52.setScale(0.5f, 0.5f, 0.5f);
+//                //super.onLoad(obj52);
+//            } catch (Exception ex) {
+//                errors.add(ex);
+//            }
 
             // test loading object made of polygonal faces
-            try {
-                // this has heterogeneous faces
-                Object3DData obj53 = new WavefrontLoader(GLES20.GL_TRIANGLE_FAN, new LoadListenerAdapter(){
-                    @Override
-                    public void onLoad(Object3DData obj53) {
-                        obj53.setLocation(new float[] { 2f, 0f, 0f });
-                        obj53.setColor(new float[] { 1.0f, 1.0f, 1f, 1.0f });
-                        Rescaler.rescale(obj53, 2f);
-                        DemoLoaderTask.this.onLoad(obj53);
-                    }
-                }).load(new URI("assets://assets/models/ToyPlane.obj")).get(0);
-
-                //super.onLoad(obj53);
-            } catch (Exception ex) {
-                errors.add(ex);
-            }
+//            try {
+//                // this has heterogeneous faces
+//                Object3DData obj53 = new WavefrontLoader(GLES20.GL_TRIANGLE_FAN, new LoadListenerAdapter(){
+//                    @Override
+//                    public void onLoad(Object3DData obj53) {
+//                        obj53.setLocation(new float[] { 2f, 0f, 0f });
+//                        obj53.setColor(new float[] { 1.0f, 1.0f, 1f, 1.0f });
+//                        Rescaler.rescale(obj53, 2f);
+//                        DemoLoaderTask.this.onLoad(obj53);
+//                    }
+//                }).load(new URI("assets://assets/models/ToyPlane.obj")).get(0);
+//
+//                //super.onLoad(obj53);
+//            } catch (Exception ex) {
+//                errors.add(ex);
+//            }
 
             // test loading object made of polygonal faces
 //            try {

@@ -23,6 +23,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 老子也是起了怪了, 写了这个鸡巴类, 不知道什么用
+ */
 public class ContentUtils {
 
     /**
