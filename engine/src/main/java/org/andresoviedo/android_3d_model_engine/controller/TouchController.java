@@ -244,7 +244,7 @@ public class TouchController {
 			gestureChanged = false;
 			Log.v(TAG, "Fin");
 		}
-		return false;
+		return true;
 	}
 }
 

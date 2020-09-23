@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         app1Layout = findViewById(R.id.app1Layout);
 
         app1Layout.setOnClickListener(v -> {
+            Toast.makeText(MainActivity.this,"app1 icon is clicked",Toast.LENGTH_SHORT).show();
             app1View.rotateAnimate();
         });
 

@@ -160,10 +160,10 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
     private final Object3DData gridz = Grid.build(0,-GRID_WIDTH,-GRID_WIDTH,0,GRID_WIDTH, GRID_WIDTH, GRID_SIZE)
             .setColor(GRID_COLOR).setId("grid-z").setSolid(false);
     {
-        extras.add(axis);   //增加这里的代码可以显示轴线
-        extras.add(gridx);
-        extras.add(gridy);
-        extras.add(gridz);
+//        extras.add(axis);   //增加这里的代码可以显示轴线
+//        extras.add(gridx);
+//        extras.add(gridy);
+//        extras.add(gridz);
     }
 
     // 3D stereoscopic matrix (left & right camera)

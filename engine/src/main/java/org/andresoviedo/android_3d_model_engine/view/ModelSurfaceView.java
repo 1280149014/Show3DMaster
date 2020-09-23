@@ -195,11 +195,11 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		try {
-			if(!isClickAble){
+//			if(!isClickAble){
 				return touchController.onTouchEvent(event);
-			}else{
-				super.onTouchEvent(event);
-			}
+//			}else{
+//				super.onTouchEvent(event);
+//			}
 		} catch (Exception ex) {
 			Log.e("ModelSurfaceView","Exception: "+ ex.getMessage(),ex);
 		}
