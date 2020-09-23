@@ -204,7 +204,7 @@ public class TouchController {
 					&& rotationVector[2] != 0;
 		}
 
-		if (pointerCount == 1 ) {
+		if (pointerCount == 1 && simpleTouch) {
 			Log.d(TAG,"click");
 			fireEvent(new TouchEvent(this, TouchEvent.CLICK, width, height, x1, y1));
 		}
@@ -218,16 +218,16 @@ public class TouchController {
 						null));
 				touchStatus = TOUCH_STATUS_MOVING_WORLD;
 			} else if (pointerCount == 2) {
-				if (fingersAreClosing) {
-					fireEvent(new TouchEvent(this, TouchEvent.PINCH, width, height, previousX1, previousY1,
-							x1, y1, dx1, dy1, (length - previousLength), null));
-					touchStatus = TOUCH_STATUS_ZOOMING_CAMERA;
-				}
-				if (isRotating) {
-					fireEvent(new TouchEvent(this, TouchEvent.ROTATE, width, height, previousX1, previousY1
-							, x1, y1, dx1, dy1, 0, rotationVector));
-					touchStatus = TOUCH_STATUS_ROTATING_CAMERA;
-				}
+//				if (fingersAreClosing) {
+//					fireEvent(new TouchEvent(this, TouchEvent.PINCH, width, height, previousX1, previousY1,
+//							x1, y1, dx1, dy1, (length - previousLength), null));
+//					touchStatus = TOUCH_STATUS_ZOOMING_CAMERA;
+//				}
+//				if (isRotating) {
+//					fireEvent(new TouchEvent(this, TouchEvent.ROTATE, width, height, previousX1, previousY1
+//							, x1, y1, dx1, dy1, 0, rotationVector));
+//					touchStatus = TOUCH_STATUS_ROTATING_CAMERA;
+//				}
 			}
 		}
 

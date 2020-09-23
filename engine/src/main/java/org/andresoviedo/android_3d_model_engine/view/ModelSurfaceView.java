@@ -75,6 +75,7 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 	Boolean isAutoAnimation;
 	Boolean isClickAble;
 	String objName;
+	int cameraPosition;
 	public void getAttrs(Context context, AttributeSet attrs){
 		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ModelSurfaceView);
 		isAutoAnimation = ta.getBoolean(R.styleable.ModelSurfaceView_autoAnimation,false);

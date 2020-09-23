@@ -27,7 +27,6 @@ import org.andresoviedo.util.android.ContentUtils;
 import org.andresoviedo.util.event.EventListener;
 
 import java.io.IOException;
-import java.net.URI;
 import java.util.EventObject;
 
 /**
@@ -202,21 +201,18 @@ public class MainActivity extends AppCompatActivity implements EventListener {
             }
     }
 
-        @Override
-        public boolean onEvent (EventObject event){
-            if (event instanceof ModelRenderer.ViewEvent) {
-                ModelRenderer.ViewEvent viewEvent = (ModelRenderer.ViewEvent) event;
-                if (viewEvent.getCode() == ModelRenderer.ViewEvent.Code.SURFACE_CHANGED) {
-                    Log.d(TAG," viewEvent.getWidth() = " + viewEvent.getWidth() +
-                            ", viewEvent.getWidth()=" +  viewEvent.getHeight());
-                    touchController.setSize(viewEvent.getWidth(), viewEvent.getHeight());
-                    gLView.setTouchController(touchController);
-                }
+    @Override
+    public boolean onEvent (EventObject event){
+        if (event instanceof ModelRenderer.ViewEvent) {
+            ModelRenderer.ViewEvent viewEvent = (ModelRenderer.ViewEvent) event;
+            if (viewEvent.getCode() == ModelRenderer.ViewEvent.Code.SURFACE_CHANGED) {
+                Log.d(TAG," viewEvent.getWidth() = " + viewEvent.getWidth() +
+                        ", viewEvent.getWidth()=" +  viewEvent.getHeight());
+                touchController.setSize(viewEvent.getWidth(), viewEvent.getHeight());
+                gLView.setTouchController(touchController);
             }
-            return true;
         }
-
-
-
+        return true;
+    }
 
 }

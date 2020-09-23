@@ -220,6 +220,7 @@ public class SceneLoader implements LoadListener, EventListener {
     public void init() {
 
         camera.setChanged(true); // force first draw
+//        camera.setPosition(DEFAULT_CAMERA_POSITION );
 
         if (uri == null) {
             return;
@@ -337,17 +338,17 @@ public class SceneLoader implements LoadListener, EventListener {
             if(scaleInitX == -1){
                 scaleInitX = objects.get(0).getScaleX();
             }else{
-                scale[0] = scaleInitX * (zoom + 1);
+                scale[0] = scaleInitX * (zoom + 0.5f);
             }
             if(scaleInitY == -1){
                 scaleInitY = objects.get(0).getScaleY();
             }else{
-                scale[1] = scaleInitY *(zoom + 1);
+                scale[1] = scaleInitY *(zoom + 0.5f);
             }
             if(scaleInitZ == -1){
                 scaleInitZ = objects.get(0).getScaleZ();
             }else{
-                scale[2] = scaleInitZ * (zoom + 1);
+                scale[2] = scaleInitZ * (zoom + 0.5f);
             }
         }else{
             float zoom = (degree - 180) / 180.0f;
@@ -358,17 +359,17 @@ public class SceneLoader implements LoadListener, EventListener {
             if(scaleInitX == -1){
                 scaleInitX = objects.get(0).getScaleX();
             }else{
-                scale[0] = scaleInitX * (2 - zoom);
+                scale[0] = scaleInitX * (1.5f - zoom);
             }
             if(scaleInitY == -1){
                 scaleInitY = objects.get(0).getScaleY();
             }else{
-                scale[1] = scaleInitY  * (2 - zoom);
+                scale[1] = scaleInitY  * (1.5f - zoom);
             }
             if(scaleInitZ == -1){
                 scaleInitZ = objects.get(0).getScaleZ();
             }else{
-                scale[2] = scaleInitZ  * (2 - zoom);
+                scale[2] = scaleInitZ  * (1.5f - zoom);
             }
         }
 
@@ -806,6 +807,11 @@ public class SceneLoader implements LoadListener, EventListener {
         this.glView = view;
     }
 
+    /**
+     *  通过这个方法, 可以找到此次点击事件, 具体点击的是哪一个 object
+     * @param event  封装的触摸事件
+     * @return  是否消费了该事件
+     */
     @Override
     public boolean onEvent(EventObject event) {
         //Log.v("SceneLoader","Processing event... "+event);
@@ -817,15 +823,15 @@ public class SceneLoader implements LoadListener, EventListener {
             if (isCollision() && point != null) {
                 addObject(point);
             } else {
-                if (getSelectedObject() == objectToSelect) {
-                    Log.i("SceneLoader", "Unselected object " + objectToSelect.getId());
-                    Log.d("SceneLoader", "Unselected object " + objectToSelect);
-                    setSelectedObject(null);
-                } else {
-                    Log.i("SceneLoader", "Selected object " + objectToSelect.getId());
-                    Log.d("SceneLoader", "Selected object " + objectToSelect);
-                    setSelectedObject(objectToSelect);
-                }
+//                if (getSelectedObject() == objectToSelect) {
+//                    Log.i("SceneLoader", "Unselected object " + objectToSelect.getId());
+//                    Log.d("SceneLoader", "Unselected object " + objectToSelect);
+//                    setSelectedObject(null);
+//                } else {
+//                    Log.i("SceneLoader", "Selected object " + objectToSelect.getId());
+//                    Log.d("SceneLoader", "Selected object " + objectToSelect);
+//                    setSelectedObject(objectToSelect);
+//                }
             }
         }
         return false;
