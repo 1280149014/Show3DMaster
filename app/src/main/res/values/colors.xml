@@ -6,4 +6,8 @@
 
     <color name="colorGreen">#00ff00</color>
     <color name="colorBack">#000F</color>
+
+    <!-- Fully transparent, equivalent to 0x00000000 -->
+    <color name="transparent">#000000FF</color>
+
 </resources>
