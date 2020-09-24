@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
     private Handler handler;
     private CameraController cameraController;
 
-    View app1Layout ;
+//    View app1Layout ;
     View app2Layout ;
 
     @Override
@@ -61,14 +61,14 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 
         handler = new Handler(getMainLooper());
         gLView = (ModelSurfaceView)findViewById(R.id.backView);
-        app1View = findViewById(R.id.app1);
+//        app1View = findViewById(R.id.app1);
 
-        app1Layout = findViewById(R.id.app1Layout);
-
-        app1Layout.setOnClickListener(v -> {
-            Toast.makeText(MainActivity.this,"app1 icon is clicked",Toast.LENGTH_SHORT).show();
-            app1View.rotateAnimate();
-        });
+//        app1Layout = findViewById(R.id.app1Layout);
+//
+//        app1Layout.setOnClickListener(v -> {
+//            Toast.makeText(MainActivity.this,"app1 icon is clicked",Toast.LENGTH_SHORT).show();
+//            app1View.rotateAnimate();
+//        });
 
         gLView.setOnClickListener(v -> Log.i(TAG, "1111111111111 "));
 

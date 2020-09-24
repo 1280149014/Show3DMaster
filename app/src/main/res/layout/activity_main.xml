@@ -21,64 +21,60 @@
         app:layout_constraintVertical_bias="0.0" />
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/app_icon_layout_width"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@id/backView"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="@dimen/app_icon_layout_width"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/backView"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
 
-        android:id="@+id/layout">
+<!--        android:id="@+id/layout">-->
 
-        <FrameLayout
-            android:layout_width= "@dimen/app_icon_layout_width"
-            android:layout_height= "@dimen/app_icon_layout_height"
-            android:id="@+id/app1Layout"
-            >
-            <org.andresoviedo.android_3d_model_engine.view.ModelSurfaceView
-                android:id="@+id/app1"
-                android:layout_width= "@dimen/app_icon_layout_width"
-                android:layout_height="@dimen/app_icon_layout_height"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                app:autoAnimation="false"
-                app:clickAble="true"
-                app:cameraDistance="3"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintBottom_toBottomOf="@id/backView"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/app2"
-                app:objName="@string/app1_obj" />
-
-
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width= "100dp"
-            android:layout_height= "100dp"
-            android:id="@+id/app2Layout"
-            >
-            <org.andresoviedo.android_3d_model_engine.view.ModelSurfaceView
-                android:id="@+id/app2"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-
-                app:layout_constraintBottom_toBottomOf="@id/backView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintLeft_toRightOf="@id/app1"
-                app:layout_goneMarginLeft="10dp" />
-
-        </FrameLayout>
+<!--        <FrameLayout-->
+<!--            android:layout_width= "@dimen/app_icon_layout_width"-->
+<!--            android:layout_height= "@dimen/app_icon_layout_height"-->
+<!--            android:id="@+id/app1Layout"-->
+<!--            >-->
+<!--            <org.andresoviedo.android_3d_model_engine.view.ModelSurfaceView-->
+<!--                android:id="@+id/app1"-->
+<!--                android:layout_width= "@dimen/app_icon_layout_width"-->
+<!--                android:layout_height="@dimen/app_icon_layout_height"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                app:autoAnimation="false"-->
+<!--                app:clickAble="true"-->
+<!--                app:cameraDistance="3"-->
+<!--                app:layout_constraintHorizontal_bias="0.0"-->
+<!--                app:layout_constraintBottom_toBottomOf="@id/backView"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toLeftOf="@id/app2"-->
+<!--                app:objName="@string/app1_obj" />-->
 
 
+<!--        </FrameLayout>-->
+
+<!--        <FrameLayout-->
+<!--            android:layout_width= "100dp"-->
+<!--            android:layout_height= "100dp"-->
+<!--            android:id="@+id/app2Layout"-->
+<!--            >-->
+<!--            <org.andresoviedo.android_3d_model_engine.view.ModelSurfaceView-->
+<!--                android:id="@+id/app2"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:layout_width="100dp"-->
+<!--                android:layout_height="100dp"-->
+
+<!--                app:layout_constraintBottom_toBottomOf="@id/backView"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_bias="0.0"-->
+<!--                app:layout_constraintLeft_toRightOf="@id/app1"-->
+<!--                app:layout_goneMarginLeft="10dp" />-->
+
+<!--        </FrameLayout>-->
 
 
-
-
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -94,10 +94,11 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
     // Add 0.5f to the alpha component to the global shader so we can see through the skin
     private static final float[] BLENDING_MASK_FORCED = {1.0f, 1.0f, 1.0f, 0.5f};
 
+    // 修改视距
     // frustrum - nearest pixel
-    private static final float near = 1f;
+    private static final float near = 2f;
     // frustrum - fartest pixel
-    private static final float far = 2000f;
+    private static final float far = 100f;
 
     // stereoscopic variables
     private static float EYE_DISTANCE = 0.64f;
@@ -274,13 +275,16 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
     public void onSurfaceChanged(GL10 unused, int width, int height) {
         this.width = width;
         this.height = height;
-
+        //获得像素点
+        Log.d(TAG,"width = " + width  + " , height = " + height);
         // Adjust the viewport based on geometry changes, such as screen rotation
         GLES20.glViewport(0, 0, width, height);
 
         // the projection matrix is the 3D virtual space (cube) that we want to project
         this.ratio = (float) width / height;
         Log.d(TAG, "onSurfaceChanged: projection: [" + -ratio + "," + ratio + ",-1,1]-near/far[1,10]");
+
+        //设置投影矩阵,  这个是关键类, 影响最后的
         Matrix.frustumM(projectionMatrix, 0, -ratio, ratio, -1, 1, getNear(), getFar());
         Matrix.frustumM(projectionMatrixRight, 0, -ratio, ratio, -1, 1, getNear(), getFar());
         Matrix.frustumM(projectionMatrixLeft, 0, -ratio, ratio, -1, 1, getNear(), getFar());

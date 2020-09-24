@@ -218,16 +218,17 @@ public class TouchController {
 						null));
 				touchStatus = TOUCH_STATUS_MOVING_WORLD;
 			} else if (pointerCount == 2) {
-//				if (fingersAreClosing) {
-//					fireEvent(new TouchEvent(this, TouchEvent.PINCH, width, height, previousX1, previousY1,
-//							x1, y1, dx1, dy1, (length - previousLength), null));
-//					touchStatus = TOUCH_STATUS_ZOOMING_CAMERA;
-//				}
-//				if (isRotating) {
-//					fireEvent(new TouchEvent(this, TouchEvent.ROTATE, width, height, previousX1, previousY1
-//							, x1, y1, dx1, dy1, 0, rotationVector));
-//					touchStatus = TOUCH_STATUS_ROTATING_CAMERA;
-//				}
+				// 多点触控代码
+				if (fingersAreClosing) {
+					fireEvent(new TouchEvent(this, TouchEvent.PINCH, width, height, previousX1, previousY1,
+							x1, y1, dx1, dy1, (length - previousLength), null));
+					touchStatus = TOUCH_STATUS_ZOOMING_CAMERA;
+				}
+				if (isRotating) {
+					fireEvent(new TouchEvent(this, TouchEvent.ROTATE, width, height, previousX1, previousY1
+							, x1, y1, dx1, dy1, 0, rotationVector));
+					touchStatus = TOUCH_STATUS_ROTATING_CAMERA;
+				}
 			}
 		}
 
