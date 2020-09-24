@@ -56,7 +56,7 @@ public class DemoLoaderTask extends LoaderTask {
             Object3DData obj10 = Cube.buildCubeV1();
             // rgba  alpha 0 为 最后一个数字 好像是亮度
             obj10.setColor(new float[] { 1f, 0f, 0f, 0.5f });
-            obj10.setLocation(new float[] { 0f, -5f, 0f });
+            obj10.setLocation(new float[] { -2f, -5f, 0f });
             obj10.setScale(0.5f, 0.5f, 0.5f);
             super.onLoad(obj10);
 
@@ -74,7 +74,7 @@ public class DemoLoaderTask extends LoaderTask {
             // test cube made of wires (I explode it to see the faces better)
             Object3DData obj12 = Cube.buildCubeV1_with_normals();
             obj12.setColor(new float[] { 1f, 0f, 1f, 1f });
-            obj12.setLocation(new float[] { 1f, -5f, 0f });
+            obj12.setLocation(new float[] { 0f, -5f, 0f });
             obj12.setScale(0.5f, 0.5f, 0.5f);
             super.onLoad(obj12);
 

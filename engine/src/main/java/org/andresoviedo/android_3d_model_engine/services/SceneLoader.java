@@ -1,6 +1,5 @@
 package org.andresoviedo.android_3d_model_engine.services;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.net.Uri;
@@ -10,6 +9,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import org.andresoviedo.android_3d_model_engine.animation.Animator;
+import org.andresoviedo.android_3d_model_engine.animation.MyAnimatorUtil;
 import org.andresoviedo.android_3d_model_engine.collision.CollisionEvent;
 import org.andresoviedo.android_3d_model_engine.controller.TouchEvent;
 import org.andresoviedo.android_3d_model_engine.model.AnimatedModel;
@@ -17,7 +17,6 @@ import org.andresoviedo.android_3d_model_engine.model.Camera;
 import org.andresoviedo.android_3d_model_engine.model.Dimensions;
 import org.andresoviedo.android_3d_model_engine.model.Object3DData;
 import org.andresoviedo.android_3d_model_engine.model.Transform;
-import org.andresoviedo.android_3d_model_engine.objects.Point;
 import org.andresoviedo.android_3d_model_engine.services.collada.ColladaLoaderTask;
 import org.andresoviedo.android_3d_model_engine.services.stl.STLLoaderTask;
 import org.andresoviedo.android_3d_model_engine.services.wavefront.WavefrontLoaderTask;
@@ -201,6 +200,7 @@ public class SceneLoader implements LoadListener, EventListener {
      */
     private long startTime;
 
+    MyAnimatorUtil myAnimator;
     /**
      * A cache to save original model dimensions before rescaling them to fit in screen
      * This enables rescaling several times
@@ -275,16 +275,28 @@ public class SceneLoader implements LoadListener, EventListener {
             animateCamera();
         }
 
-        if(isClicked){
-            rotateAnimation();
+//        if(isClicked){
+//            rotateAnimation();
+//        }
+
+
+        for (int i = 0; i < objects.size(); i++) {
+            Object3DData obj = objects.get(i);
+            if(obj.isNeedRotate()){
+                myAnimator.startAnimation(obj);
+            }
         }
 
         if (objects.isEmpty()) return;
+
+
 
         if (doAnimation) {
             for (int i = 0; i < objects.size(); i++) {
                 Object3DData obj = objects.get(i);
                 animator.update(obj, isShowBindPose());
+
+
             }
         }
     }
@@ -322,6 +334,32 @@ public class SceneLoader implements LoadListener, EventListener {
             scaleInitX = scaleInitY = scaleInitZ = -1;
         }
     }
+
+    private void rotateAnimationObj(Object3DData obj, float scaleInitX,
+                                    float scaleInitY, float scaleInitZ) {
+        // 正常的旋转角度, 应该是 从 0 到 360度
+        // 参照黄工意见, 改为步长 处理, 考虑到大致的针数在 60,
+        // 步长设成5,需要72次一圈 360 度,耗时1.2s左右
+        degree = degree + 5;
+        calculateScale(scale,degree);
+
+
+        obj.setRotation1(new float[]{0,degree, 0});
+        obj.setScale(scale);
+        Log.d(TAG,"1111 scale = " + obj.getScaleX() + " , y = " + obj.getScaleY());
+
+        if(degree >= rotateDegree){
+
+            obj.setRotation1(new float[]{0,0, 0});
+            obj.setScale(scaleInitX,scaleInitY,scaleInitZ);
+
+            isClicked = false;
+            degree = 0;
+            scaleInitX = scaleInitY = scaleInitZ = -1;
+        }
+    }
+
+
 
     /**
      *  计算放大缩小的倍数,
@@ -745,6 +783,9 @@ public class SceneLoader implements LoadListener, EventListener {
         // reposition camera
         Log.i("SceneLoader", "Camera position: " + DEFAULT_CAMERA_POSITION);
         camera.setPosition(DEFAULT_CAMERA_POSITION);
+
+        //初始化动画处理类
+        myAnimator = new MyAnimatorUtil(getObjects());
     }
 
     private void rescale(List<Object3DData> objs) {
@@ -823,15 +864,18 @@ public class SceneLoader implements LoadListener, EventListener {
             if (isCollision() && point != null) {
                 addObject(point);
             } else {
-//                if (getSelectedObject() == objectToSelect) {
-//                    Log.i("SceneLoader", "Unselected object " + objectToSelect.getId());
-//                    Log.d("SceneLoader", "Unselected object " + objectToSelect);
-//                    setSelectedObject(null);
-//                } else {
-//                    Log.i("SceneLoader", "Selected object " + objectToSelect.getId());
-//                    Log.d("SceneLoader", "Selected object " + objectToSelect);
-//                    setSelectedObject(objectToSelect);
-//                }
+                // 对象选中
+                if (getSelectedObject() == objectToSelect) {
+                    Log.i("SceneLoader", "Unselected object " + objectToSelect.getId());
+                    Log.d("SceneLoader", "Unselected object " + objectToSelect);
+                    setSelectedObject(null);
+                } else {
+                    Log.i("SceneLoader", "Selected object " + objectToSelect.getId());
+                    Log.d("SceneLoader", "Selected object " + objectToSelect);
+                    setSelectedObject(objectToSelect);
+                    objectToSelect.setNeedRotate(true);
+                    objectToSelect.setNeedScale(true);
+                }
             }
         }
         return false;

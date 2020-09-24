@@ -29,6 +29,30 @@ import java.util.List;
 public class Object3DData {
 
 
+    public boolean isNeedRotate() {
+        return isNeedRotate;
+    }
+
+    public void setNeedRotate(boolean needRotate) {
+        isNeedRotate = needRotate;
+    }
+
+    public boolean isNeedScale() {
+        return isNeedScale;
+    }
+
+    public void setNeedScale(boolean needScale) {
+        isNeedScale = needScale;
+    }
+
+    public boolean isAutoAnimation() {
+        return autoAnimation;
+    }
+
+    public void setAutoAnimation(boolean autoAnimation) {
+        this.autoAnimation = autoAnimation;
+    }
+
     protected static class ChangeEvent extends EventObject {
         ChangeEvent(Object source) {
             super(source);
@@ -137,6 +161,13 @@ public class Object3DData {
 
     // event listeners
     private List<EventListener> listeners = new ArrayList<>();
+
+
+    private boolean isNeedRotate = false;
+
+    private boolean isNeedScale = false;
+
+    private boolean autoAnimation = false;
 
 
     public Object3DData() {
@@ -571,6 +602,11 @@ public class Object3DData {
         return bindTransform;
     }
 
+    /**
+     *
+     * 更新 模型数据
+     *
+     */
     private void updateModelMatrix() {
 
         Matrix.setIdentityM(modelMatrix, 0);
