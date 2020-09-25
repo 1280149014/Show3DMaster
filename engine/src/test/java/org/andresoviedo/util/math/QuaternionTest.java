@@ -1,6 +1,8 @@
 package org.andresoviedo.util.math;
 
 import org.junit.Test;
+import org.ok.util.math.Math3DUtils;
+import org.ok.util.math.Quaternion;
 
 public class QuaternionTest {
 

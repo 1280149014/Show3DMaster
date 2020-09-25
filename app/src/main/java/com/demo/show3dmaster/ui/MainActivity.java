@@ -4,27 +4,24 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Layout;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.demo.show3dmaster.R;
 
-import org.andresoviedo.android_3d_model_engine.camera.CameraController;
-import org.andresoviedo.android_3d_model_engine.collision.CollisionController;
-import org.andresoviedo.android_3d_model_engine.controller.TouchController;
-import org.andresoviedo.android_3d_model_engine.controller.TouchEvent;
-import org.andresoviedo.android_3d_model_engine.view.ModelRenderer;
-import org.andresoviedo.android_3d_model_engine.view.ModelSurfaceView;
-import org.andresoviedo.util.android.ContentUtils;
-import org.andresoviedo.util.event.EventListener;
+import org.ok.android_3d_model_engine.camera.CameraController;
+import org.ok.android_3d_model_engine.collision.CollisionController;
+import org.ok.android_3d_model_engine.controller.TouchController;
+import org.ok.android_3d_model_engine.controller.TouchEvent;
+import org.ok.android_3d_model_engine.view.ModelRenderer;
+import org.ok.android_3d_model_engine.view.ModelSurfaceView;
+import org.ok.util.android.ContentUtils;
+import org.ok.util.event.EventListener;
 
 import java.io.IOException;
 import java.util.EventObject;

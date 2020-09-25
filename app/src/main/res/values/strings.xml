@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Show3DMaster</string>
 
+    <string name="full_obj">Test_Sence.obj</string>
 
-    <string name="app1_obj">butten_1.obj</string>
+    <string name="app1_obj">ToyPlane.obj</string>
 
     <string name="app2_obj">cube.obj</string>
 

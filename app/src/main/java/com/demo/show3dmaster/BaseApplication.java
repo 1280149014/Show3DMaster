@@ -2,7 +2,7 @@ package com.demo.show3dmaster;
 
 import android.app.Application;
 
-import org.andresoviedo.util.android.AndroidURLStreamHandlerFactory;
+import org.ok.util.android.AndroidURLStreamHandlerFactory;
 
 import java.net.URL;
 
@@ -20,7 +20,7 @@ public class BaseApplication extends Application {
 
     // Custom handler: org/andresoviedo/util/android/assets/Handler.class
     static {
-        System.setProperty("java.protocol.handler.pkgs", "org.andresoviedo.util.android");
+        System.setProperty("java.protocol.handler.pkgs", "org.ok.util.android");
         URL.setURLStreamHandlerFactory(new AndroidURLStreamHandlerFactory());
     }
 
