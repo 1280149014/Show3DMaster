@@ -74,10 +74,6 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 
         try {
             Log.i("ModelActivity", "Loading GLSurfaceView...");
-//            gLView = new ModelSurfaceView(this, backgroundColor, this.scene);
-//            gLView.addListener(this);
-//            setContentView(gLView);
-//            scene.setView(gLView);
         } catch (Exception e) {
             Log.e("ModelActivity", e.getMessage(), e);
             Toast.makeText(this, "Error loading OpenGL view:\n" + e.getMessage(), Toast.LENGTH_LONG).show();
