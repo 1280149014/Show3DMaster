@@ -5,11 +5,14 @@ import android.opengl.GLES20;
 import android.util.Log;
 
 import org.ok.android_3d_model_engine.model.Object3DData;
+import org.ok.android_3d_model_engine.objects.AppIconCube;
 import org.ok.android_3d_model_engine.objects.Cube;
+import org.ok.android_3d_model_engine.objects.Square;
 import org.ok.android_3d_model_engine.services.LoadListener;
 import org.ok.android_3d_model_engine.services.LoadListenerAdapter;
 import org.ok.android_3d_model_engine.services.LoaderTask;
 import org.ok.android_3d_model_engine.services.wavefront.WavefrontLoader;
+import org.ok.android_3d_model_engine.util.Exploder;
 import org.ok.util.android.ContentUtils;
 import org.ok.util.io.IOUtils;
 
@@ -17,6 +20,7 @@ import java.io.InputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * This class loads a 3D scene as an example of what can be done with the app
@@ -52,20 +56,20 @@ public class DemoLoaderTask extends LoaderTask {
             // test cube made of arrays
 //            Object3DData obj10 = Cube.buildCubeV1_with_normals();
 //            // rgba  alpha 0 为 最后一个数字 好像是亮度
-//            obj10.setColor(new float[] { 1f, 0f, 0f, 0.5f });
+//            obj10.setColor(new float[] { 1f, 0f, 0f, 0f });
 //            obj10.setLocation(new float[] { -4f, -5f, 0f });
 //            obj10.setScale(0.5f, 0.5f, 0.5f);
 //            super.onLoad(obj10);
 
             //通过线条实现 cube, 三角形立方体
             // test cube made of wires (I explode it to see the faces better)
-//            Object3DData obj11 = Cube.buildCubeV1();
-//            obj11.setColor(new float[] { 1f, 1f, 0f, 0.5f });
-//            obj11.setLocation(new float[] { 1f, 2f, 0f });
-//            Exploder.centerAndScaleAndExplode(obj11, 2.0f, 1.5f);
-//            obj11.setId(obj11.getId() + "_exploded");
-//            obj11.setScale(0.5f, 0.5f, 0.5f);
-//            super.onLoad(obj11);
+//            Object3DData obj110 = Cube.buildCubeV1();
+//            obj110.setColor(new float[] { 1f, 1f, 0f, 0.5f });
+//            obj110.setLocation(new float[] { 1f, 2f, 0f });
+////            Exploder.centerAndScaleAndExplode(obj110, 2.0f, 1.5f);
+//            obj110.setId(obj110.getId() + "_exploded");
+//            obj110.setScale(0.5f, 0.5f, 0.5f);
+//            super.onLoad(obj110);
 
             //每个面有不同的颜色
             // test cube made of wires (I explode it to see the faces better)
@@ -77,26 +81,85 @@ public class DemoLoaderTask extends LoaderTask {
 
             //绿色的cube  , 指标
             // test cube made of indices
-//            Object3DData obj20 = Cube.buildCubeV2();
-//            obj20.setColor(new float[] { 0f, 1f, 0, 0.25f });
-//            obj20.setLocation(new float[] { 2f, -5f, 0f });
-//            obj20.setScale(0.5f, 0.5f, 0.5f);
-//            super.onLoad(obj20);
+//            InputStream open11 = ContentUtils.getInputStream("phone.png");
+//            Object3DData obj11 = Square.buildCubeV3face(IOUtils.read(open11));
+//            open11.close();
+//            obj11.setColor(new float[] { 1f, 0f, 0, 0.75f });
+//            obj11.setLocation(new float[] { -2f, -5f, 0f });
+//            obj11.setScale(0.5f, 0.5f, 0.5f);
+//            super.onLoad(obj11);
+//
+//            Object3DData obj10 = Cube.buildCubeV1();
+//            obj10.setColor(new float[] { 0f, 1f, 0, 0.25f });
+//            obj10.setLocation(new float[] { -2f, -5f, 0f });
+//            obj10.setScale(0.5f, 0.5f, 0.5f);
+//            obj10.setFriend(obj11);
+//            obj10.getFriend().setFriend(obj10);
+//            super.onLoad(obj10);
 
+            List<Object3DData> res = new ArrayList<>();
 
-            //6个面都是 企鹅的cube
-            // test cube with texture
-            try {
-                InputStream open = ContentUtils.getInputStream("phone.png");
-                Object3DData obj3 = Cube.buildCubeV4(IOUtils.read(open));
-                open.close();
-                obj3.setColor(new float[] { 1f, 1f, 1f, 0f });
-                obj3.setLocation(new float[] { -2f, -5f, 0f });
-                obj3.setScale(0.5f, 0.5f, 0.5f);
-                super.onLoad(obj3);
-            } catch (Exception ex) {
-                errors.add(ex);
+            float iconRotateAngle = -10;
+
+            List<Object3DData> app1 = AppIconCube.createAppIconCube("phone.png",
+                    new float[]{-2f, -5f, 0f},
+                    new float[]{0f, 1f, 0, 0.75f},
+                    new float[]{0.5f, 0.5f, 0.5f},
+                    DemoLoaderTask.this);
+            res.addAll(app1);
+
+            List<Object3DData> app2 = AppIconCube.createAppIconCube("facebook.png",
+                    new float[]{0f, -5f, 0f},
+                    new float[]{0f, 1f, 0, 0.75f},
+                    new float[]{0.5f, 0.5f, 0.5f},
+                    DemoLoaderTask.this);
+            res.addAll(app2);
+
+            List<Object3DData> app3 = AppIconCube.createAppIconCube("wechat.png",
+                    new float[]{2f, -5f, 0f},
+                    new float[]{0f, 1f, 0, 0.75f},
+                    new float[]{0.5f, 0.5f, 0.5f},
+                    DemoLoaderTask.this);
+            res.addAll(app3);
+
+            List<Object3DData> app4 = AppIconCube.createAppIconCube("music.png",
+                    new float[]{4f, -5f, 0f},
+                    new float[]{0f, 1f, 0, 0.75f},
+                    new float[]{0.5f, 0.5f, 0.5f},
+                    DemoLoaderTask.this);
+            res.addAll(app4);
+
+            for(Object3DData obj : res){
+                obj.setRotation2(new float[]{iconRotateAngle
+                                ,0,0},
+                        new float[]{
+                                obj.getLocationX(),
+                                obj.getLocationY(),
+                                obj.getLocationZ()
+                        });
             }
+
+
+//            Object3DData obj21 = Square.buildCubeV2Face();
+//            obj21.setColor(new float[] { 0f, 1f, 0, 0.25f });
+//            obj21.setLocation(new float[] { 2f, -5f, 0f });
+//            obj21.setScale(0.5f, 0.5f, 0.5f);
+//            super.onLoad(obj21);
+
+
+            //6个面都是
+            // test cube with texture
+//            try {
+//                InputStream open10 = ContentUtils.getInputStream("phone.png");
+//                Object3DData obj3 = Cube.buildCubeV2();
+//                open10.close();
+//                obj3.setColor(new float[] { 1f, 1f, 1f, 0f });
+//                obj3.setLocation(new float[] { -2f, -5f, 0f });
+//                obj3.setScale(0.5f, 0.5f, 0.5f);
+//                super.onLoad(obj3);
+//            } catch (Exception ex) {
+//                errors.add(ex);
+//            }
 
             // 总结, x 为 正, 往左, 为负, 往右
             //      y 为 正, 往上, 为负, 往下
@@ -252,4 +315,7 @@ public class DemoLoaderTask extends LoaderTask {
     public void onProgress(String progress) {
         super.publishProgress(progress);
     }
+
+
+
 }

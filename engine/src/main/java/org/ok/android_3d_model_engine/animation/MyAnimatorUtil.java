@@ -71,12 +71,11 @@ public class MyAnimatorUtil {
             // 步长设成5,需要72次一圈 360 度,耗时1.2s左右
             degree = degree + 5;
             calculateScale(newScale,degree);
+            obj.setRotation2(new float[]{-10,degree, 0},
+                    new float[]{0
 
-//            obj.setRotation2(new float[]{0,degree, 0},
-//                    new float[]{0
-//
-//                            ,obj.getLocation()[1]/2,obj.getLocation()[2]/2});
-//            obj.setScale(newScale);
+                            ,obj.getLocation()[1]/2,obj.getLocation()[2]/2});
+            obj.setScale(newScale);
             obj.setRotation(new float[]{0,degree, 0});
             Log.d(TAG,"1111 scale = " + obj.getScaleX() + " , y = " + obj.getScaleY());
 
@@ -107,12 +106,16 @@ public class MyAnimatorUtil {
 
     }
 
-
     public void startAnimation(Object3DData object3DData){
         if(map.containsKey(object3DData)){
             ObjectStatus status = map.get(object3DData);
             status.rotateAnimationObj(object3DData);
             map.put(object3DData,status);
+        }
+        if(object3DData != null && map.containsKey(object3DData.getFriend())){
+            ObjectStatus status = map.get(object3DData.getFriend());
+            status.rotateAnimationObj(object3DData.getFriend());
+            map.put(object3DData.getFriend(),status);
         }
     }
 

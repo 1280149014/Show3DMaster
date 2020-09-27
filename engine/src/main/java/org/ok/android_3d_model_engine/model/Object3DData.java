@@ -63,6 +63,14 @@ public class Object3DData {
      * Parent object if hierarchy of objects
      */
     protected Object3DData parent;
+
+
+    /**
+     * 这里是一个退而求其次的方案, 并不是真的 只给一个面添加纹理, 而是把object 拆分成两个object , 分别上色
+     */
+    protected Object3DData friend;
+
+
     /**
      * model resource locator
      */
@@ -247,6 +255,14 @@ public class Object3DData {
 
     public void setParent(Object3DData parent) {
         this.parent = parent;
+    }
+
+    public Object3DData getFriend() {
+        return friend;
+    }
+
+    public void setFriend(Object3DData friend) {
+        this.friend = friend;
     }
 
     public Object3DData setId(String id) {

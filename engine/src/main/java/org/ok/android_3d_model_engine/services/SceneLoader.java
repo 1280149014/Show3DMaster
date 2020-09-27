@@ -2,6 +2,7 @@ package org.ok.android_3d_model_engine.services;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.location.Location;
 import android.net.Uri;
 import android.opengl.GLSurfaceView;
 import android.os.SystemClock;
@@ -62,7 +63,7 @@ public class SceneLoader implements LoadListener, EventListener {
      * Light bulb 3d data  ,,  设置白点光源
      *
      */
-     private final Object3DData lightBulb = Point.build(new float[]{0, 0, 0}).setId("light");
+     private final Object3DData lightBulb = Point.build(new float[]{0, -5, 0}).setId("light");
 
     /**
      * Parent component
@@ -770,6 +771,9 @@ public class SceneLoader implements LoadListener, EventListener {
         // clear thread local
         ContentUtils.setThreadActivity(null);
 
+        lightBulb.setLocation(new float[]{0,3,0});
+
+        addObject(lightBulb);
 
         // rescale all object so they fit in the screen
         rescale(this.getObjects(), DEFAULT_MAX_MODEL_SIZE, new float[3]);
@@ -871,9 +875,9 @@ public class SceneLoader implements LoadListener, EventListener {
                     Log.i("SceneLoader", "Selected object " + objectToSelect.getId());
                     Log.d("SceneLoader", "Selected object " + objectToSelect);
                     setSelectedObject(objectToSelect);
-                    objectToSelect.setNeedRotate(true);
-                    objectToSelect.setNeedScale(true);
                 }
+                objectToSelect.setNeedRotate(true);
+                objectToSelect.setNeedScale(true);
             }
         }
         return false;

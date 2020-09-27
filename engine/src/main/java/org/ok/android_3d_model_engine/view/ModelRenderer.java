@@ -96,7 +96,7 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
 
     // 修改视距
     // frustrum - nearest pixel
-    private static final float near = 1f;
+    private static final float near = 10f;
     // frustrum - fartest pixel
     private static final float far = 1000f;
 

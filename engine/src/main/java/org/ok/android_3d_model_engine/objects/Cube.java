@@ -26,8 +26,8 @@ public final class Cube {
     final static int[] cubeIndices = new int[]{
             // @formatter:off
             // front
-            0, 1, 2,
-            0, 2, 3,
+//            0, 1, 2,
+//            0, 2, 3,
             // back
             7, 6, 5,
             4, 7, 5,
@@ -64,12 +64,12 @@ public final class Cube {
             1.0f, 1.0f, -1.0f,
 
             // Back face
-            1.0f, 1.0f, -1.0f,
-            1.0f, -1.0f, -1.0f,
-            -1.0f, 1.0f, -1.0f,
-            1.0f, -1.0f, -1.0f,
-            -1.0f, -1.0f, -1.0f,
-            -1.0f, 1.0f, -1.0f,
+//            1.0f, 1.0f, -1.0f,
+//            1.0f, -1.0f, -1.0f,
+//            -1.0f, 1.0f, -1.0f,
+//            1.0f, -1.0f, -1.0f,
+//            -1.0f, -1.0f, -1.0f,
+//            -1.0f, 1.0f, -1.0f,
 
             // Left face
             -1.0f, 1.0f, -1.0f,
