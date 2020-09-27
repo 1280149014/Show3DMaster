@@ -29,7 +29,7 @@ import java.util.Objects;
  *
  */
 public class DemoLoaderTask extends LoaderTask {
-
+    private Context mContext;
     /**
      * Build a new progress dialog for loading the data model asynchronously
      *
@@ -39,6 +39,7 @@ public class DemoLoaderTask extends LoaderTask {
      */
     public DemoLoaderTask(Context parent, URI uri, LoadListener callback) {
         super(parent, uri, callback);
+        this.mContext=parent;
         ContentUtils.provideAssets(parent);
     }
 
@@ -99,7 +100,14 @@ public class DemoLoaderTask extends LoaderTask {
 
             List<Object3DData> res = new ArrayList<>();
 
+
             float iconRotateAngle = -10;
+            List<Object3DData> app0 = AppIconCube.createAppIconCube("setting_icon.png",
+                    new float[]{-4f, -5f, 0f},
+                    new float[]{0f, 1f, 0, 0.75f},
+                    new float[]{0.5f, 0.5f, 0.5f},
+                    DemoLoaderTask.this);
+            res.addAll(app0);
 
             List<Object3DData> app1 = AppIconCube.createAppIconCube("phone.png",
                     new float[]{-2f, -5f, 0f},
@@ -124,10 +132,27 @@ public class DemoLoaderTask extends LoaderTask {
 
             List<Object3DData> app4 = AppIconCube.createAppIconCube("music.png",
                     new float[]{4f, -5f, 0f},
-                    new float[]{0f, 1f, 0, 0.75f},
+                    new float[]{0f, 1f, 0, 0.55f},
                     new float[]{0.5f, 0.5f, 0.5f},
                     DemoLoaderTask.this);
             res.addAll(app4);
+
+            List<Object3DData> app6 = AppIconCube.createAppIconCube("calendar_icon.png",
+                    new float[]{6f, -5f, 0f},
+                    new float[]{0f, 1f, 0, 0.75f},
+                    new float[]{0.5f, 0.5f, 0.5f},
+                    DemoLoaderTask.this);
+            res.addAll(app6);
+
+
+            List<Object3DData> app5 = AppIconCube.createAppIconCube("home.png",
+                    new float[]{ 8f, -1f, 0f},
+                    new float[]{0f, 1f, 0, 0.75f},
+                    new float[]{0.5f, 0.5f, 0.5f},
+                    DemoLoaderTask.this);
+            res.addAll(app5);
+
+
 
             for(Object3DData obj : res){
                 obj.setRotation2(new float[]{iconRotateAngle
