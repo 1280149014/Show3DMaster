@@ -96,7 +96,7 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
 
     // 修改视距
     // frustrum - nearest pixel
-    private static final float near = 10f;
+    private static final float near = 1f;
     // frustrum - fartest pixel
     private static final float far = 1000f;
 
@@ -260,7 +260,7 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
 
         // Use culling to remove back faces.
         // Don't remove back faces so we can see them
-        // GLES20.glEnable(GLES20.GL_CULL_FACE);
+//         GLES20.glEnable(GLES20.GL_CULL_FACE);
 
         // Enable depth testing for hidden-surface elimination.
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
@@ -488,6 +488,21 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
         }
     }
 
+    /**
+     * 绘制 模型　object　的方法
+     * @param viewMatrix
+     * @param projectionMatrix
+     * @param lightPosInWorldSpace
+     * @param colorMask
+     * @param cameraPosInWorldSpace
+     * @param doAnimation
+     * @param drawLighting
+     * @param drawWireframe
+     * @param drawTextures
+     * @param drawColors
+     * @param objects
+     * @param i
+     */
     private void drawObject(float[] viewMatrix, float[] projectionMatrix,
                             float[] lightPosInWorldSpace, float[] colorMask,
                             float[] cameraPosInWorldSpace, boolean doAnimation,

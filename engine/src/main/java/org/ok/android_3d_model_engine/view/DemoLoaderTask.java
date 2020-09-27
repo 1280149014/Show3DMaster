@@ -1,12 +1,15 @@
 package org.ok.android_3d_model_engine.view;
 
 import android.content.Context;
+import android.opengl.GLES20;
 import android.util.Log;
 
 import org.ok.android_3d_model_engine.model.Object3DData;
 import org.ok.android_3d_model_engine.objects.Cube;
 import org.ok.android_3d_model_engine.services.LoadListener;
+import org.ok.android_3d_model_engine.services.LoadListenerAdapter;
 import org.ok.android_3d_model_engine.services.LoaderTask;
+import org.ok.android_3d_model_engine.services.wavefront.WavefrontLoader;
 import org.ok.util.android.ContentUtils;
 import org.ok.util.io.IOUtils;
 
@@ -45,12 +48,12 @@ public class DemoLoaderTask extends LoaderTask {
         final List<Exception> errors = new ArrayList<>();
 
         try {
-//            // 测试 通过数组生成立方体,  水壶正上方的obj
-//            // test cube made of arrays
-//            Object3DData obj10 = Cube.buildCubeV1();
+            // 测试 通过数组生成立方体,  水壶正上方的obj
+            // test cube made of arrays
+//            Object3DData obj10 = Cube.buildCubeV1_with_normals();
 //            // rgba  alpha 0 为 最后一个数字 好像是亮度
 //            obj10.setColor(new float[] { 1f, 0f, 0f, 0.5f });
-//            obj10.setLocation(new float[] { -2f, -5f, 0f });
+//            obj10.setLocation(new float[] { -4f, -5f, 0f });
 //            obj10.setScale(0.5f, 0.5f, 0.5f);
 //            super.onLoad(obj10);
 
@@ -66,19 +69,19 @@ public class DemoLoaderTask extends LoaderTask {
 
             //每个面有不同的颜色
             // test cube made of wires (I explode it to see the faces better)
-            Object3DData obj12 = Cube.buildCubeV1_with_normals();
-            obj12.setColor(new float[] { 1f, 0f, 1f, 1f });
-            obj12.setLocation(new float[] { 0f, -5f, 0f });
-            obj12.setScale(0.5f, 0.5f, 0.5f);
-            super.onLoad(obj12);
+//            Object3DData obj12 = Cube.buildCubeV1_with_normals();
+//            obj12.setColor(new float[] { 1f, 0f, 1f, 1f });
+//            obj12.setLocation(new float[] { 0f, -5f, 0f });
+//            obj12.setScale(0.5f, 0.5f, 0.5f);
+//            super.onLoad(obj12);
 
             //绿色的cube  , 指标
             // test cube made of indices
-            Object3DData obj20 = Cube.buildCubeV2();
-            obj20.setColor(new float[] { 0f, 1f, 0, 0.25f });
-            obj20.setLocation(new float[] { 2f, -5f, 0f });
-            obj20.setScale(0.5f, 0.5f, 0.5f);
-            super.onLoad(obj20);
+//            Object3DData obj20 = Cube.buildCubeV2();
+//            obj20.setColor(new float[] { 0f, 1f, 0, 0.25f });
+//            obj20.setLocation(new float[] { 2f, -5f, 0f });
+//            obj20.setScale(0.5f, 0.5f, 0.5f);
+//            super.onLoad(obj20);
 
 
             //6个面都是 企鹅的cube
@@ -97,7 +100,7 @@ public class DemoLoaderTask extends LoaderTask {
 
             // 总结, x 为 正, 往左, 为负, 往右
             //      y 为 正, 往上, 为负, 往下
-            // 文理是门的 cube , 切每个面的颜色不一样
+            // 纹理是门的 cube , 切每个面的颜色不一样
             // test cube with texture & colors
 //            try {
 //                InputStream open =  ContentUtils.getInputStream("cube.bmp");
@@ -138,14 +141,14 @@ public class DemoLoaderTask extends LoaderTask {
 //                Object3DData obj52 = new WavefrontLoader(GLES20.GL_TRIANGLE_FAN, new LoadListenerAdapter(){
 //                    @Override
 //                    public void onLoad(Object3DData obj53) {
-//                        obj53.setLocation(new float[] { 1.5f, -2.5f, -0.5f });
+//                        obj53.setLocation(new float[] { 4f, -5f, 0f });
 //                        obj53.setColor(new float[] { 0.0f, 1.0f, 1f, 1.0f });
 //                        DemoLoaderTask.this.onLoad(obj53);
 //                    }
 //                }).load(new URI("assets://assets/models/cube.obj")).get(0);
 //
-//                //obj52.setScale(0.5f, 0.5f, 0.5f);
-//                //super.onLoad(obj52);
+//                obj52.setScale(0.5f, 0.5f, 0.5f);
+//                super.onLoad(obj52);
 //            } catch (Exception ex) {
 //                errors.add(ex);
 //            }

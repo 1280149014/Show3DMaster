@@ -166,8 +166,14 @@ public class Object3DData {
     private boolean isNeedRotate = false;
 
     private boolean isNeedScale = false;
-
     private boolean autoAnimation = false;
+
+    public static int mTextureID_front;
+    public static int mTextureID_back;
+    public static int mTextureID_left;
+    public static int mTextureID_right;
+    public static int mTextureID_top;
+    public static int mTextureID_bottom;
 
 
     public Object3DData() {
@@ -210,10 +216,10 @@ public class Object3DData {
 
     /**
      *  这个v4 每个颜色还不一样
-     * @param vertexBuffer
-     * @param colorsBuffer
-     * @param textureBuffer
-     * @param texData
+     * @param vertexBuffer  　　　//顶点数据
+     * @param colorsBuffer　　　　//颜色数据
+     * @param textureBuffer　　　 //纹理数据
+     * @param texData    //纹理数据
      */
     public Object3DData(FloatBuffer vertexBuffer, FloatBuffer colorsBuffer,
                         FloatBuffer textureBuffer, byte[] texData) {

@@ -95,6 +95,29 @@ public final class Cube {
             -1.0f, -1.0f, 1.0f,
             -1.0f, -1.0f, -1.0f
     };
+
+
+    private final static float[] cubePositionDatav4 = {
+            //@formatter:off
+            // Front face
+            -1.0f, 1.0f, 1.0f,
+            -1.0f, -1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            -1.0f, -1.0f, 1.0f,
+            1.0f, -1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+
+            // Right face
+            1.0f, 1.0f, 1.0f,
+            1.0f, -1.0f, 1.0f,
+            1.0f, 1.0f, -1.0f,
+            1.0f, -1.0f, 1.0f,
+            1.0f, -1.0f, -1.0f,
+            1.0f, 1.0f, -1.0f,
+
+    };
+
+
     private final static float[] cubeColorData = {
 
             // Front face (red)
@@ -295,6 +318,21 @@ public final class Cube {
                     1.0f, 1.0f,
                     1.0f, 0.0f
             };
+
+    private final static float[] cubeTextureCoordinateDatav4 =
+            {
+                    // Front face
+                    0.0f, 0.0f,
+                    0.0f, 1.0f,
+                    1.0f, 0.0f,
+                    0.0f, 1.0f,
+                    1.0f, 1.0f,
+                    1.0f, 0.0f,
+
+
+
+            };
+
 
     public static Object3DData buildCubeV1() {
         return new Object3DData(

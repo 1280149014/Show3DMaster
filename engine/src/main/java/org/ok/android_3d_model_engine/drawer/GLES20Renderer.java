@@ -146,7 +146,6 @@ class GLES20Renderer implements Renderer {
             mNormalHandle = setVBO("a_Normal", obj.getNormalsBuffer(), COORDS_PER_VERTEX);
         }
 
-
         //这里就是给每个 面设置不同颜色的节点
         // pass in color or colors array
         int mColorHandle = -1;
@@ -160,6 +159,7 @@ class GLES20Renderer implements Renderer {
         setUniform4(colorMask != null ? colorMask : NO_COLOR_MASK,"vColorMask");
 
         // pass in texture UV buffer
+        //设置纹理,真正设置纹理的地方
         int mTextureHandle = -1;
         if (textureId != -1 && supportsTextures()) {
             setTexture(textureId);
@@ -193,6 +193,15 @@ class GLES20Renderer implements Renderer {
         disableVBO(in_weightsHandle);
         disableVBO(in_jointIndicesHandle);
     }
+
+
+    /**
+     *  这个方式可以设置纹理，　可以设置顶点，　可以设置颜色
+     * @param shaderVariableName
+     * @param vertexBufferObject
+     * @param coordsPerVertex
+     * @return
+     */
 
     private int setVBO(final String shaderVariableName, final FloatBuffer vertexBufferObject, int coordsPerVertex) {
         int handler = GLES20.glGetAttribLocation(mProgram, shaderVariableName);

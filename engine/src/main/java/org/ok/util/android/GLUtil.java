@@ -130,7 +130,7 @@ public final class GLUtil {
 		// Read in the resource
 		final Bitmap bitmap = BitmapFactory.decodeStream(is, null, options);
 		if (bitmap == null) {
-			throw new RuntimeException("couldnt load bitmap");
+			throw new RuntimeException("could'nt load bitmap");
 		}
 
 		// Bind to the texture in OpenGL

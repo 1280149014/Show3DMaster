@@ -277,11 +277,6 @@ public class SceneLoader implements LoadListener, EventListener {
             animateCamera();
         }
 
-//        if(isClicked){
-//            rotateAnimation();
-//        }
-
-
         for (int i = 0; i < objects.size(); i++) {
             Object3DData obj = objects.get(i);
             if(obj.isNeedRotate()){
@@ -291,14 +286,10 @@ public class SceneLoader implements LoadListener, EventListener {
 
         if (objects.isEmpty()) return;
 
-
-
         if (doAnimation) {
             for (int i = 0; i < objects.size(); i++) {
                 Object3DData obj = objects.get(i);
                 animator.update(obj, isShowBindPose());
-
-
             }
         }
     }

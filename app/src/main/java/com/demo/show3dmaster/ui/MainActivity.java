@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.net.Uri;
+import android.opengl.GLSurfaceView;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -66,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 //            Toast.makeText(MainActivity.this,"app1 icon is clicked",Toast.LENGTH_SHORT).show();
 //            app1View.rotateAnimate();
 //        });
+
+//        gLView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 
         gLView.setOnClickListener(v -> Log.i(TAG, "1111111111111 "));
 
