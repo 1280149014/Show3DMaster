@@ -40,9 +40,9 @@ public final class CameraController implements EventListener {
 //                    camera.translateCamera(dx1, dy1);
                     break;
                 case PINCH:
-                    float zoomFactor = ((TouchEvent) event).getZoom() / 10;
-                    Log.v("CameraController", "Zooming '" + zoomFactor + "'...");
-                    camera.MoveCameraZ(zoomFactor);
+//                    float zoomFactor = ((TouchEvent) event).getZoom() / 10;
+//                    Log.v("CameraController", "Zooming '" + zoomFactor + "'...");
+//                    camera.MoveCameraZ(zoomFactor);
                     break;
                 case SPREAD:
 //                    float[] rotation = touchEvent.getRotation();
