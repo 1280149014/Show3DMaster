@@ -108,6 +108,8 @@ public class DemoLoaderTask extends LoaderTask {
                     new float[]{0.5f, 0.5f, 0.5f},
                     DemoLoaderTask.this);
             res.addAll(app0);
+            setId(app0,"settings");
+
 
             List<Object3DData> app1 = AppIconCube.createAppIconCube(AppIconCube.getIcon(mContext,"com.tencent.mm"),
                     new float[]{-2f, -5f, 0f},
@@ -115,6 +117,7 @@ public class DemoLoaderTask extends LoaderTask {
                     new float[]{0.5f, 0.5f, 0.5f},
                     DemoLoaderTask.this);
             res.addAll(app1);
+            setId(app1,"wechat");
 
             List<Object3DData> app2 = AppIconCube.createAppIconCube(AppIconCube.getIcon(mContext,"com.tencent.wecarflow"),
                     new float[]{0f, -5f, 0f},
@@ -122,6 +125,7 @@ public class DemoLoaderTask extends LoaderTask {
                     new float[]{0.5f, 0.5f, 0.5f},
                     DemoLoaderTask.this);
             res.addAll(app2);
+            setId(app2,"wecarflow");
 
             List<Object3DData> app3 = AppIconCube.createAppIconCube(AppIconCube.getIcon(mContext,"com.tencent.wecar"),
                     new float[]{2f, -5f, 0f},
@@ -129,6 +133,7 @@ public class DemoLoaderTask extends LoaderTask {
                     new float[]{0.5f, 0.5f, 0.5f},
                     DemoLoaderTask.this);
             res.addAll(app3);
+            setId(app3,"wecar");
 
             List<Object3DData> app4 = AppIconCube.createAppIconCube(AppIconCube.getIcon(mContext,"com.android.deskclock"),
                     new float[]{4f, -5f, 0f},
@@ -136,6 +141,7 @@ public class DemoLoaderTask extends LoaderTask {
                     new float[]{0.5f, 0.5f, 0.5f},
                     DemoLoaderTask.this);
             res.addAll(app4);
+            setId(app4 , "deskclock");
 
             List<Object3DData> app6 = AppIconCube.createAppIconCube(AppIconCube.getIcon(mContext,"com.android.calendar"),
                     new float[]{6f, -5f, 0f},
@@ -143,7 +149,7 @@ public class DemoLoaderTask extends LoaderTask {
                     new float[]{0.5f, 0.5f, 0.5f},
                     DemoLoaderTask.this);
             res.addAll(app6);
-
+            setId(app6 , "calendar");
 
             List<Object3DData> app5 = AppIconCube.createAppIconCube(AppIconCube.getIcon(mContext,"com.android.car.carlauncher"),
                     new float[]{ 8f, -1f, 0f},
@@ -151,7 +157,7 @@ public class DemoLoaderTask extends LoaderTask {
                     new float[]{0.5f, 0.5f, 0.5f},
                     DemoLoaderTask.this);
             res.addAll(app5);
-
+            setId(app5 , "carlauncher");
 
 
             for(Object3DData obj : res){
@@ -334,6 +340,12 @@ public class DemoLoaderTask extends LoaderTask {
             }
         }
         return null;
+    }
+
+    private void setId(List<Object3DData> objects,String id  ){
+        for(Object3DData o : objects){
+            o.setId(id);
+        }
     }
 
     @Override

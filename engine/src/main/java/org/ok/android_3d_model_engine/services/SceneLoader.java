@@ -1,7 +1,9 @@
 package org.ok.android_3d_model_engine.services;
 
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
 import android.opengl.GLSurfaceView;
@@ -240,6 +242,9 @@ public class SceneLoader implements LoadListener, EventListener {
         } else if (uri.toString().toLowerCase().endsWith(".dae") || type == 2) {
             Log.i("SceneLoader", "Loading Collada object from: " + uri);
             new ColladaLoaderTask(parent, uri, this).execute();
+        } else if (uri.toString().toLowerCase().endsWith(".ma") || type == 3){
+            Log.i("SceneLoader", "Loading maya file object from: " + uri);
+//            new MayaLoaderTask(parent, uri, this).execute();
         }
     }
 
@@ -881,6 +886,62 @@ public class SceneLoader implements LoadListener, EventListener {
 //                }
                 objectToSelect.setNeedRotate(true);
                 objectToSelect.setNeedScale(true);
+                String id = objectToSelect.getId();
+                Intent intent = new Intent();
+                intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                ComponentName cn;
+                try{
+                    switch (id){
+                        case "wechat":
+                            //参数是包名，类全限定名，注意直接用类名不行
+                             cn=new ComponentName("com.tencent.mm",
+                                    "com.tencent.mm.ui.LauncherUI");
+                            break;
+                        case "settings":
+                            //参数是包名，类全限定名，注意直接用类名不行
+                             cn=new ComponentName("com.android.settings",
+                                    "com.android.settings.Settings");
+                            break;
+                        case "wecar":
+                            //参数是包名，类全限定名，注意直接用类名不行
+                             cn=new ComponentName("com.tencent.wecar",
+                                    "com.tencent.wecar.MainActivity");
+                            break;
+                        case "wecarflow":
+                            //参数是包名，类全限定名，注意直接用类名不行
+                             cn=new ComponentName("com.tencent.wecarflow",
+                                    "com.tencent.wecarflow.MainActivity");
+                            break;
+                        case "carlauncher":
+                            //参数是包名，类全限定名，注意直接用类名不行
+                             cn=new ComponentName("com.android.calendar",
+                                    "com.android.calendar.AllInOneActivity");
+                            break;
+
+                        default:
+                            throw new IllegalStateException("Unexpected value: " + id);
+                    }
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setComponent(cn);
+                    parent.startActivity(intent);
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+               
+//com.tencent.wecar/.MainActivity
+//
+//com.tencent.wecarflow/.MainActivity
+//
+//com.android.car.carlauncher/.AppGridActivity
+//com.android.car.carlauncher/.CarLauncher
+//
+//
+//com.android.settings/.Settings
+//com.android.car.settings/.common.CarSettingActivity
+//
+//
+//com.android.deskclock/.DeskClock
+
             }
         }
         return false;
