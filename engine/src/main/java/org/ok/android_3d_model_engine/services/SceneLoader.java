@@ -63,7 +63,8 @@ public class SceneLoader implements LoadListener, EventListener {
      * Light bulb 3d data  ,,  设置白点光源
      *
      */
-     private final Object3DData lightBulb = Point.build(new float[]{0, -5, 0}).setId("light");
+     private final Object3DData lightBulb = Point.build(new float[]{0, -5, 0})
+            .setId("light");
 
     /**
      * Parent component
@@ -218,6 +219,7 @@ public class SceneLoader implements LoadListener, EventListener {
         this.glView = glView;
 
         lightBulb.setLocation(new float[]{0, 20, 0});
+        lightBulb.setColor(new float[]{0f,0f,0f,0f});
     }
 
     public void init() {
@@ -743,7 +745,7 @@ public class SceneLoader implements LoadListener, EventListener {
 
         // 调试的时候才需要处理加上
         // load new object and rescale all together so they fit in the viewport
-        //addObject(data);
+        addObject(data);
 
         // rescale objects so they fit in the viewport
         //rescale(this.getObjects(), DEFAULT_MAX_MODEL_SIZE, new float[3]);

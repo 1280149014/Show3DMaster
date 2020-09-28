@@ -3,6 +3,7 @@ package com.demo.show3dmaster.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.opengl.GLSurfaceView;
@@ -21,11 +22,16 @@ import org.ok.android_3d_model_engine.controller.TouchController;
 import org.ok.android_3d_model_engine.controller.TouchEvent;
 import org.ok.android_3d_model_engine.view.ModelRenderer;
 import org.ok.android_3d_model_engine.view.ModelSurfaceView;
+
 import org.ok.util.android.ContentUtils;
 import org.ok.util.event.EventListener;
 
 import java.io.IOException;
 import java.util.EventObject;
+import java.util.logging.Level;
+
+import javax.microedition.khronos.egl.EGL10;
+import javax.microedition.khronos.egl.EGLDisplay;
 
 /**
  * 2020-9-17   能够显示 obj文件, 并且不会出现
@@ -51,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 //    View app1Layout ;
     View app2Layout ;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         handler = new Handler(getMainLooper());
         gLView = (ModelSurfaceView)findViewById(R.id.backView);
 //        app1View = findViewById(R.id.app1);
-
 //        app1Layout = findViewById(R.id.app1Layout);
 //
 //        app1Layout.setOnClickListener(v -> {
