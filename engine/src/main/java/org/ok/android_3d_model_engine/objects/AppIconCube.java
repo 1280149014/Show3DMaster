@@ -99,7 +99,7 @@ public class AppIconCube {
 
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+//            bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
             InputStream isBm = new ByteArrayInputStream(baos.toByteArray());
 
             return isBm;

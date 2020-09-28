@@ -151,13 +151,13 @@ public class DemoLoaderTask extends LoaderTask {
             res.addAll(app6);
             setId(app6 , "calendar");
 
-            List<Object3DData> app5 = AppIconCube.createAppIconCube(AppIconCube.getIcon(mContext,"com.android.car.carlauncher"),
-                    new float[]{ 8f, -1f, 0f},
-                    new float[]{0f, 1f, 0, 0.75f},
-                    new float[]{0.5f, 0.5f, 0.5f},
-                    DemoLoaderTask.this);
-            res.addAll(app5);
-            setId(app5 , "carlauncher");
+//            List<Object3DData> app5 = AppIconCube.createAppIconCube(AppIconCube.getIcon(mContext,"com.android.car.carlauncher"),
+//                    new float[]{ 8f, -1f, 0f},
+//                    new float[]{0f, 1f, 0, 0.75f},
+//                    new float[]{0.5f, 0.5f, 0.5f},
+//                    DemoLoaderTask.this);
+//            res.addAll(app5);
+//            setId(app5 , "carlauncher");
 
 
             for(Object3DData obj : res){
