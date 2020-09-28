@@ -1,5 +1,6 @@
 package com.demo.show3dmaster.ui;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.TargetApi;
@@ -39,6 +40,7 @@ import javax.microedition.khronos.egl.EGLDisplay;
  * 2020-9-18   独立出几个obj文件, 通过layout加载, 显示
  *
  */
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class MainActivity extends AppCompatActivity implements EventListener {
 
     private static final int REQUEST_CODE_LOAD_TEXTURE = 1000;
@@ -63,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         super.onCreate(savedInstanceState);
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-
+        startFuping3D();
         handler = new Handler(getMainLooper());
         gLView = (ModelSurfaceView)findViewById(R.id.backView);
 //        app1View = findViewById(R.id.app1);
@@ -90,6 +92,15 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 
     }
 
+    private void startFuping3D(){
+        android.content.Intent intentLauncher = new android.content.Intent();
+        intentLauncher.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intentLauncher.setComponent(new android.content.ComponentName(
+                "jp.clouds_inc.android.renesaschina20","jp.clouds_inc.android.renesas.china20.MainActivity"));
+        android.app.ActivityOptions launcherOptions = android.app.ActivityOptions.makeBasic();
+        launcherOptions.setLaunchDisplayId(1);
+        startActivity(intentLauncher,launcherOptions.toBundle());
+    }
 
     @Override
     protected void onResume() {
