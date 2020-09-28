@@ -868,15 +868,15 @@ public class SceneLoader implements LoadListener, EventListener {
                 addObject(point);
             } else {
                 // 对象选中
-                if (getSelectedObject() == objectToSelect) {
-                    Log.i("SceneLoader", "Unselected object " + objectToSelect.getId());
-                    Log.d("SceneLoader", "Unselected object " + objectToSelect);
-                    setSelectedObject(null);
-                } else {
-                    Log.i("SceneLoader", "Selected object " + objectToSelect.getId());
-                    Log.d("SceneLoader", "Selected object " + objectToSelect);
-                    setSelectedObject(objectToSelect);
-                }
+//                if (getSelectedObject() == objectToSelect) {
+//                    Log.i("SceneLoader", "Unselected object " + objectToSelect.getId());
+//                    Log.d("SceneLoader", "Unselected object " + objectToSelect);
+//                    setSelectedObject(null);
+//                } else {
+//                    Log.i("SceneLoader", "Selected object " + objectToSelect.getId());
+//                    Log.d("SceneLoader", "Selected object " + objectToSelect);
+//                    setSelectedObject(objectToSelect);
+//                }
                 objectToSelect.setNeedRotate(true);
                 objectToSelect.setNeedScale(true);
             }
