@@ -25,7 +25,7 @@ import java.util.List;
 
 /**
  * This is the actual opengl view. From here we can detect touch gestures for example
- * 
+ *
  * @author andresoviedo
  *
  */
@@ -107,18 +107,17 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 		}else {
 			scene.init();
 		}
-		setTranslucent();
-
 		try{
 			Log.i("ModelSurfaceView","Loading [OpenGL 2] ModelSurfaceView...");
 
 			// Create an OpenGL ES 2.0 context. 设置OpenGL的版本号2.0
 			setEGLContextClientVersion(2);
-
+			setEGLConfigChooser(8, 8, 8, 8, 16, 0);
 			// This is the actual renderer of the 3D space
 			mRenderer = new ModelRenderer(parent, this, backgroundColor, scene);
 			mRenderer.addListener(this);
 			setRenderer(mRenderer);
+			setTranslucent();
 		}catch (Exception e){
 			Log.e("ModelActivity",e.getMessage(),e);
 			Toast.makeText(parent, "Error loading shaders:\n" +e.getMessage(), Toast.LENGTH_LONG).show();
@@ -142,7 +141,7 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 	 */
 	public void setTranslucent() {
 		// 设置背景透明，否则一般加载时间长的话会先黑一下，但是也有问题，就是在它之上无法再有View了，因为它是top的，用的时候需要注意，必要的时候将其设置为false
-		setEGLConfigChooser(8, 8, 8, 8, 16, 0);
+
 		getHolder().setFormat(PixelFormat.TRANSLUCENT);
 		setZOrderOnTop(true);
 	}
@@ -196,7 +195,7 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 	public boolean onTouchEvent(MotionEvent event) {
 		try {
 //			if(!isClickAble){
-				return touchController.onTouchEvent(event);
+			return touchController.onTouchEvent(event);
 //			}else{
 //				super.onTouchEvent(event);
 //			}
@@ -225,10 +224,10 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 		mRenderer.toggleLights();
 	}
 
-    public void toggleWireframe() {
+	public void toggleWireframe() {
 		Log.i("ModelSurfaceView","Toggling wireframe...");
-        mRenderer.toggleWireframe();
-    }
+		mRenderer.toggleWireframe();
+	}
 
 	public void toggleTextures() {
 		Log.i("ModelSurfaceView","Toggling textures...");
