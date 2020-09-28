@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
 import android.opengl.GLSurfaceView;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
 import android.widget.Toast;
@@ -887,46 +888,15 @@ public class SceneLoader implements LoadListener, EventListener {
                 objectToSelect.setNeedRotate(true);
                 objectToSelect.setNeedScale(true);
                 String id = objectToSelect.getId();
-                Intent intent = new Intent();
-                intent.addCategory(Intent.CATEGORY_LAUNCHER);
-                ComponentName cn;
-                try{
-                    switch (id){
-                        case "wechat":
-                            //参数是包名，类全限定名，注意直接用类名不行
-                             cn=new ComponentName("com.tencent.mm",
-                                    "com.tencent.mm.ui.LauncherUI");
-                            break;
-                        case "settings":
-                            //参数是包名，类全限定名，注意直接用类名不行
-                             cn=new ComponentName("com.android.settings",
-                                    "com.android.settings.Settings");
-                            break;
-                        case "wecar":
-                            //参数是包名，类全限定名，注意直接用类名不行
-                             cn=new ComponentName("com.tencent.wecar",
-                                    "com.tencent.wecar.MainActivity");
-                            break;
-                        case "wecarflow":
-                            //参数是包名，类全限定名，注意直接用类名不行
-                             cn=new ComponentName("com.tencent.wecarflow",
-                                    "com.tencent.wecarflow.MainActivity");
-                            break;
-                        case "carlauncher":
-                            //参数是包名，类全限定名，注意直接用类名不行
-                             cn=new ComponentName("com.android.calendar",
-                                    "com.android.calendar.AllInOneActivity");
-                            break;
 
-                        default:
-                            throw new IllegalStateException("Unexpected value: " + id);
+
+                new Handler().postDelayed(new Runnable(){
+                    public void run() {
+                        //execute the task
+                        startAvtivity(id);
                     }
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setComponent(cn);
-                    parent.startActivity(intent);
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
+                }, 1300);
+
                
 //com.tencent.wecar/.MainActivity
 //
@@ -946,6 +916,50 @@ public class SceneLoader implements LoadListener, EventListener {
         }
         return false;
     }
+
+    private void startAvtivity(String id){
+        Intent intent = new Intent();
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+        ComponentName cn = null;
+        try{
+            switch (id){
+                case "wechat":
+                    //参数是包名，类全限定名，注意直接用类名不行
+                    cn=new ComponentName("com.tencent.mm",
+                            "com.tencent.mm.ui.LauncherUI");
+                    break;
+                case "settings":
+                    //参数是包名，类全限定名，注意直接用类名不行
+                    cn=new ComponentName("com.android.settings",
+                            "com.android.settings.Settings");
+                    break;
+                case "wecar":
+                    //参数是包名，类全限定名，注意直接用类名不行
+                    cn=new ComponentName("com.tencent.wecar",
+                            "com.tencent.wecar.MainActivity");
+                    break;
+                case "wecarflow":
+                    //参数是包名，类全限定名，注意直接用类名不行
+                    cn=new ComponentName("com.tencent.wecarflow",
+                            "com.tencent.wecarflow.MainActivity");
+                    break;
+                case "carlauncher":
+                    //参数是包名，类全限定名，注意直接用类名不行
+                    cn=new ComponentName("com.android.calendar",
+                            "com.android.calendar.AllInOneActivity");
+                    break;
+
+                default:
+                    break;
+            }
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setComponent(cn);
+            parent.startActivity(intent);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 
     private void rescale(List<Object3DData> datas, float newScale, float[] newPosition) {
 
