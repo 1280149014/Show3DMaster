@@ -33,14 +33,14 @@ public class AppIconCube {
      * @param scale    icon的比例
      * @return objects 创建的实体对象
      */
-    public static List<Object3DData> createAppIconCube(InputStream open,
+    public static List<Object3DData> createAppIconCube(String icon,
                                                        float[] Location,
                                                        float[] color,
                                                        float[] scale,
                                                        LoaderTask task) {
         List<Object3DData> res = new ArrayList<>();
         try {
-//            InputStream opens = ContentUtils.getInputStream(icon);
+            InputStream open = ContentUtils.getInputStream(icon);
             Object3DData iconObj = Square.buildCubeV3face(IOUtils.read(open));
             open.close();
             iconObj.setColor(color);
@@ -86,7 +86,6 @@ public class AppIconCube {
      */
     public static InputStream getIcon(Context mContext, String pakgename) {
         PackageManager pm = mContext.getPackageManager();
-        String imgName="";
         try {
             ApplicationInfo appInfo = pm.getApplicationInfo(pakgename, PackageManager.GET_META_DATA);
             // 应用名称
@@ -99,7 +98,7 @@ public class AppIconCube {
 
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//            bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+            bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
             InputStream isBm = new ByteArrayInputStream(baos.toByteArray());
 
             return isBm;

@@ -102,7 +102,7 @@ public class DemoLoaderTask extends LoaderTask {
 
 
             float iconRotateAngle = -10;
-            List<Object3DData> app0 = AppIconCube.createAppIconCube(AppIconCube.getIcon(mContext,"com.android.settings"),
+            List<Object3DData> app0 = AppIconCube.createAppIconCube("setting_icon.png",
                     new float[]{-4f, -5f, 0f},
                     new float[]{0f, 1f, 0, 0.75f},
                     new float[]{0.5f, 0.5f, 0.5f},
@@ -111,7 +111,7 @@ public class DemoLoaderTask extends LoaderTask {
             setId(app0,"settings");
 
 
-            List<Object3DData> app1 = AppIconCube.createAppIconCube(AppIconCube.getIcon(mContext,"com.tencent.mm"),
+            List<Object3DData> app1 = AppIconCube.createAppIconCube("wechat.png",
                     new float[]{-2f, -5f, 0f},
                     new float[]{0f, 1f, 0, 0.75f},
                     new float[]{0.5f, 0.5f, 0.5f},
@@ -119,7 +119,7 @@ public class DemoLoaderTask extends LoaderTask {
             res.addAll(app1);
             setId(app1,"wechat");
 
-            List<Object3DData> app2 = AppIconCube.createAppIconCube(AppIconCube.getIcon(mContext,"com.tencent.wecarflow"),
+            List<Object3DData> app2 = AppIconCube.createAppIconCube("wecarflow.png",
                     new float[]{0f, -5f, 0f},
                     new float[]{0f, 1f, 0, 0.75f},
                     new float[]{0.5f, 0.5f, 0.5f},
@@ -127,7 +127,7 @@ public class DemoLoaderTask extends LoaderTask {
             res.addAll(app2);
             setId(app2,"wecarflow");
 
-            List<Object3DData> app3 = AppIconCube.createAppIconCube(AppIconCube.getIcon(mContext,"com.tencent.wecar"),
+            List<Object3DData> app3 = AppIconCube.createAppIconCube("wecarui.png",
                     new float[]{2f, -5f, 0f},
                     new float[]{0f, 1f, 0, 0.75f},
                     new float[]{0.5f, 0.5f, 0.5f},
@@ -135,7 +135,7 @@ public class DemoLoaderTask extends LoaderTask {
             res.addAll(app3);
             setId(app3,"wecar");
 
-            List<Object3DData> app4 = AppIconCube.createAppIconCube(AppIconCube.getIcon(mContext,"com.android.deskclock"),
+            List<Object3DData> app4 = AppIconCube.createAppIconCube("clock_icon.png",
                     new float[]{4f, -5f, 0f},
                     new float[]{0f, 1f, 0, 0.55f},
                     new float[]{0.5f, 0.5f, 0.5f},
@@ -143,7 +143,7 @@ public class DemoLoaderTask extends LoaderTask {
             res.addAll(app4);
             setId(app4 , "deskclock");
 
-            List<Object3DData> app6 = AppIconCube.createAppIconCube(AppIconCube.getIcon(mContext,"com.android.calendar"),
+            List<Object3DData> app6 = AppIconCube.createAppIconCube("calendar_icon.png",
                     new float[]{6f, -5f, 0f},
                     new float[]{0f, 1f, 0, 0.75f},
                     new float[]{0.5f, 0.5f, 0.5f},
