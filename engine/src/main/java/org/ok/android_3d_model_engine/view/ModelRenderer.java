@@ -370,7 +370,6 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
 
                 }
                 camera.setChanged(false);
-
             }
 
 

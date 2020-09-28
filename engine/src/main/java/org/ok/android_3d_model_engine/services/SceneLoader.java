@@ -741,8 +741,9 @@ public class SceneLoader implements LoadListener, EventListener {
             animator.update(data, isShowBindPose());
         }
 
+        // 调试的时候才需要处理加上
         // load new object and rescale all together so they fit in the viewport
-        addObject(data);
+        //addObject(data);
 
         // rescale objects so they fit in the viewport
         //rescale(this.getObjects(), DEFAULT_MAX_MODEL_SIZE, new float[3]);
