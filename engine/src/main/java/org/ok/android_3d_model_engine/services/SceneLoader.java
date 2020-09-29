@@ -943,10 +943,15 @@ public class SceneLoader implements LoadListener, EventListener {
                     cn=new ComponentName("com.tencent.wecarflow",
                             "com.tencent.wecarflow.MainActivity");
                     break;
-                case "carlauncher":
+                case "calendar":
                     //参数是包名，类全限定名，注意直接用类名不行
                     cn=new ComponentName("com.android.calendar",
                             "com.android.calendar.AllInOneActivity");
+                    break;
+                case "deskclock":
+                    //参数是包名，类全限定名，注意直接用类名不行
+                    cn=new ComponentName("com.android.deskclock",
+                            "com.android.deskclock.DeskClock");
                     break;
 
                 default:
