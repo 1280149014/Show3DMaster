@@ -13,6 +13,7 @@ import org.ok.android_3d_model_engine.services.LoadListenerAdapter;
 import org.ok.android_3d_model_engine.services.LoaderTask;
 import org.ok.android_3d_model_engine.services.wavefront.WavefrontLoader;
 import org.ok.android_3d_model_engine.util.Exploder;
+import org.ok.android_3d_model_engine.util.Rescaler;
 import org.ok.util.android.ContentUtils;
 import org.ok.util.io.IOUtils;
 
@@ -248,22 +249,22 @@ public class DemoLoaderTask extends LoaderTask {
 //            }
 
             // test loading object made of polygonal faces
-//            try {
-//                // this has heterogeneous faces
-//                Object3DData obj53 = new WavefrontLoader(GLES20.GL_TRIANGLE_FAN, new LoadListenerAdapter(){
-//                    @Override
-//                    public void onLoad(Object3DData obj53) {
-//                        obj53.setLocation(new float[] { 2f, 0f, 0f });
-//                        obj53.setColor(new float[] { 1.0f, 1.0f, 1f, 1.0f });
-//                        Rescaler.rescale(obj53, 2f);
-//                        DemoLoaderTask.this.onLoad(obj53);
-//                    }
-//                }).load(new URI("assets://assets/models/butten_1.obj")).get(0);
-//
-//                //super.onLoad(obj53);
-//            } catch (Exception ex) {
-//                errors.add(ex);
-//            }
+            try {
+                // this has heterogeneous faces
+                Object3DData obj53 = new WavefrontLoader(GLES20.GL_TRIANGLE_FAN, new LoadListenerAdapter(){
+                    @Override
+                    public void onLoad(Object3DData obj53) {
+                        obj53.setLocation(new float[] { 2f, 0f, 0f });
+                        obj53.setColor(new float[] { 1.0f, 1.0f, 1f, 1.0f });
+                        Rescaler.rescale(obj53, 2f);
+                        DemoLoaderTask.this.onLoad(obj53);
+                    }
+                }).load(new URI("assets://assets/models/box_unit_1.obj")).get(0);
+
+                //super.onLoad(obj53);
+            } catch (Exception ex) {
+                errors.add(ex);
+            }
 
             // test loading object made of polygonal faces
 //            try {
