@@ -1,6 +1,5 @@
 package com.demo.show3dmaster.ui;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.TargetApi;
@@ -33,8 +32,6 @@ import java.io.IOException;
 import java.util.EventObject;
 import java.util.logging.Level;
 
-import javax.microedition.khronos.egl.EGL10;
-import javax.microedition.khronos.egl.EGLDisplay;
 
 /**
  * 2020-9-17   能够显示 obj文件, 并且不会出现
@@ -109,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 startActivity(intentLauncher,launcherOptions.toBundle());
             }
-        }catch (Exception e){
+        } catch (Exception e){
             e.printStackTrace();
         }
 

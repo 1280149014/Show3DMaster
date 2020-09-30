@@ -221,8 +221,8 @@ public class SceneLoader implements LoadListener, EventListener {
         this.type = type;
         this.glView = glView;
 
-        lightBulb.setLocation(new float[]{0, 20, 0});
-        lightBulb.setColor(new float[]{0f,0f,0f,0f});
+//        lightBulb.setLocation(new float[]{0, 20, 0});
+//        lightBulb.setColor(new float[]{0f,0f,0f,0f});
     }
 
     public void init() {
@@ -289,7 +289,7 @@ public class SceneLoader implements LoadListener, EventListener {
         for (int i = 0; i < objects.size(); i++) {
             Object3DData obj = objects.get(i);
             if(obj.isNeedRotate()){
-                myAnimator.startAnimation(obj);
+//                myAnimator.startAnimation(obj);
             }
         }
 
@@ -768,6 +768,7 @@ public class SceneLoader implements LoadListener, EventListener {
         List<String> allErrors = new ArrayList<>();
         for (Object3DData data : objs) {
             allErrors.addAll(data.getErrors());
+            data.setRotation(new float[]{0,90f,0});
         }
         if (!allErrors.isEmpty()) {
             makeToastText(allErrors.toString(), Toast.LENGTH_LONG);
@@ -780,9 +781,9 @@ public class SceneLoader implements LoadListener, EventListener {
         // clear thread local
         ContentUtils.setThreadActivity(null);
 
-        lightBulb.setLocation(new float[]{0,3,0});
-
-        addObject(lightBulb);
+//        lightBulb.setLocation(new float[]{0,3,0});
+//
+//        addObject(lightBulb);
 
         // rescale all object so they fit in the screen
         rescale(this.getObjects(), DEFAULT_MAX_MODEL_SIZE, new float[3]);

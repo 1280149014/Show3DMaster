@@ -320,11 +320,13 @@ public class WavefrontLoader {
                             meshCurrent.addElement(elementCurrent.build());
 
                             // log event
-                            Log.d("WavefrontLoader", "New element. indices: " + indicesCurrent.size());
+                            Log.d("WavefrontLoader", "New element. indices: " + indicesCurrent.size()
+                                    + " , meshCurrent.size = " + meshCurrent);
 
                             // prepare next element
                             indicesCurrent = new ArrayList<>();
                             elementCurrent = new Element.Builder().id(line.substring(1).trim());
+
                         } else {
                             elementCurrent.id(line.substring(1).trim());
                             buildNewElement = true;
@@ -374,11 +376,13 @@ public class WavefrontLoader {
                         + ", vertices:" + vertexList.size()
                         + ", normals: " + normalsList.size()
                         + ", textures:" + textureList.size()
-                        + ", elements: " + meshData.getElements());
-
+                        );
+                for(Element e : meshData.getElements()){
+                    Log.i("WavefrontLoader"," e = " + e);
+                }
                 // add mesh
                 meshes.add(meshData);
-
+                Log.i("WavefrontLoader","mesh.size = "  + meshes.size() );
                 // return all meshes
                 return meshes;
 

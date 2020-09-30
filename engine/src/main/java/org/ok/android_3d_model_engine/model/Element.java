@@ -51,7 +51,7 @@ public class Element {
 
     }
 
-    // polygon
+    // polygon  多边形
     private final String id;
     private final List<Integer> indicesArray;
     private IntBuffer indexBuffer;
