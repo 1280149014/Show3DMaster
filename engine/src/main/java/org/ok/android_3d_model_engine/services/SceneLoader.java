@@ -786,7 +786,7 @@ public class SceneLoader implements LoadListener, EventListener {
 //        addObject(lightBulb);
 
         // rescale all object so they fit in the screen
-        rescale(this.getObjects(), DEFAULT_MAX_MODEL_SIZE, new float[3]);
+//        rescale(this.getObjects(), DEFAULT_MAX_MODEL_SIZE, new float[3]);
 
         // reposition camera
         Log.i("SceneLoader", "Camera position: " + DEFAULT_CAMERA_POSITION);
