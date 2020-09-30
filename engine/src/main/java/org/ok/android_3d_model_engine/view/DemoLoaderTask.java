@@ -258,7 +258,7 @@ public class DemoLoaderTask extends LoaderTask {
 //                        Rescaler.rescale(obj53, 2f);
 //                        DemoLoaderTask.this.onLoad(obj53);
 //                    }
-//                }).load(new URI("assets://assets/models/ToyPlane.obj")).get(0);
+//                }).load(new URI("assets://assets/models/butten_1.obj")).get(0);
 //
 //                //super.onLoad(obj53);
 //            } catch (Exception ex) {

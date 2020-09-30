@@ -144,7 +144,7 @@ public class WavefrontLoader {
                 data3D.setUri(modelURI);
                 data3D.setDrawUsingArrays(false);
                 data3D.setDrawMode(GLES20.GL_TRIANGLES);
-
+                Log.i("WavefrontLoader", "Loaded data: " + data3D.toString());
                 // add model to scene
                 callback.onLoad(data3D);
 

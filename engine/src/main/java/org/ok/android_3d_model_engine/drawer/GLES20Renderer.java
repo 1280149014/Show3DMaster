@@ -102,7 +102,7 @@ class GLES20Renderer implements Renderer {
         mProgram = GLUtil.createAndLinkProgram(vertexShader, fragmentShader, features.toArray(new String[0]));
 
         flags.clear();
-        Log.d("GLES20Renderer", "Compiled 3D Drawer (" + id + ") with id " + mProgram);
+//        Log.d("GLES20Renderer", "Compiled 3D Drawer (" + id + ") with id " + mProgram);
     }
 
     @Override
@@ -122,7 +122,7 @@ class GLES20Renderer implements Renderer {
 
         // log event once
         if (id != flags.get(obj.getId())) {
-            Log.i("GLES20Renderer", "Rendering with shader: " + id + "vert... obj: " + obj);
+//            Log.i("GLES20Renderer", "Rendering with shader: " + id + "vert... obj: " + obj);
             flags.put(obj.getId(), this.id);
         }
 
@@ -338,6 +338,12 @@ class GLES20Renderer implements Renderer {
         }
     }
 
+    /**
+     *
+     * @param drawMode 指定顶点直接的绘制模式。是只描绘点，还是描绘顶点之间的线段，还是描绘顶点构成的平面
+     * @param drawSize 从第first个顶点开始绘制。若无意外都是取值为0，表示从数组下标的第0个开始绘制
+     * @param drawCount 本次绘制操作的顶点数量。也就是说，从第first个点描绘到第（first+count）个顶点
+     */
     private void drawTrianglesUsingArrays(int drawMode, int drawSize, int drawCount) {
         if (drawSize <= 0) {
             // if we want to animate, initialize counter=0 at variable declaration
@@ -379,8 +385,8 @@ class GLES20Renderer implements Renderer {
             }*/
 
             if (id != flags.get(obj.getElements())) {
-                Log.i("GLES20Renderer", "Rendering elements... obj: " + obj.getId()
-                        + ", total:" + obj.getElements().size());
+//                Log.i("GLES20Renderer", "Rendering elements... obj: " + obj.getId()
+//                        + ", total:" + obj.getElements().size());
                 flags.put(obj.getElements(), this.id);
             }
 
@@ -392,7 +398,7 @@ class GLES20Renderer implements Renderer {
 
                 // log event
                 if (id != flags.get(element)) {
-                    Log.d("GLES20Renderer", "Rendering element " + i + "....  " + element);
+//                    Log.d("GLES20Renderer", "Rendering element " + i + "....  " + element);
                 }
 
                 // FIXME: there may be element without texture. so a Different shader should be used
@@ -419,7 +425,7 @@ class GLES20Renderer implements Renderer {
 
                 // log event
                 if (id != flags.get(element)) {
-                    Log.d("GLES20Renderer", "Rendering element " + i + " finished");
+//                    Log.d("GLES20Renderer", "Rendering element " + i + " finished");
                     flags.put(element, this.id);
                 }
             }

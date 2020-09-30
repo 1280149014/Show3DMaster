@@ -298,7 +298,7 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
             return;
         }
         try {
-
+            // 设置输出屏幕大小
             GLES20.glViewport(0, 0, width, height);
             GLES20.glScissor(0, 0, width, height);
 
@@ -542,7 +542,7 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
 
                     for (int e = 0; e < objData.getElements().size(); e++) {
                         Element element = objData.getElements().get(e);
-
+                        Log.i("ModelRenderer", "element... '" + element.toString());
                         // check required info
                         if (element.getMaterial() == null || element.getMaterial().getTextureData() == null)
                             continue;
@@ -590,7 +590,15 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
             }
 
             else {
-
+                /**
+                 * GL_LINES:顶点两两连接，为多条线段构成
+                 * GL_POINTS:绘制独立的点
+                 * GL_LINE_STRIP:前后两个顶点用线段连接，但不闭合（最后一个点与第一个点不连接）
+                 * GL_LINE_LOOP:前后两个顶点用线段连接，并且闭合（最后一个点与第一个点有线段连接）
+                 * GL_TRIANGLES:每隔三个顶点绘制一个三角形的平面
+                 * GL_TRIANGLE_STRIP:每相邻三个顶点组成一个三角形
+                 * GL_TRIANGLE_FAN:以一个点为三角形公共顶点，组成一系列相邻的三角形
+                 */
                 // draw wireframe
                 if (drawWireframe && objData.getDrawMode() != GLES20.GL_POINTS
                         && objData.getDrawMode() != GLES20.GL_LINES && objData.getDrawMode() != GLES20.GL_LINE_STRIP

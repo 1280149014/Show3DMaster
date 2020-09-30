@@ -32,6 +32,11 @@ public final class IOUtils {
         return buffer.toByteArray();
     }
 
+    /**
+     * 把顶点集合的数据结构由Float[]转换为FloatBuffer
+     * @param floats
+     * @return
+     */
     public static FloatBuffer createFloatBuffer(int floats) {
         return createNativeByteBuffer(floats*4).asFloatBuffer();
     }
@@ -52,6 +57,11 @@ public final class IOUtils {
         return createNativeByteBuffer(shorts*2).asShortBuffer();
     }
 
+    /**
+     * 将浮点数组float[]转换为浮点缓存FloatBuffer(浮点数组不能直接传给OpenGL处理，OpenGL底层用C语音实现)
+     * @param length
+     * @return
+     */
     public static ByteBuffer createNativeByteBuffer(int length) {
         // initialize vertex byte buffer for shape coordinates
         ByteBuffer bb = ByteBuffer.allocateDirect(length);
