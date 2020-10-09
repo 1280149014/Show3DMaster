@@ -58,12 +58,12 @@ public class CollisionController implements EventListener {
 
                     if (this.scene.isCollision()) {
 
-                        Log.i("CollisionController", "Collision. Getting triangle intersection... " + objectHit.getId());
+                        Log.v("CollisionController", "Collision. Getting triangle intersection... " + objectHit.getId());
                         float[] point = CollisionDetection.getTriangleIntersection(objectHit, view.getWidth(), view.getHeight
                                 (), view.getViewMatrix(), view.getProjectionMatrix(), x, y);
 
                         if (point != null) {
-                            Log.i("CollisionController", "Drawing intersection point: " + Arrays.toString(point));
+                            Log.v("CollisionController", "Drawing intersection point: " + Arrays.toString(point));
                             point3D = Point.build(point).setColor(new float[]{1.0f, 0f, 0f, 1f});
                         }
                     }

@@ -18,7 +18,9 @@ import java.util.List;
 public class AndroidUtils {
 
     public static void fireEvent(List<EventListener> listeners, EventObject eventObject){
-        for (int i=0; i<listeners.size(); i++) listeners.get(i).onEvent(eventObject);
+        for (int i=0; i<listeners.size(); i++) {
+            listeners.get(i).onEvent(eventObject);
+        }
     }
 
     public static boolean supportsMultiTouch(PackageManager packageManager) {

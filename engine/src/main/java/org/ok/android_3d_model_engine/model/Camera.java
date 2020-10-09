@@ -170,7 +170,7 @@ public class Camera {
 	 * @param dY the Y component of the user 2D vector, that is, a value between [-1,1]
 	 */
 	public synchronized void translateCamera(float dX, float dY) {
-		// Log.v("Camera","translate:"+dX+","+dY);
+		 Log.v("Camera","translate:"+dX+","+dY);
 		if (dX == 0 && dY == 0) return;
 		translateCameraImpl(dX, dY);
 		lastAction = new Object[]{"translate",dX, dY};

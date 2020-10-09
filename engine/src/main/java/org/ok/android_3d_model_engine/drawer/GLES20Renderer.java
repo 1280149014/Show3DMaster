@@ -204,14 +204,23 @@ class GLES20Renderer implements Renderer {
      */
 
     private int setVBO(final String shaderVariableName, final FloatBuffer vertexBufferObject, int coordsPerVertex) {
+        /**
+         * 获取顶点位置属性引用的值
+         */
         int handler = GLES20.glGetAttribLocation(mProgram, shaderVariableName);
         GLUtil.checkGlError("glGetAttribLocation");
 
+        /**
+         * 启用顶点位置数据
+         */
         GLES20.glEnableVertexAttribArray(handler);
         GLUtil.checkGlError("glEnableVertexAttribArray");
 
         // Pass in the normal information
         vertexBufferObject.position(0);
+        /**
+         * 顶点数组
+         */
         GLES20.glVertexAttribPointer(handler, coordsPerVertex, GLES20.GL_FLOAT, false, 0, vertexBufferObject);
         GLUtil.checkGlError("glVertexAttribPointer");
 

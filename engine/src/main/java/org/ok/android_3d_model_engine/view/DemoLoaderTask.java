@@ -103,16 +103,175 @@ public class DemoLoaderTask extends LoaderTask {
 
 
             float iconRotateAngle = -10;
-            List<Object3DData> app0 = AppIconCube.createAppIconCube("setting_icon.png",
-                    new float[]{-4f, -5f, 0f},
-                    new float[]{0f, 1f, 0, 0.75f},
-                    new float[]{0.5f, 0.5f, 0.5f},
-                    DemoLoaderTask.this);
-            res.addAll(app0);
-            setId(app0,"settings");
+//            List<Object3DData> app0 = AppIconCube.createAppIconCube("setting_icon.png",
+//                    new float[]{-4f, -5f, 0f},
+//                    new float[]{0f, 1f, 0, 0.75f},
+//                    new float[]{0.5f, 0.5f, 0.5f},
+//                    DemoLoaderTask.this);
+//            res.addAll(app0);
+//            setId(app0,"settings");
+
+            try {
+                // this has heterogeneous faces
+                Object3DData app0 = new WavefrontLoader(GLES20.GL_TRIANGLE_FAN, new LoadListenerAdapter(){
+                    @Override
+                    public void onLoad(Object3DData obj53) {
+//                        InputStream open = ContentUtils.getInputStream("penguin.bmp");
+//                        try{
+//                            obj53=  AppIconCube.createAppIconCubeS("setting_icon.png", new float[]{2f, -5f, 0f}, new float[]{0f, 0.35f, 0, 0.35f}, new float[]{0.5f, 0.5f, 0.5f}, DemoLoaderTask.this);
 
 
-            List<Object3DData> app1 = AppIconCube.createAppIconCube("wechat.png",
+//                            obj53 = Cube.buildCubeV3(IOUtils.read(open));
+//                            open.close();
+//                        }catch (Exception e){
+//                            e.printStackTrace();
+//                        }
+
+
+                        try {
+                            InputStream open = ContentUtils.getInputStream("penguin.bmp");
+                            Object3DData iconObj = Square.buildCubeV3face(IOUtils.read(open));
+                            open.close();
+//                            iconObj.setColor(color);
+//                            iconObj.setLocation(Location);
+//                            iconObj.setScale(scale);
+//            res.add(iconObj);
+//                            task.onLoad(iconObj);
+
+//                            Object3DData iconCube = Cube.buildCubeV1();
+//                            iconCube.setColor(color);
+//                            iconCube.setLocation(Location);
+//                            iconCube.setScale(scale);
+
+                            //设置朋友关系 , 实现动画的联动
+                            obj53.setFriend(iconObj);
+                            obj53.getFriend().setFriend(obj53);
+//                            task.onLoad(iconCube);
+
+                            //添加到返回结果
+//            res.add(iconCube);
+//                            return iconCube;
+                        } catch (Exception e) {
+                            errors.add(e);
+                            if (!errors.isEmpty()) {
+                                StringBuilder msg = new StringBuilder("There was a problem loading the data");
+                                for (Exception error : errors) {
+                                    Log.e("Example", error.getMessage(), error);
+                                    msg.append("\n").append(error.getMessage());
+                                }
+                            }
+                        }
+
+                        obj53.setLocation(new float[] {2f, -5f, 0f});
+                        obj53.setColor(new float[] {0f, 1f, 0, 0.75f });
+                        obj53.setScale(new float[]{0.5f, 0.5f, 0.5f});
+                        Rescaler.rescale(obj53, 2f);
+                        DemoLoaderTask.this.onLoad(obj53);
+                    }
+                }).load(new URI("assets://assets/models/box_unit_1.obj")).get(0);
+
+//                setId(app0,"settings");
+                res.add(app0);
+                //super.onLoad(obj53);
+            } catch (Exception ex) {
+                errors.add(ex);
+            }
+            try {
+                // this has heterogeneous faces
+                Object3DData app1 = new WavefrontLoader(GLES20.GL_TRIANGLE_FAN, new LoadListenerAdapter(){
+                    @Override
+                    public void onLoad(Object3DData obj53) {
+                        obj53.setLocation(new float[] {4f, -5f, 0f});
+                        obj53.setColor(new float[] {0f, 1f, 0, 0.75f });
+                        obj53.setScale(new float[]{0.5f, 0.5f, 0.5f});
+                        Rescaler.rescale(obj53, 2f);
+                        DemoLoaderTask.this.onLoad(obj53);
+                    }
+                }).load(new URI("assets://assets/models/box_unit_1.obj")).get(0);
+//                setId(app1,"wechat");
+                res.add(app1);
+                //super.onLoad(obj53);
+            } catch (Exception ex) {
+                errors.add(ex);
+            }
+
+            try {
+                // this has heterogeneous faces
+                Object3DData app2 = new WavefrontLoader(GLES20.GL_TRIANGLE_FAN, new LoadListenerAdapter(){
+                    @Override
+                    public void onLoad(Object3DData obj53) {
+                        obj53.setLocation(new float[] {6f, -5f, 0f});
+                        obj53.setColor(new float[] {0f, 1f, 0, 0.75f });
+                        obj53.setScale(new float[]{0.5f, 0.5f, 0.5f});
+                        Rescaler.rescale(obj53, 2f);
+                        DemoLoaderTask.this.onLoad(obj53);
+                    }
+                }).load(new URI("assets://assets/models/box_unit_1.obj")).get(0);
+//                setId(app2,"wecarflow");
+                res.add(app2);
+                //super.onLoad(obj53);
+            } catch (Exception ex) {
+                errors.add(ex);
+            }
+
+            try {
+                // this has heterogeneous faces
+                Object3DData app3 = new WavefrontLoader(GLES20.GL_TRIANGLE_FAN, new LoadListenerAdapter(){
+                    @Override
+                    public void onLoad(Object3DData obj53) {
+                        obj53.setLocation(new float[] {8f, -5f, 0f});
+                        obj53.setColor(new float[] {0f, 1f, 0, 0.75f });
+                        obj53.setScale(new float[]{0.5f, 0.5f, 0.5f});
+                        Rescaler.rescale(obj53, 2f);
+                        DemoLoaderTask.this.onLoad(obj53);
+                    }
+                }).load(new URI("assets://assets/models/box_unit_1.obj")).get(0);
+//                setId(app3,"wecar");
+                res.add(app3);
+                //super.onLoad(obj53);
+            } catch (Exception ex) {
+                errors.add(ex);
+            }
+
+            try {
+                // this has heterogeneous faces
+                Object3DData app4 = new WavefrontLoader(GLES20.GL_TRIANGLE_FAN, new LoadListenerAdapter(){
+                    @Override
+                    public void onLoad(Object3DData obj53) {
+                        obj53.setLocation(new float[] {10f, -5f, 0f});
+                        obj53.setColor(new float[] {0f, 1f, 0, 0.75f });
+                        obj53.setScale(new float[]{0.5f, 0.5f, 0.5f});
+                        Rescaler.rescale(obj53, 2f);
+                        DemoLoaderTask.this.onLoad(obj53);
+                    }
+                }).load(new URI("assets://assets/models/box_unit_1.obj")).get(0);
+//                setId(app4,"deskclock");
+                res.add(app4);
+                //super.onLoad(obj53);
+            } catch (Exception ex) {
+                errors.add(ex);
+            }
+
+            try {
+                // this has heterogeneous faces
+                Object3DData app5 = new WavefrontLoader(GLES20.GL_TRIANGLE_FAN, new LoadListenerAdapter(){
+                    @Override
+                    public void onLoad(Object3DData obj53) {
+                        obj53.setLocation(new float[] {12f, -5f, 0f});
+                        obj53.setColor(new float[] {0f, 1f, 0, 0.75f });
+                        obj53.setScale(new float[]{0.5f, 0.5f, 0.5f});
+                        Rescaler.rescale(obj53, 2f);
+                        DemoLoaderTask.this.onLoad(obj53);
+                    }
+                }).load(new URI("assets://assets/models/box_unit_1.obj")).get(0);
+//                setId(app5,"calendar");
+                res.add(app5);
+                //super.onLoad(obj53);
+            } catch (Exception ex) {
+                errors.add(ex);
+            }
+
+          /*  List<Object3DData> app1 = AppIconCube.createAppIconCube("wechat.png",
                     new float[]{-2f, -5f, 0f},
                     new float[]{0f, 1f, 0, 0.75f},
                     new float[]{0.5f, 0.5f, 0.5f},
@@ -150,7 +309,7 @@ public class DemoLoaderTask extends LoaderTask {
                     new float[]{0.5f, 0.5f, 0.5f},
                     DemoLoaderTask.this);
             res.addAll(app6);
-            setId(app6 , "calendar");
+            setId(app6 , "calendar");*/
 
 //            List<Object3DData> app5 = AppIconCube.createAppIconCube(AppIconCube.getIcon(mContext,"com.android.car.carlauncher"),
 //                    new float[]{ 8f, -1f, 0f},
@@ -249,22 +408,22 @@ public class DemoLoaderTask extends LoaderTask {
 //            }
 
             // test loading object made of polygonal faces
-            try {
-                // this has heterogeneous faces
-                Object3DData obj53 = new WavefrontLoader(GLES20.GL_TRIANGLE_FAN, new LoadListenerAdapter(){
-                    @Override
-                    public void onLoad(Object3DData obj53) {
-                        obj53.setLocation(new float[] { 2f, 0f, 0f });
-                        obj53.setColor(new float[] { 1.0f, 1.0f, 1f, 1.0f });
-                        Rescaler.rescale(obj53, 2f);
-                        DemoLoaderTask.this.onLoad(obj53);
-                    }
-                }).load(new URI("assets://assets/models/box_unit_1.obj")).get(0);
-
-                //super.onLoad(obj53);
-            } catch (Exception ex) {
-                errors.add(ex);
-            }
+//            try {
+//                // this has heterogeneous faces
+//                Object3DData obj53 = new WavefrontLoader(GLES20.GL_TRIANGLE_FAN, new LoadListenerAdapter(){
+//                    @Override
+//                    public void onLoad(Object3DData obj53) {
+//                        obj53.setLocation(new float[] { 2f, 0f, 0f });
+//                        obj53.setColor(new float[] { 1.0f, 1.0f, 1f, 1.0f });
+//                        Rescaler.rescale(obj53, 2f);
+//                        DemoLoaderTask.this.onLoad(obj53);
+//                    }
+//                }).load(new URI("assets://assets/models/box_unit_1.obj")).get(0);
+//
+//                //super.onLoad(obj53);
+//            } catch (Exception ex) {
+//                errors.add(ex);
+//            }
 
             // test loading object made of polygonal faces
 //            try {
@@ -347,6 +506,9 @@ public class DemoLoaderTask extends LoaderTask {
         for(Object3DData o : objects){
             o.setId(id);
         }
+    }
+    private void setId(Object3DData obj,String id){
+        obj.setId((id));
     }
 
     @Override

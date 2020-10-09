@@ -45,7 +45,7 @@ import java.util.Map;
  * @author andresoviedo
  */
 public class SceneLoader implements LoadListener, EventListener {
-
+    private static String TAG = SceneLoader.class.getSimpleName();
     /**
      * Default max size for dimension on any axis
      */
@@ -282,9 +282,9 @@ public class SceneLoader implements LoadListener, EventListener {
         // smooth camera transition
         camera.animate();
 
-        if(isAutoAnimation){
-            animateCamera();
-        }
+//        if(isAutoAnimation){
+//            animateCamera();
+//        }
 
         for (int i = 0; i < objects.size(); i++) {
             Object3DData obj = objects.get(i);
@@ -304,116 +304,6 @@ public class SceneLoader implements LoadListener, EventListener {
     }
 
 
-    private static String TAG = SceneLoader.class.getSimpleName();
-
-    //为了保证 旋转的是360度, 需要最后一步加上之前的步, 总共360度
-    float scaleInitX = -1;     // 动画开始前, 实体的大小比例
-    float scaleInitY = -1;     // 动画开始前, 实体的大小比例
-    float scaleInitZ = -1;     // 动画开始前, 实体的大小比例
-    private long rotateDegree = 360;   //旋转角度
-    int degree = 0;
-    float[] scale = new float[3];
-    private void rotateAnimation() {
-        // 正常的旋转角度, 应该是 从 0 到 360度
-        // 参照黄工意见, 改为步长 处理, 考虑到大致的针数在 60,
-        // 步长设成5,需要72次一圈 360 度,耗时1.2s左右
-        degree = degree + 5;
-        calculateScale(scale,degree);
-
-        for(Object3DData o : objects){
-            o.setRotation1(new float[]{0,degree, 0});
-            o.setScale(scale);
-            Log.d(TAG,"1111 scale = " + o.getScaleX() + " , y = " + o.getScaleY());
-        }
-
-        if(degree >= rotateDegree){
-            for(Object3DData o : objects){
-                o.setRotation1(new float[]{0,0, 0});
-                o.setScale(scaleInitX,scaleInitY,scaleInitZ);
-            }
-            isClicked = false;
-            degree = 0;
-            scaleInitX = scaleInitY = scaleInitZ = -1;
-        }
-    }
-
-    private void rotateAnimationObj(Object3DData obj, float scaleInitX,
-                                    float scaleInitY, float scaleInitZ) {
-        // 正常的旋转角度, 应该是 从 0 到 360度
-        // 参照黄工意见, 改为步长 处理, 考虑到大致的针数在 60,
-        // 步长设成5,需要72次一圈 360 度,耗时1.2s左右
-        degree = degree + 5;
-        calculateScale(scale,degree);
-
-
-        obj.setRotation1(new float[]{0,degree, 0});
-        obj.setScale(scale);
-        Log.d(TAG,"1111 scale = " + obj.getScaleX() + " , y = " + obj.getScaleY());
-
-        if(degree >= rotateDegree){
-
-            obj.setRotation1(new float[]{0,0, 0});
-            obj.setScale(scaleInitX,scaleInitY,scaleInitZ);
-
-            isClicked = false;
-            degree = 0;
-            scaleInitX = scaleInitY = scaleInitZ = -1;
-        }
-    }
-
-
-
-    /**
-     *  计算放大缩小的倍数,
-     * @param scale    放大缩小的具体数组, 三个数依次为x,y,z的比例缩放值
-     * @param degree   旋转的进度 从 0 到 360
-     */
-    private void calculateScale(float[] scale, int degree){
-        if(degree <= 180){
-            float zoom = degree / 180.0f;
-            scale[0] = objects.get(0).getScaleX();
-            scale[1] = objects.get(0).getScaleY();
-            scale[2] = objects.get(0).getScaleZ();
-
-            if(scaleInitX == -1){
-                scaleInitX = objects.get(0).getScaleX();
-            }else{
-                scale[0] = scaleInitX * (zoom + 0.5f);
-            }
-            if(scaleInitY == -1){
-                scaleInitY = objects.get(0).getScaleY();
-            }else{
-                scale[1] = scaleInitY *(zoom + 0.5f);
-            }
-            if(scaleInitZ == -1){
-                scaleInitZ = objects.get(0).getScaleZ();
-            }else{
-                scale[2] = scaleInitZ * (zoom + 0.5f);
-            }
-        }else{
-            float zoom = (degree - 180) / 180.0f;
-            scale[0] = objects.get(0).getScaleX();
-            scale[1] = objects.get(0).getScaleY();
-            scale[2] = objects.get(0).getScaleZ();
-
-            if(scaleInitX == -1){
-                scaleInitX = objects.get(0).getScaleX();
-            }else{
-                scale[0] = scaleInitX * (1.5f - zoom);
-            }
-            if(scaleInitY == -1){
-                scaleInitY = objects.get(0).getScaleY();
-            }else{
-                scale[1] = scaleInitY  * (1.5f - zoom);
-            }
-            if(scaleInitZ == -1){
-                scaleInitZ = objects.get(0).getScaleZ();
-            }else{
-                scale[2] = scaleInitZ  * (1.5f - zoom);
-            }
-        }
-
-    }
 
 
     private void animateCamera() {
@@ -780,7 +670,7 @@ public class SceneLoader implements LoadListener, EventListener {
         // clear thread local
         ContentUtils.setThreadActivity(null);
 
-        lightBulb.setLocation(new float[]{0,3,0});
+        lightBulb.setLocation(new float[]{0,0,0});
 
         addObject(lightBulb);
 
