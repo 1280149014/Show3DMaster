@@ -28,7 +28,6 @@ import java.util.List;
  */
 public class Object3DData {
 
-
     public boolean isNeedRotate() {
         return isNeedRotate;
     }

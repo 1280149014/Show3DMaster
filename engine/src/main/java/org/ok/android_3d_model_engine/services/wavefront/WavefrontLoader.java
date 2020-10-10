@@ -50,6 +50,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -105,6 +106,8 @@ public class WavefrontLoader {
 
             // open stream, parse model, then close stream
             final InputStream is = modelURI.toURL().openStream();
+
+            // 一种可能, 通过这里生成多个mesh,
             final List<MeshData> meshes = loadModel(modelURI.toString(), is);
             is.close();
 
@@ -118,6 +121,7 @@ public class WavefrontLoader {
             callback.onProgress("Processing geometries...");
 
 
+            //解析成Object3DData
 
 //             proces all meshes
             for (MeshData meshData : meshes) {
@@ -177,9 +181,10 @@ public class WavefrontLoader {
         Log.i("WavefrontLoader", "--------------------------------------------------");
 
         try {
-
+            // 原生程序显示无法加载纹理, 原因 是 文件不存在
             // get materials stream
-            final InputStream inputStream = ContentUtils.getInputStream(meshData.getMaterialFile());
+            final InputStream inputStream = ContentUtils.getInputStream(new URI(
+                    Uri.parse("assets://asserts/models/" + meshData.getMaterialFile()).toString()));
 
             // parse materials
             final WavefrontMaterialsParser materialsParser = new WavefrontMaterialsParser();
@@ -231,7 +236,8 @@ public class WavefrontLoader {
                     }
                 }
             }
-        } catch (IOException ex) {
+        } catch (IOException | URISyntaxException ex) {
+            Log.e("WavefrontLoader","Error loading materials... " +  ex.toString());
             Log.e("WavefrontLoader", "Error loading materials... " + meshData.getMaterialFile());
         }
     }

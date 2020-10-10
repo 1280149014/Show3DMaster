@@ -31,13 +31,13 @@ public final class CameraController implements EventListener {
                 case CLICK:
                     break;
                 case MOVE:
-                    float dx1 = touchEvent.getdX();
-                    float dy1 = touchEvent.getdY();
-                    float max = Math.max(width, height);
-                    Log.v("CameraController", "Translating camera (dx,dy) '" + dx1 + "','" + dy1 + "'...");
-                    dx1 = (float) (dx1 / max * Math.PI * 2);
-                    dy1 = (float) (dy1 / max * Math.PI * 2);
-                    camera.translateCamera(dx1, dy1);
+//                    float dx1 = touchEvent.getdX();
+//                    float dy1 = touchEvent.getdY();
+//                    float max = Math.max(width, height);
+//                    Log.v("CameraController", "Translating camera (dx,dy) '" + dx1 + "','" + dy1 + "'...");
+//                    dx1 = (float) (dx1 / max * Math.PI * 2);
+//                    dy1 = (float) (dy1 / max * Math.PI * 2);
+//                    camera.translateCamera(dx1, dy1);
                     break;
                 case PINCH:
                     float zoomFactor = ((TouchEvent) event).getZoom() / 10;
@@ -45,9 +45,9 @@ public final class CameraController implements EventListener {
                     camera.MoveCameraZ(zoomFactor);
                     break;
                 case SPREAD:
-                    float[] rotation = touchEvent.getRotation();
-                    Log.v("CameraController", "Rotating camera '" + Math.signum(rotation[2]) + "'...");
-                    camera.Rotate((float) (Math.signum(rotation[2]) / Math.PI) / 4);
+//                    float[] rotation = touchEvent.getRotation();
+//                    Log.v("CameraController", "Rotating camera '" + Math.signum(rotation[2]) + "'...");
+//                    camera.Rotate((float) (Math.signum(rotation[2]) / Math.PI) / 4);
                     break;
             }
         }

@@ -81,7 +81,6 @@ public class Element {
         return this.indicesArray;
     }
 
-
     public IntBuffer getIndexBuffer() {
         if (indexBuffer == null) {
             this.indexBuffer = IOUtils.createIntBuffer(indicesArray.size());

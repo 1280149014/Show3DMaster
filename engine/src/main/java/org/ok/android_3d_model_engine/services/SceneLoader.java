@@ -63,7 +63,7 @@ public class SceneLoader implements LoadListener, EventListener {
      */
     public static final float[] POSITION_ZERO = new float[3];
     /**
-     * Light bulb 3d data  ,,  设置白点光源
+     * Light bulb 3d data , 设置白点光源
      *
      */
      private final Object3DData lightBulb = Point.build(new float[]{0, -5, 0})
@@ -786,7 +786,7 @@ public class SceneLoader implements LoadListener, EventListener {
 //        addObject(lightBulb);
 
         // rescale all object so they fit in the screen
-//        rescale(this.getObjects(), DEFAULT_MAX_MODEL_SIZE, new float[3]);
+        rescale(this.getObjects(), DEFAULT_MAX_MODEL_SIZE, new float[3]);
 
         // reposition camera
         Log.i("SceneLoader", "Camera position: " + DEFAULT_CAMERA_POSITION);

@@ -48,6 +48,7 @@ public class CollisionController implements EventListener {
                 final float x = touchEvent.getX();
                 final float y = touchEvent.getY();
                 Log.v("CollisionController", "Testing for collision... (" + objects.size() + ") " + x + "," + y);
+                // 检测点击的具体是哪个 obj 对象
                 Object3DData objectHit = CollisionDetection.getBoxIntersection(
                         objects, view.getWidth(), view.getHeight(),
                         view.getViewMatrix(), view.getProjectionMatrix(), x, y);

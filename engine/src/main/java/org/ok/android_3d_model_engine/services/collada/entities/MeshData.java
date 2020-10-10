@@ -790,6 +790,14 @@ public class MeshData {
         return materialFile;
     }
 
+    /**
+     *  这里写的比较死, 直接固定到了这个文件夹,
+     * @return
+     */
+    public String getMaterialFileUri() {
+        return materialFile;
+    }
+
     public FloatBuffer getJointsBuffer() {
         if (this.jointsBuffer == null && getJointsArray() != null) {
             this.jointsBuffer = IOUtils.createFloatBuffer(getJointsArray().length);
