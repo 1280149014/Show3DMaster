@@ -9,7 +9,11 @@ master2 分支为 调试分支
 
 2020-10-10
 今天计划, 尝试将 element 拆分成 obj
+方案一, 代码加载一个大的obj, 然后group, 获取到element , 将element 转化为 object3Ddata
+方案二, 通过软件将按钮拆分开成多个obj文件,然后将obj 添加到同一个 GLSurfaceView
 
+2020-10-13
+今天计划,
 
 
 
