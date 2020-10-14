@@ -34,11 +34,13 @@ public class MyAnimatorUtil {
         float[] initScale = new float[3]; //初始时 x,y,z 轴的比例变化尺寸
         int rotateDegree = 360;   //旋转角度
         float[] newScale = new float[3];  //变换后 x,y,z 轴的比例变化尺寸
+        float[] initLocation = new float[3];  //变换后 x,y,z 轴的比例变化尺寸
 
-        public ObjectStatus(int degree, float[] initScale,int rotateDegree) {
+        public ObjectStatus(int degree, float[] initScale,float[] initLocation ,int rotateDegree) {
             this.degree = degree;
             this.initScale = initScale;
             this.rotateDegree = rotateDegree;
+            this.initLocation = initLocation;
         }
 
         /**
@@ -71,27 +73,30 @@ public class MyAnimatorUtil {
             // 步长设成5,需要72次一圈 360 度,耗时1.2s左右
             degree = degree + 5;
             calculateScale(newScale,degree);
-//            obj.translate(
-//                        new float[]{
-//                                - obj.getLocationX(),
-//                                - obj.getLocationY(),
-//                                - obj.getLocationZ()
-//                        }
-//                    );
+            obj.translate(
+                        new float[]{
+                                - initLocation[0],
+                                - initLocation[1],
+                                - initLocation[2]
+                        }
+                    );
+            //  第一步 需要理解 4*4 矩阵的含义,
+            //
+//            obj.setLocation(new float[]{0,0,0});
 //            obj.setRotation2(new float[]{-10,degree, 0},
 //                    new float[]{0
 //
 //                            ,obj.getLocation()[1]/2,obj.getLocation()[2]/2});
-            obj.setScale(1,newScale[1],1);
+            obj.setScale(1,newScale[1],1);  //
 //            obj.setRotation(new float[]{0,degree, 0});
             Log.d(TAG,"1111 scale = " + obj.getScaleX() + " , y = " + obj.getScaleY());
-//            obj.translate(
-//                    new float[]{
-//                             obj.getLocationX(),
-//                             obj.getLocationY(),
-//                             obj.getLocationZ()
-//                    }
-//            );
+            obj.translate(
+                    new float[]{
+                            initLocation[0],
+                            initLocation[1],
+                            initLocation[2]
+                    }
+            );
 
             if(degree >= rotateDegree){
 
@@ -113,7 +118,7 @@ public class MyAnimatorUtil {
         map = new HashMap<>();
         for(Object3DData o : objects){
             if(!map.containsKey(o)){
-                ObjectStatus objectStatus = new ObjectStatus(0,o.getScale(),360);
+                ObjectStatus objectStatus = new ObjectStatus(0,o.getScale(),o.getLocation(),360);
                 map.put(o,objectStatus);
             }
         }
