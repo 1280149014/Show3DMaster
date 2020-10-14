@@ -73,13 +73,13 @@ public class MyAnimatorUtil {
             // 步长设成5,需要72次一圈 360 度,耗时1.2s左右
             degree = degree + 5;
             calculateScale(newScale,degree);
-            obj.translate(
-                        new float[]{
-                                - initLocation[0],
-                                - initLocation[1],
-                                - initLocation[2]
-                        }
-                    );
+//            obj.translate(
+//                        new float[]{
+//                                - initLocation[0],
+//                                - initLocation[1],
+//                                - initLocation[2]
+//                        }
+//                    );
             //  第一步 需要理解 4*4 矩阵的含义,
             //
 //            obj.setLocation(new float[]{0,0,0});
@@ -87,7 +87,7 @@ public class MyAnimatorUtil {
 //                    new float[]{0
 //
 //                            ,obj.getLocation()[1]/2,obj.getLocation()[2]/2});
-            obj.setScale(1,newScale[1],1);  //
+            obj.setScale(newScale[0],newScale[1],1);  //
 //            obj.setRotation(new float[]{0,degree, 0});
             Log.d(TAG,"1111 scale = " + obj.getScaleX() + " , y = " + obj.getScaleY());
             obj.translate(

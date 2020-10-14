@@ -22,18 +22,22 @@ Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 Ni 0.00
+
+### 主题色
 newmtl aiStandardSurface9SG
 illum 4
 Kd 0.00 0.00 0.00
+map_Kd donghua2_aiStandardSurface3_BaseColor.png
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 Ni 0.00
+
 newmtl lambert4SG
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd ΢��ͼƬ_20201006222643.png
+map_Kd ΢��ͼƬ_20201006222643.png
 Ni 1.00
 newmtl lambert5SG
 illum 4
@@ -59,12 +63,15 @@ Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 Ni 0.00
+
 newmtl pasted__Icon_2SG2
 illum 4
 Kd 0.00 0.00 0.00
+map_Kd donghua2_aiStandardSurface7_BaseColor.png
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 Ni 0.00
+
 newmtl pasted__Icon_2SG3
 illum 4
 Kd 0.00 0.00 0.00
