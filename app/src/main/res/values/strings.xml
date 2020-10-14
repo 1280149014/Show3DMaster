@@ -5,6 +5,8 @@
 
     <string name="app1_obj">ToyPlane.obj</string>
 
+    <string name="cowboy_obj">cowboy.dae</string>
+
     <string name="app2_obj">cube.obj</string>
 
     <string name="app3_obj">cube.obj</string>

@@ -117,7 +117,6 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
     private int width;
     // height of the screen
     private int height;
-    private float ratio;
 
     /**
      * Drawer factory to get right renderer/shader based on object attributes
@@ -147,6 +146,7 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
 
     // light
     private final float[] tempVector4 = new float[4];
+    //lightPosInWorldSpace 为灯光的位置 , 添加灯光, 才能显示颜色
     private final float[] lightPosInWorldSpace = new float[3];
     private final float[] cameraPosInWorldSpace = new float[3];
     private final float[] lightPosition = new float[]{0,0,0,1};
@@ -161,10 +161,10 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
     private final Object3DData gridz = Grid.build(0,-GRID_WIDTH,-GRID_WIDTH,0,GRID_WIDTH, GRID_WIDTH, GRID_SIZE)
             .setColor(GRID_COLOR).setId("grid-z").setSolid(false);
     {
-//        extras.add(axis);   //增加这里的代码可以显示轴线
-//        extras.add(gridx);
-//        extras.add(gridy);
-//        extras.add(gridz);
+        extras.add(axis);   //增加这里的代码可以显示轴线
+        extras.add(gridx);
+        extras.add(gridy);
+        extras.add(gridz);
     }
 
     // 3D stereoscopic matrix (left & right camera)
@@ -281,7 +281,7 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
         GLES20.glViewport(0, 0, width, height);
 
         // the projection matrix is the 3D virtual space (cube) that we want to project
-        this.ratio = (float) width / height;
+        float ratio = (float) width / height;
         Log.d(TAG, "onSurfaceChanged: projection: [" + -ratio + "," + ratio + ",-1,1]-near/far[1,10]");
 
         //设置投影矩阵,  这个是关键类, 影响最后的
@@ -434,6 +434,7 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
             // Calculate position of the light in world space to support lighting
             if (scene.isRotatingLight()) {
                 Matrix.multiplyMV(tempVector4, 0, scene.getLightBulb().getModelMatrix(), 0, lightPosition, 0);
+                //
                 lightPosInWorldSpace[0] = tempVector4[0];
                 lightPosInWorldSpace[1] = tempVector4[1];
                 lightPosInWorldSpace[2] = tempVector4[2];

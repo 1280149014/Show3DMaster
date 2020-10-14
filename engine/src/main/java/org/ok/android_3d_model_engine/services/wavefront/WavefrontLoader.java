@@ -221,7 +221,8 @@ public class WavefrontLoader {
                             Log.i("WavefrontLoader", "Reading texture file... " + elementMaterial.getTextureFile());
 
                             // read texture data
-                            try (InputStream stream = ContentUtils.getInputStream(elementMaterial.getTextureFile())) {
+                            try (InputStream stream = ContentUtils.getInputStream(new URI(
+                                    Uri.parse("assets://asserts/models/" + elementMaterial.getTextureFile()).toString()))) {
 
                                 // read data
                                 elementMaterial.setTextureData(IOUtils.read(stream));

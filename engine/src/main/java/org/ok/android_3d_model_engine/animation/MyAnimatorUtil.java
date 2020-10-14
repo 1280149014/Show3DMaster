@@ -71,13 +71,27 @@ public class MyAnimatorUtil {
             // 步长设成5,需要72次一圈 360 度,耗时1.2s左右
             degree = degree + 5;
             calculateScale(newScale,degree);
-            obj.setRotation2(new float[]{-10,degree, 0},
-                    new float[]{0
-
-                            ,obj.getLocation()[1]/2,obj.getLocation()[2]/2});
-            obj.setScale(newScale);
-            obj.setRotation(new float[]{0,degree, 0});
+//            obj.translate(
+//                        new float[]{
+//                                - obj.getLocationX(),
+//                                - obj.getLocationY(),
+//                                - obj.getLocationZ()
+//                        }
+//                    );
+//            obj.setRotation2(new float[]{-10,degree, 0},
+//                    new float[]{0
+//
+//                            ,obj.getLocation()[1]/2,obj.getLocation()[2]/2});
+            obj.setScale(1,newScale[1],1);
+//            obj.setRotation(new float[]{0,degree, 0});
             Log.d(TAG,"1111 scale = " + obj.getScaleX() + " , y = " + obj.getScaleY());
+//            obj.translate(
+//                    new float[]{
+//                             obj.getLocationX(),
+//                             obj.getLocationY(),
+//                             obj.getLocationZ()
+//                    }
+//            );
 
             if(degree >= rotateDegree){
 

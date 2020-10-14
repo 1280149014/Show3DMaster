@@ -289,7 +289,7 @@ public class SceneLoader implements LoadListener, EventListener {
         for (int i = 0; i < objects.size(); i++) {
             Object3DData obj = objects.get(i);
             if(obj.isNeedRotate()){
-//                myAnimator.startAnimation(obj);
+                myAnimator.startAnimation(obj);
             }
         }
 
@@ -768,7 +768,7 @@ public class SceneLoader implements LoadListener, EventListener {
         List<String> allErrors = new ArrayList<>();
         for (Object3DData data : objs) {
             allErrors.addAll(data.getErrors());
-            data.setRotation(new float[]{0,90f,0});
+//            data.setRotation(new float[]{0,90f,0});
         }
         if (!allErrors.isEmpty()) {
             makeToastText(allErrors.toString(), Toast.LENGTH_LONG);
@@ -785,8 +785,10 @@ public class SceneLoader implements LoadListener, EventListener {
 //
 //        addObject(lightBulb);
 
+
+
         // rescale all object so they fit in the screen
-        rescale(this.getObjects(), DEFAULT_MAX_MODEL_SIZE, new float[3]);
+//        rescale(this.getObjects(), DEFAULT_MAX_MODEL_SIZE, new float[3]);
 
         // reposition camera
         Log.i("SceneLoader", "Camera position: " + DEFAULT_CAMERA_POSITION);
@@ -884,7 +886,7 @@ public class SceneLoader implements LoadListener, EventListener {
 //                } else {
 //                    Log.i("SceneLoader", "Selected object " + objectToSelect.getId());
 //                    Log.d("SceneLoader", "Selected object " + objectToSelect);
-//                    setSelectedObject(objectToSelect);
+                    setSelectedObject(objectToSelect);
 //                }
                 objectToSelect.setNeedRotate(true);
                 objectToSelect.setNeedScale(true);

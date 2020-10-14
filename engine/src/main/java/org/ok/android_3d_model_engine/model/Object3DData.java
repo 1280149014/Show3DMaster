@@ -520,6 +520,14 @@ public class Object3DData {
         return this;
     }
 
+//    public Object3DData setLocation(float[] location) {
+//        this.location = location;
+//        this.updateModelMatrix();
+//        this.updateModelDimensions();
+//        this.changed = true;
+//        return this;
+//    }
+
     public void translate(float[] translation) {
         this.location[0] += translation[0];
         this.location[1] += translation[1];
