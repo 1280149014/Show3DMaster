@@ -7,6 +7,7 @@ import android.util.Log;
 import org.ok.android_3d_model_engine.collision.Octree;
 import org.ok.android_3d_model_engine.drawer.RendererFactory;
 import org.ok.android_3d_model_engine.services.collada.entities.MeshData;
+import org.ok.android_3d_model_engine.util.MatrixUtil;
 import org.ok.util.android.AndroidUtils;
 import org.ok.util.event.EventListener;
 import org.ok.util.io.IOUtils;
@@ -670,6 +671,8 @@ public class Object3DData {
             Matrix.rotateM(modelMatrix, 0, getRotation2()[2], 0, 0, 1f);
             Matrix.translateM(modelMatrix, 0, -rotation2Location[0], -rotation2Location[1], -rotation2Location[2]);
         }
+        //将坐标系中心移动到物体中心
+        MatrixUtil.getObjectCenterMatrixBaseRes(modelMatrix,modelMatrix,getDimensions());
         if (getRotation() != null) {
             Matrix.rotateM(modelMatrix, 0, getRotation()[0], 1f, 0f, 0f);
             Matrix.rotateM(modelMatrix, 0, getRotation()[1], 0, 1f, 0f);
@@ -679,6 +682,8 @@ public class Object3DData {
         if (getScale() != null) {
             Matrix.scaleM(modelMatrix, 0, getScaleX(), getScaleY(), getScaleZ());
         }
+        //操作完成后从物体中心还原坐标系
+        MatrixUtil.resetMatrixFromObjectCenter(modelMatrix,modelMatrix,getDimensions());
 
         if (this.bindTransform == null) {
             // geometries not linked to any joint does not have bind transform

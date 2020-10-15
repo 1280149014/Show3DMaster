@@ -49,13 +49,14 @@ public class MyAnimatorUtil {
          * @param degree   旋转的进度 从 0 到 360
          */
         public float[] calculateScale(float[] newScale, int degree){
+            degree = (degree+90)%360;
             if(degree <= 180){
-                float zoom = degree / 180.0f;
+                float zoom = (float) degree / 180.0f;
                 newScale[0] = initScale[0] * (zoom + 0.5f);
                 newScale[1] = initScale[1] *(zoom + 0.5f);
                 newScale[2] = initScale[2] * (zoom + 0.5f);
             }else{
-                float zoom = (degree - 180) / 180.0f;
+                float zoom = (degree - 180f) / 180.0f;
                 newScale[0] = initScale[0] * (1.5f - zoom);
                 newScale[1] = initScale[1]  * (1.5f - zoom);
                 newScale[2] = initScale[2]  * (1.5f - zoom);
@@ -87,8 +88,8 @@ public class MyAnimatorUtil {
 //                    new float[]{0
 //
 //                            ,obj.getLocation()[1]/2,obj.getLocation()[2]/2});
-            obj.setScale(newScale[0],newScale[1],1);  //
-//            obj.setRotation(new float[]{0,degree, 0});
+            obj.setScale(newScale[0],newScale[1],newScale[1]);  //
+            obj.setRotation(new float[]{0, degree, 0});
             Log.d(TAG,"1111 scale = " + obj.getScaleX() + " , y = " + obj.getScaleY());
             obj.translate(
                     new float[]{
