@@ -32,7 +32,7 @@ public class MyAnimatorUtil {
     class ObjectStatus{
         int degree = 0;
         float[] initScale = new float[3]; //初始时 x,y,z 轴的比例变化尺寸
-        int rotateDegree = 360;   //旋转角度
+        int rotateDegree = 180;   //旋转角度
         float[] newScale = new float[3];  //变换后 x,y,z 轴的比例变化尺寸
 
         public ObjectStatus(int degree, float[] initScale,int rotateDegree) {
@@ -47,13 +47,13 @@ public class MyAnimatorUtil {
          * @param degree   旋转的进度 从 0 到 360
          */
         public float[] calculateScale(float[] newScale, int degree){
-            if(degree <= 180){
-                float zoom = degree / 180.0f;
+            if(degree <= 90){
+                float zoom = degree / 90.0f;
                 newScale[0] = initScale[0] * (zoom + 0.5f);
                 newScale[1] = initScale[1] *(zoom + 0.5f);
                 newScale[2] = initScale[2] * (zoom + 0.5f);
             }else{
-                float zoom = (degree - 180) / 180.0f;
+                float zoom = (degree - 90) / 90.0f;
                 newScale[0] = initScale[0] * (1.5f - zoom);
                 newScale[1] = initScale[1]  * (1.5f - zoom);
                 newScale[2] = initScale[2]  * (1.5f - zoom);
@@ -99,7 +99,7 @@ public class MyAnimatorUtil {
         map = new HashMap<>();
         for(Object3DData o : objects){
             if(!map.containsKey(o)){
-                ObjectStatus objectStatus = new ObjectStatus(0,o.getScale(),360);
+                ObjectStatus objectStatus = new ObjectStatus(0,o.getScale(),180);
                 map.put(o,objectStatus);
             }
         }

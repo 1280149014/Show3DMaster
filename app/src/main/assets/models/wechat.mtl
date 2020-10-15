@@ -1,18 +1,21 @@
 newmtl aiStandardSurface1SG
 illum 4
 Kd 0.00 0.00 0.00
+map_kd donghua2_aiStandardSurface7_Metallic.png
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 Ni 0.00
 newmtl aiStandardSurface4SG
 illum 4
 Kd 0.00 0.00 0.00
+map_kd donghua2_word_5_BaseColor.png
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 Ni 0.00
 newmtl aiStandardSurface6SG
 illum 4
 Kd 0.00 0.00 0.00
+map_Kd lambert3_BaseColor.png
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
 Ni 0.00
@@ -25,9 +28,10 @@ Ni 0.00
 newmtl aiStandardSurface9SG
 illum 4
 Kd 0.00 0.00 0.00
+map_Kd donghua2_aiStandardSurface3_BaseColor.png
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd wecar.bmp
+
 Ni 0.00
 newmtl lambert4SG
 illum 4

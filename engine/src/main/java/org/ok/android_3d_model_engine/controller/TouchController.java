@@ -194,7 +194,7 @@ public class TouchController {
 			if (currentSquare == 1 && previousRotationSquare == 4) {
 				rotation = 0;
 			} else if (currentSquare == 4 && previousRotationSquare == 1) {
-				rotation = 360;
+				rotation = 180;
 			}
 
 			// gesture detection

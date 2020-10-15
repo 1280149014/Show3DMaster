@@ -280,7 +280,7 @@ public class SceneLoader implements LoadListener, EventListener {
     public final void onDrawFrame() {
 
         // smooth camera transition
-        camera.animate();
+//        camera.animate();
 
 //        if(isAutoAnimation){
 //            animateCamera();

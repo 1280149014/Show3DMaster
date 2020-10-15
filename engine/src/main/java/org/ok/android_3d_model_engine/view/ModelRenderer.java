@@ -335,40 +335,57 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
                 // The camera has 3 vectors (the position, the vector where we are looking at, and the up position (sky)
 
                 // the projection matrix is the 3D virtual space (cube) that we want to project
-                float ratio = (float) width / height;
+//                float ratio = (float) width / height;
                 // Log.v(TAG, "Camera changed: projection: [" + -ratio + "," + ratio + ",-1,1]-near/far[1,10], ");
 
                 if (!scene.isStereoscopic()) {
+                    //需要填充的参数
+                    //float cx, //摄像机位置x
+                    //float cy, //摄像机位置y
+                    //float cz, //摄像机位置z
+                    //float tx, //摄像机目标点x
+                    //float ty, //摄像机目标点y
+                    //float tz, //摄像机目标点z
+                    //float upx, //摄像机UP向量X分量
+                    //float upy, //摄像机UP向量Y分量
+                    //float upz //摄像机UP向量Z分量
+                    //这个方法看起来很抽象，设几组参数对比一下效果，摄像机目标点，即绘制的3D图像，tx，ty, tz,
+                    // 为图像的中心位置设置到原点即 tx = 0,ty = 0, tz = 0; 摄像机的位置，
+                    // 即观察者眼睛的位置 我们设置在目标点的正前方（位置z轴正方向）
+                    // ，cx = 0, cy = 0, cz = 10; 接着是摄像机顶部的方向了，如下图，很显然相机旋转，
+                    // up的方向就会改变，这样就会会影响到绘制图像的角度。
                     Matrix.setLookAtM(viewMatrix, 0, camera.xPos, camera.yPos, camera.zPos, camera.xView, camera.yView,
                             camera.zView, camera.xUp, camera.yUp, camera.zUp);
+                    //将两个4x4矩阵相乘，并将结果存储在第三个4x4矩阵中。以矩阵表示法表示：结果=lhs x rhs。
                     Matrix.multiplyMM(viewProjectionMatrix, 0, projectionMatrix, 0, viewMatrix, 0);
-                } else {
-                    Camera[] stereoCamera = camera.toStereo(EYE_DISTANCE);
-                    Camera leftCamera = stereoCamera[0];
-                    Camera rightCamera = stereoCamera[1];
-
-                    // camera on the left for the left eye
-                    Matrix.setLookAtM(viewMatrixLeft, 0, leftCamera.xPos, leftCamera.yPos, leftCamera.zPos, leftCamera
-                                    .xView,
-                            leftCamera.yView, leftCamera.zView, leftCamera.xUp, leftCamera.yUp, leftCamera.zUp);
-                    // camera on the right for the right eye
-                    Matrix.setLookAtM(viewMatrixRight, 0, rightCamera.xPos, rightCamera.yPos, rightCamera.zPos, rightCamera
-                                    .xView,
-                            rightCamera.yView, rightCamera.zView, rightCamera.xUp, rightCamera.yUp, rightCamera.zUp);
-
-                    if (scene.isAnaglyph()) {
-                        Matrix.frustumM(projectionMatrixRight, 0, -ratio, ratio, -1, 1, getNear(), getFar());
-                        Matrix.frustumM(projectionMatrixLeft, 0, -ratio, ratio, -1, 1, getNear(), getFar());
-                    } else if (scene.isVRGlasses()) {
-                        float ratio2 = (float) width / 2 / height;
-                        Matrix.frustumM(projectionMatrixRight, 0, -ratio2, ratio2, -1, 1, getNear(), getFar());
-                        Matrix.frustumM(projectionMatrixLeft, 0, -ratio2, ratio2, -1, 1, getNear(), getFar());
-                    }
-                    // Calculate the projection and view transformation
-                    Matrix.multiplyMM(viewProjectionMatrixLeft, 0, projectionMatrixLeft, 0, viewMatrixLeft, 0);
-                    Matrix.multiplyMM(viewProjectionMatrixRight, 0, projectionMatrixRight, 0, viewMatrixRight, 0);
-
                 }
+//                else {
+//                    Camera[] stereoCamera = camera.toStereo(EYE_DISTANCE);
+//                    Camera leftCamera = stereoCamera[0];
+//                    Camera rightCamera = stereoCamera[1];
+//
+//                    // camera on the left for the left eye
+//                    Matrix.setLookAtM(viewMatrixLeft, 0, leftCamera.xPos, leftCamera.yPos, leftCamera.zPos, leftCamera
+//                                    .xView,
+//                            leftCamera.yView, leftCamera.zView, leftCamera.xUp, leftCamera.yUp, leftCamera.zUp);
+//                    // camera on the right for the right eye
+//                    Matrix.setLookAtM(viewMatrixRight, 0, rightCamera.xPos, rightCamera.yPos, rightCamera.zPos, rightCamera
+//                                    .xView,
+//                            rightCamera.yView, rightCamera.zView, rightCamera.xUp, rightCamera.yUp, rightCamera.zUp);
+//
+//                    if (scene.isAnaglyph()) {
+//                        Matrix.frustumM(projectionMatrixRight, 0, -ratio, ratio, -1, 1, getNear(), getFar());
+//                        Matrix.frustumM(projectionMatrixLeft, 0, -ratio, ratio, -1, 1, getNear(), getFar());
+//                    } else if (scene.isVRGlasses()) {
+//                        float ratio2 = (float) width / 2 / height;
+//                        Matrix.frustumM(projectionMatrixRight, 0, -ratio2, ratio2, -1, 1, getNear(), getFar());
+//                        Matrix.frustumM(projectionMatrixLeft, 0, -ratio2, ratio2, -1, 1, getNear(), getFar());
+//                    }
+//                    // Calculate the projection and view transformation
+//                    Matrix.multiplyMM(viewProjectionMatrixLeft, 0, projectionMatrixLeft, 0, viewMatrixLeft, 0);
+//                    Matrix.multiplyMM(viewProjectionMatrixRight, 0, projectionMatrixRight, 0, viewMatrixRight, 0);
+//
+//                }
                 camera.setChanged(false);
             }
 
@@ -392,20 +409,20 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
                 return;
             }
 
-            if (scene.isVRGlasses()) {
-
-                // draw left eye image
-                GLES20.glViewport(0, 0, width / 2, height);
-                GLES20.glScissor(0, 0, width / 2, height);
-                this.onDrawFrame(viewMatrixLeft, projectionMatrixLeft, viewProjectionMatrixLeft, lightPosInWorldSpace,
-                        null, cameraPosInWorldSpace);
-
-                // draw right eye image
-                GLES20.glViewport(width / 2, 0, width / 2, height);
-                GLES20.glScissor(width / 2, 0, width / 2, height);
-                this.onDrawFrame(viewMatrixRight, projectionMatrixRight, viewProjectionMatrixRight, lightPosInWorldSpace,
-                        null, cameraPosInWorldSpace);
-            }
+//            if (scene.isVRGlasses()) {
+//
+//                // draw left eye image
+//                GLES20.glViewport(0, 0, width / 2, height);
+//                GLES20.glScissor(0, 0, width / 2, height);
+//                this.onDrawFrame(viewMatrixLeft, projectionMatrixLeft, viewProjectionMatrixLeft, lightPosInWorldSpace,
+//                        null, cameraPosInWorldSpace);
+//
+//                // draw right eye image
+//                GLES20.glViewport(width / 2, 0, width / 2, height);
+//                GLES20.glScissor(width / 2, 0, width / 2, height);
+//                this.onDrawFrame(viewMatrixRight, projectionMatrixRight, viewProjectionMatrixRight, lightPosInWorldSpace,
+//                        null, cameraPosInWorldSpace);
+//            }
 
 
         } catch (Exception ex) {

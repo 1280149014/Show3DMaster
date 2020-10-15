@@ -116,15 +116,14 @@ public class DemoLoaderTask extends LoaderTask {
                 Object3DData app0 = new WavefrontLoader(GLES20.GL_TRIANGLE_FAN, new LoadListenerAdapter(){
                     @Override
                     public void onLoad(Object3DData obj53) {
-                        obj53.setLocation(new float[] {-2f, -5f, 0f});
+                        obj53.setLocation(new float[] {-4f, -10f, 0f});
                         obj53.setColor(new float[] {0f, 1f, 0, 0.75f });
                         obj53.setScale(new float[]{0.5f, 0.5f, 0.5f});
                         Rescaler.rescale(obj53, 2f);
                         DemoLoaderTask.this.onLoad(obj53);
                     }
-                }).load(new URI("assets://assets/models/wechat.obj")).get(0);
-
-//                setId(app0,"settings");
+                }).load(new URI("assets://assets/models/Butten_6.obj")).get(0);
+//                setId(app0,"wecarflow");
                 res.add(app0);
                 //super.onLoad(obj53);
             } catch (Exception ex) {
@@ -135,14 +134,14 @@ public class DemoLoaderTask extends LoaderTask {
                 Object3DData app1 = new WavefrontLoader(GLES20.GL_TRIANGLE_FAN, new LoadListenerAdapter(){
                     @Override
                     public void onLoad(Object3DData obj53) {
-                        obj53.setLocation(new float[] {0f, -5f, 0f});
+                        obj53.setLocation(new float[] {-2f, -10f, 0f});
                         obj53.setColor(new float[] {0f, 1f, 0, 0.75f });
                         obj53.setScale(new float[]{0.5f, 0.5f, 0.5f});
                         Rescaler.rescale(obj53, 2f);
                         DemoLoaderTask.this.onLoad(obj53);
                     }
-                }).load(new URI("assets://assets/models/wechat.obj")).get(0);
-//                setId(app1,"wechat");
+                }).load(new URI("assets://assets/models/Butten_5.obj")).get(0);
+
                 res.add(app1);
                 //super.onLoad(obj53);
             } catch (Exception ex) {
@@ -154,14 +153,15 @@ public class DemoLoaderTask extends LoaderTask {
                 Object3DData app2 = new WavefrontLoader(GLES20.GL_TRIANGLE_FAN, new LoadListenerAdapter(){
                     @Override
                     public void onLoad(Object3DData obj53) {
-                        obj53.setLocation(new float[] {2f, -5f, 0f});
+                        obj53.setLocation(new float[] {0f, -10f, 0f});
                         obj53.setColor(new float[] {0f, 1f, 0, 0.75f });
                         obj53.setScale(new float[]{0.5f, 0.5f, 0.5f});
                         Rescaler.rescale(obj53, 2f);
                         DemoLoaderTask.this.onLoad(obj53);
                     }
-                }).load(new URI("assets://assets/models/wechat.obj")).get(0);
+                }).load(new URI("assets://assets/models/Butten_4.obj")).get(0);
 //                setId(app2,"wecarflow");
+                setId(app2,"deskclock");
                 res.add(app2);
                 //super.onLoad(obj53);
             } catch (Exception ex) {
@@ -173,13 +173,13 @@ public class DemoLoaderTask extends LoaderTask {
                 Object3DData app3 = new WavefrontLoader(GLES20.GL_TRIANGLE_FAN, new LoadListenerAdapter(){
                     @Override
                     public void onLoad(Object3DData obj53) {
-                        obj53.setLocation(new float[] {4f, -5f, 0f});
+                        obj53.setLocation(new float[] {2f, -10f, 0f});
                         obj53.setColor(new float[] {0f, 1f, 0, 0.75f });
                         obj53.setScale(new float[]{0.5f, 0.5f, 0.5f});
                         Rescaler.rescale(obj53, 2f);
                         DemoLoaderTask.this.onLoad(obj53);
                     }
-                }).load(new URI("assets://assets/models/wechat.obj")).get(0);
+                }).load(new URI("assets://assets/models/Butten_3.obj")).get(0);
 //                setId(app3,"wecar");
                 res.add(app3);
                 //super.onLoad(obj53);
@@ -192,14 +192,15 @@ public class DemoLoaderTask extends LoaderTask {
                 Object3DData app4 = new WavefrontLoader(GLES20.GL_TRIANGLE_FAN, new LoadListenerAdapter(){
                     @Override
                     public void onLoad(Object3DData obj53) {
-                        obj53.setLocation(new float[] {6f, -5f, 0f});
+                        obj53.setLocation(new float[] {4f,-10f, 0f});
                         obj53.setColor(new float[] {0f, 1f, 0, 0.75f });
                         obj53.setScale(new float[]{0.5f, 0.5f, 0.5f});
                         Rescaler.rescale(obj53, 2f);
                         DemoLoaderTask.this.onLoad(obj53);
                     }
-                }).load(new URI("assets://assets/models/wechat.obj")).get(0);
+                }).load(new URI("assets://assets/models/Butten_2.obj")).get(0);
 //                setId(app4,"deskclock");
+//                setId(app4,"settings");
                 res.add(app4);
                 //super.onLoad(obj53);
             } catch (Exception ex) {
@@ -211,14 +212,15 @@ public class DemoLoaderTask extends LoaderTask {
                 Object3DData app5 = new WavefrontLoader(GLES20.GL_TRIANGLE_FAN, new LoadListenerAdapter(){
                     @Override
                     public void onLoad(Object3DData obj53) {
-                        obj53.setLocation(new float[] {8f, -5f, 0f});
+                        obj53.setLocation(new float[] {6f, -10f, 0f});
                         obj53.setColor(new float[] {0f, 1f, 0, 0.75f });
                         obj53.setScale(new float[]{0.5f, 0.5f, 0.5f});
                         Rescaler.rescale(obj53, 2f);
                         DemoLoaderTask.this.onLoad(obj53);
                     }
-                }).load(new URI("assets://assets/models/wechat.obj")).get(0);
+                }).load(new URI("assets://assets/models/Butten_1.obj")).get(0);
 //                setId(app5,"calendar");
+//                setId(app5,"wechat");
                 res.add(app5);
                 //super.onLoad(obj53);
             } catch (Exception ex) {

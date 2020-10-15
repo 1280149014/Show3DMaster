@@ -1,0 +1,40 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# �������ļ�:15.10.2020 13:12:27
+
+newmtl phong1SG
+	Ns 18.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	map_Ka wechat_one_gaitubao.png
+	Kd 0.7500 0.7500 0.7500
+	map_Kd wechat_one_gaitubao.png
+	Ks 0.0800 0.0800 0.0800
+	Ke 0.0000 0.0000 0.0000
+
+newmtl phong2SG
+	Ns 3.4300
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+
+	Kd 0.0000 0.0000 0.0000
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka wechat_one_gaitubao.png
+	map_Kd donghua2_word_5_BaseColor.png
+	map_Ks donghua2_word_5_BaseColor.png
+
+#环境反射 Ka r g b
+#漫反射 Kd r g b
+#镜反射 Ks r g b
+#反射指数 Ns exponent 指定材质的反射指数，定义了反射高光度
+#折射值 Ni ptical density 指定材质表面的光密度，即折射值
+#渐隐指数 d factor 参数factor表示物体融入背景的数量
+
