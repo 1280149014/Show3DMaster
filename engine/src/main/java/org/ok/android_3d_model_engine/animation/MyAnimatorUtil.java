@@ -32,7 +32,7 @@ public class MyAnimatorUtil {
     class ObjectStatus{
         int degree = 0;
         float[] initScale = new float[3]; //初始时 x,y,z 轴的比例变化尺寸
-        int rotateDegree = 360;   //旋转角度
+        int rotateDegree = 720;   //旋转角度
         float[] newScale = new float[3];  //变换后 x,y,z 轴的比例变化尺寸
         float[] initLocation = new float[3];  //变换后 x,y,z 轴的比例变化尺寸
 
@@ -49,17 +49,17 @@ public class MyAnimatorUtil {
          * @param degree   旋转的进度 从 0 到 360
          */
         public float[] calculateScale(float[] newScale, int degree){
-            degree = (degree+90)%360;
-            if(degree <= 180){
-                float zoom = (float) degree / 180.0f;
-                newScale[0] = initScale[0] * (zoom + 0.5f);
-                newScale[1] = initScale[1] *(zoom + 0.5f);
-                newScale[2] = initScale[2] * (zoom + 0.5f);
+//            degree = (degree)%720;
+            if(degree <= 360){
+                float zoom = (float) degree / 360f;
+                newScale[0] = initScale[0] * (zoom + 1f);
+                newScale[1] = initScale[1] *(zoom + 1f);
+                newScale[2] = initScale[2] * (zoom + 1f);
             }else{
-                float zoom = (degree - 180f) / 180.0f;
-                newScale[0] = initScale[0] * (1.5f - zoom);
-                newScale[1] = initScale[1]  * (1.5f - zoom);
-                newScale[2] = initScale[2]  * (1.5f - zoom);
+                float zoom = (degree - 360f) / 360f;
+                newScale[0] = initScale[0] * (2f - zoom);
+                newScale[1] = initScale[1]  * (2f - zoom);
+                newScale[2] = initScale[2]  * (2f - zoom);
             }
             return newScale;
         }
@@ -71,33 +71,15 @@ public class MyAnimatorUtil {
         private void rotateAnimationObj(Object3DData obj) {
             // 正常的旋转角度, 应该是 从 0 到 360度
             // 参照黄工意见, 改为步长 处理, 考虑到大致的针数在 60,
-            // 步长设成5,需要72次一圈 360 度,耗时1.2s左右
-            degree = degree + 5;
+            // 步长设成10,需要72次一圈 360 度,耗时1.2s左右
+            degree = degree + getSpeed(degree);
             calculateScale(newScale,degree);
-//            obj.translate(
-//                        new float[]{
-//                                - initLocation[0],
-//                                - initLocation[1],
-//                                - initLocation[2]
-//                        }
-//                    );
+
             //  第一步 需要理解 4*4 矩阵的含义,
             //
-//            obj.setLocation(new float[]{0,0,0});
-//            obj.setRotation2(new float[]{-10,degree, 0},
-//                    new float[]{0
-//
-//                            ,obj.getLocation()[1]/2,obj.getLocation()[2]/2});
             obj.setScale(newScale[0],newScale[1],newScale[1]);  //
             obj.setRotation(new float[]{0, degree, 0});
-            Log.d(TAG,"1111 scale = " + obj.getScaleX() + " , y = " + obj.getScaleY());
-            obj.translate(
-                    new float[]{
-                            initLocation[0],
-                            initLocation[1],
-                            initLocation[2]
-                    }
-            );
+            Log.d(TAG,"1111 scale = " + obj.getScaleX() + " , y = " + degree);
 
             if(degree >= rotateDegree){
 
@@ -110,6 +92,28 @@ public class MyAnimatorUtil {
             }
         }
 
+        /**
+         *  自定义一个速度控制器
+         *    0 - 360 度,  速度变化 20 -> 3
+         *  360 - 720 度,  速度变化  3 -> 20
+         * @param degree
+         * @return
+         */
+        public int getSpeed(int degree){
+            int deltaDegree = Math.abs(360 - degree);
+            int speed = 0;
+            if(deltaDegree < 15){
+                speed = 2;
+            }else if(degree < 120){
+                speed = 8;
+            }else if(degree < 240){
+                speed = 12;
+            }else{
+                speed = 16;
+            }
+            return speed;
+        }
+
     }
 
     HashMap<Object3DData,ObjectStatus> map;
@@ -119,7 +123,10 @@ public class MyAnimatorUtil {
         map = new HashMap<>();
         for(Object3DData o : objects){
             if(!map.containsKey(o)){
-                ObjectStatus objectStatus = new ObjectStatus(0,o.getScale(),o.getLocation(),360);
+                ObjectStatus objectStatus = new ObjectStatus(0,
+                            o.getScale(),
+                            o.getLocation(),
+                            720);
                 map.put(o,objectStatus);
             }
         }

@@ -654,6 +654,9 @@ public class Object3DData {
 
         Matrix.setIdentityM(modelMatrix, 0);
 
+        //将坐标系中心移动到物体中心
+        MatrixUtil.getObjectCenterMatrixBaseRes(modelMatrix,modelMatrix,getDimensions());
+
         if (rotation1 != null) {
             //Matrix.rotateM(modelMatrix, 0, rotation1[0], 1f, 0f, 0f);
             Matrix.rotateM(modelMatrix, 0, rotation1[1], 0, 1f, 0f);
@@ -671,8 +674,7 @@ public class Object3DData {
             Matrix.rotateM(modelMatrix, 0, getRotation2()[2], 0, 0, 1f);
             Matrix.translateM(modelMatrix, 0, -rotation2Location[0], -rotation2Location[1], -rotation2Location[2]);
         }
-        //将坐标系中心移动到物体中心
-        MatrixUtil.getObjectCenterMatrixBaseRes(modelMatrix,modelMatrix,getDimensions());
+
         if (getRotation() != null) {
             Matrix.rotateM(modelMatrix, 0, getRotation()[0], 1f, 0f, 0f);
             Matrix.rotateM(modelMatrix, 0, getRotation()[1], 0, 1f, 0f);

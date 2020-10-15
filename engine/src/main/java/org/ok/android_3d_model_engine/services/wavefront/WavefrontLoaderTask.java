@@ -39,6 +39,7 @@ public class WavefrontLoaderTask extends LoaderTask {
             load.addAll(wfl.load(new URI(
                     Uri.parse("assets://asserts/models/" + "Butten_1.obj").toString())
             ));
+            load.get(load.size()-1).setId("wechat");
             load.addAll(wfl.load(new URI(
                     Uri.parse("assets://asserts/models/" + "Butten_2.obj").toString())
             ));

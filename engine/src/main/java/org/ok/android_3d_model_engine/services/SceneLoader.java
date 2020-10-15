@@ -886,7 +886,7 @@ public class SceneLoader implements LoadListener, EventListener {
 //                } else {
 //                    Log.i("SceneLoader", "Selected object " + objectToSelect.getId());
 //                    Log.d("SceneLoader", "Selected object " + objectToSelect);
-                    setSelectedObject(objectToSelect);
+//                    setSelectedObject(objectToSelect);
 //                }
                 objectToSelect.setNeedRotate(true);
                 objectToSelect.setNeedScale(true);
@@ -898,23 +898,7 @@ public class SceneLoader implements LoadListener, EventListener {
                         //execute the task
                         startAvtivity(id);
                     }
-                }, 1300);
-
-               
-//com.tencent.wecar/.MainActivity
-//
-//com.tencent.wecarflow/.MainActivity
-//
-//com.android.car.carlauncher/.AppGridActivity
-//com.android.car.carlauncher/.CarLauncher
-//
-//
-//com.android.settings/.Settings
-//com.android.car.settings/.common.CarSettingActivity
-//
-//
-//com.android.deskclock/.DeskClock
-
+                }, 1500);
             }
         }
         return false;
