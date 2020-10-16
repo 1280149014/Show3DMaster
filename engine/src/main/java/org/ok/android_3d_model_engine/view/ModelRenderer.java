@@ -459,9 +459,12 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
                 basicShader.draw(scene.getLightBulb(), projectionMatrix, viewMatrix, -1, lightPosInWorldSpace, colorMask, cameraPosInWorldSpace);
                 basicShader.draw(Point.build(lightPosInWorldSpace), projectionMatrix, viewMatrix, -1, lightPosInWorldSpace, colorMask, cameraPosInWorldSpace);
             } else {
-                lightPosInWorldSpace[0] = cameraPosInWorldSpace[0];
-                lightPosInWorldSpace[1] = cameraPosInWorldSpace[1];
-                lightPosInWorldSpace[2] = cameraPosInWorldSpace[2];
+//                lightPosInWorldSpace[0] = cameraPosInWorldSpace[0];
+//                lightPosInWorldSpace[1] = cameraPosInWorldSpace[1];
+//                lightPosInWorldSpace[2] = cameraPosInWorldSpace[2];
+                lightPosInWorldSpace[0] = 0;
+                lightPosInWorldSpace[1] = 0;
+                lightPosInWorldSpace[2] = -20;
             }
 
             // FIXME: memory leak

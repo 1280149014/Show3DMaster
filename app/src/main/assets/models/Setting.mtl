@@ -1,0 +1,25 @@
+newmtl phong1SG
+illum 4
+Kd 0.06 0.06 0.06
+map_Kd icon_white_deep.png
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.13 0.13 0.13
+Ns 91.85
+newmtl phong6SG
+illum 4
+Kd 0.00 0.38 1.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 1.00 1.00 1.00
+Ns 35.64
+newmtl phongE1SG
+illum 4
+Kd 1.00 1.00 1.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.55 0.55 0.55
+Ns 60.31

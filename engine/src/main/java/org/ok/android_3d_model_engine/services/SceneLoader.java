@@ -57,7 +57,7 @@ public class SceneLoader implements LoadListener, EventListener {
     /**
      * Camera position on Z axis
      */
-    private static final float DEFAULT_CAMERA_POSITION = DEFAULT_MAX_MODEL_SIZE *2 ;
+    private static final float DEFAULT_CAMERA_POSITION = DEFAULT_MAX_MODEL_SIZE *2;
     /**
      * Position 0f,0f,0f
      */
@@ -222,7 +222,7 @@ public class SceneLoader implements LoadListener, EventListener {
         this.glView = glView;
 
         lightBulb.setLocation(new float[]{0, 20, 0});
-        lightBulb.setColor(new float[]{0f,0f,0f,0f});
+//        lightBulb.setColor(new float[]{0f,0f,0f,0f});
     }
 
     public void init() {
@@ -418,17 +418,17 @@ public class SceneLoader implements LoadListener, EventListener {
     }
 
     public final void toggleLighting() {
-        if (this.drawLighting && this.rotatingLight) {
+//        if (this.drawLighting && this.rotatingLight) {
             this.rotatingLight = false;
-            makeToastText("Light stopped", Toast.LENGTH_SHORT);
-        } else if (this.drawLighting && !this.rotatingLight) {
-            this.drawLighting = false;
-            makeToastText("Lights off", Toast.LENGTH_SHORT);
-        } else {
-            this.drawLighting = true;
-            this.rotatingLight = true;
-            makeToastText("Light on", Toast.LENGTH_SHORT);
-        }
+//            makeToastText("Light stopped", Toast.LENGTH_SHORT);
+//        } else if (this.drawLighting && !this.rotatingLight) {
+//            this.drawLighting = false;
+//            makeToastText("Lights off", Toast.LENGTH_SHORT);
+//        } else {
+//            this.drawLighting = true;
+//            this.rotatingLight = true;
+//            makeToastText("Light on", Toast.LENGTH_SHORT);
+//        }
         requestRender();
     }
 

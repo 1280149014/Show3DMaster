@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         }
 
         setupOnSystemVisibilityChangeListener();
-
+        gLView.getScene().toggleLighting();
         try {
             gLView.setTouchController(touchController);
         }catch (Exception e) {

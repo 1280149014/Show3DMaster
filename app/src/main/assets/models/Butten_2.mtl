@@ -12,7 +12,6 @@ newmtl aiStandardSurface8SG
 	Kd 0.0000 0.0000 0.0000
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-	map_Ka donghua2_word_5_BaseColor.png
     map_Kd donghua2_word_5_BaseColor.png
     map_Ks donghua2_word_5_BaseColor.png
 
@@ -27,7 +26,6 @@ newmtl pasted__Icon_1SG
 	Kd 0.0000 0.0000 0.0000
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-	map_Ka donghua2_aiStandardSurface4_BaseColor.png
     map_Kd donghua2_aiStandardSurface4_BaseColor.png
 
 
@@ -59,6 +57,4 @@ newmtl aiStandardSurface9SG
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
 
-map_Ka donghua2_word_5_BaseColor.png
         map_Kd donghua2_word_5_BaseColor.png
-        map_Ks donghua2_word_5_BaseColor.png

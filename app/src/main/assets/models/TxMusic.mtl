@@ -1,0 +1,25 @@
+newmtl TxMusic:phong1SG
+illum 4
+Kd 0.06 0.06 0.06
+map_Kd icon_white_deep.png
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.13 0.13 0.13
+Ns 91.85
+newmtl TxMusic:phong5SG
+illum 4
+Kd 0.42 0.01 0.81
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.09 0.02 0.78
+Ns 64.42
+newmtl TxMusic:phongE1SG
+illum 4
+Kd 1.00 1.00 1.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.55 0.55 0.55
+Ns 60.31
