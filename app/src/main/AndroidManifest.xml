@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/timg"
         android:supportsRtl="true"
         android:name="BaseApplication"
-        android:theme="@style/AppTheme">
+        android:theme="@style/MyAppTheme">
         <activity android:name=".ui.MainActivity"
             android:theme="@style/MyAppTheme"
             android:screenOrientation="landscape"

@@ -123,7 +123,7 @@ public class DemoLoaderTask extends LoaderTask {
                         DemoLoaderTask.this.onLoad(obj53);
                     }
                 }).load(new URI("assets://assets/models/Butten_6.obj")).get(0);
-//                setId(app0,"wecarflow");
+                setId(app0,"wecar");
                 res.add(app0);
                 //super.onLoad(obj53);
             } catch (Exception ex) {
@@ -141,7 +141,8 @@ public class DemoLoaderTask extends LoaderTask {
                         DemoLoaderTask.this.onLoad(obj53);
                     }
                 }).load(new URI("assets://assets/models/Butten_5.obj")).get(0);
-
+//                setId(app1,"calendar");
+                setId(app1,"wecarflow");
                 res.add(app1);
                 //super.onLoad(obj53);
             } catch (Exception ex) {
@@ -160,8 +161,7 @@ public class DemoLoaderTask extends LoaderTask {
                         DemoLoaderTask.this.onLoad(obj53);
                     }
                 }).load(new URI("assets://assets/models/Butten_4.obj")).get(0);
-//                setId(app2,"wecarflow");
-                setId(app2,"deskclock");
+                setId(app2,"calendar");
                 res.add(app2);
                 //super.onLoad(obj53);
             } catch (Exception ex) {
@@ -181,6 +181,7 @@ public class DemoLoaderTask extends LoaderTask {
                     }
                 }).load(new URI("assets://assets/models/Butten_3.obj")).get(0);
 //                setId(app3,"wecar");
+                setId(app3,"deskclock");
                 res.add(app3);
                 //super.onLoad(obj53);
             } catch (Exception ex) {
@@ -200,7 +201,7 @@ public class DemoLoaderTask extends LoaderTask {
                     }
                 }).load(new URI("assets://assets/models/Butten_2.obj")).get(0);
 //                setId(app4,"deskclock");
-//                setId(app4,"settings");
+                setId(app4,"settings");
                 res.add(app4);
                 //super.onLoad(obj53);
             } catch (Exception ex) {
@@ -219,8 +220,7 @@ public class DemoLoaderTask extends LoaderTask {
                         DemoLoaderTask.this.onLoad(obj53);
                     }
                 }).load(new URI("assets://assets/models/Butten_1.obj")).get(0);
-//                setId(app5,"calendar");
-//                setId(app5,"wechat");
+                setId(app5,"wechat");
                 res.add(app5);
                 //super.onLoad(obj53);
             } catch (Exception ex) {

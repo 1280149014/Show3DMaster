@@ -559,7 +559,7 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
 
                     for (int e = 0; e < objData.getElements().size(); e++) {
                         Element element = objData.getElements().get(e);
-                        Log.i("ModelRenderer", "element... '" + element.toString());
+//                        Log.i("ModelRenderer", "element... '" + element.toString());
                         // check required info
                         if (element.getMaterial() == null || element.getMaterial().getTextureData() == null)
                             continue;
@@ -569,7 +569,7 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
                         if (textureId != null) continue;
 
                         // bind texture
-                        Log.i("ModelRenderer", "Loading material texture for element... '" + element);
+//                        Log.i("ModelRenderer", "Loading material texture for element... '" + element);
                         textureId = GLUtil.loadTexture(element.getMaterial().getTextureData());
                         element.getMaterial().setTextureId(textureId);
 
@@ -577,7 +577,7 @@ public class ModelRenderer implements GLSurfaceView.Renderer {
                         textures.put(element.getMaterial().getTextureData(), textureId);
 
                         // log event
-                        Log.i("ModelRenderer", "Loaded material texture for element. id: " + textureId);
+//                        Log.i("ModelRenderer", "Loaded material texture for element. id: " + textureId);
 
                         // FIXME: we have to set this, otherwise the RendererFactory won't return textured shader
                         objData.setTextureData(element.getMaterial().getTextureData());

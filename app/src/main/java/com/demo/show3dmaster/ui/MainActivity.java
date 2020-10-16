@@ -4,17 +4,27 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Point;
 import android.net.Uri;
 import android.opengl.GLSurfaceView;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Display;
+import android.view.KeyCharacterMap;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
+import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.demo.show3dmaster.R;
@@ -61,10 +71,14 @@ public class MainActivity extends AppCompatActivity implements EventListener {
     View app2Layout ;
 
 
+    int mHeight = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        hideBottomUIMenu();
+//        Log.i("ModelActivity", getNavigationBarHeight(this)+"666");
+
         setContentView(R.layout.activity_main);
         startFuping3D();
         handler = new Handler(getMainLooper());
@@ -78,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 //        });
 
 //        gLView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
-
+//        gLView.getScene().toggleLighting();
         gLView.setOnClickListener(v -> Log.i(TAG, "1111111111111 "));
 
         try {
@@ -91,7 +105,9 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 
         Log.i("ModelActivity", "Finished loading");
 
+
     }
+
 
     private void startFuping3D(){
         try{
@@ -114,6 +130,21 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         }
 
     }
+//    protected void hideBottomUIMenu() {
+//        //隐藏虚拟按键，并且全屏
+//        //隐藏虚拟按键，并且全屏
+//        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
+//            View v = this.getWindow().getDecorView();
+//            v.setSystemUiVisibility(View.GONE);
+//        } else if (Build.VERSION.SDK_INT >= 19) {
+//            //for new api versions.
+//            View decorView = getWindow().getDecorView();
+//            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+//                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
+//            decorView.setSystemUiVisibility(uiOptions);
+//        }
+//
+//    }
 
     @Override
     protected void onResume() {
@@ -166,7 +197,6 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         }catch (Exception e) {
             e.printStackTrace();
         }
-
 
     }
 

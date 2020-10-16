@@ -240,7 +240,7 @@ public final class ColladaLoader {
                         if (element.getMaterial() != null && element.getMaterial().getTextureFile() != null){
                             final String textureFile = element.getMaterial().getTextureFile();
                             // log event
-                            Log.i("ColladaLoaderTask", "Reading texture file... " + textureFile);
+//                            Log.i("ColladaLoaderTask", "Reading texture file... " + textureFile);
 
                             // read texture data
                             try (InputStream stream = ContentUtils.getInputStream(textureFile)) {
@@ -249,7 +249,7 @@ public final class ColladaLoader {
                                 element.getMaterial().setTextureData(IOUtils.read(stream));
 
                                 // log event
-                                Log.i("ColladaLoaderTask", "Texture linked... " + element.getMaterial().getTextureData().length+" (bytes)");
+//                                Log.i("ColladaLoaderTask", "Texture linked... " + element.getMaterial().getTextureData().length+" (bytes)");
 
                             } catch (Exception ex) {
                                 Log.e("ColladaLoaderTask", String.format("Error reading texture file: %s", ex.getMessage()));

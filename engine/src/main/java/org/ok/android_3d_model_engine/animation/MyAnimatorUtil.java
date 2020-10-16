@@ -69,7 +69,7 @@ public class MyAnimatorUtil {
             // 正常的旋转角度, 应该是 从 0 到 360度
             // 参照黄工意见, 改为步长 处理, 考虑到大致的针数在 60,
             // 步长设成10,需要72次一圈 360 度,耗时1.2s左右
-            degree = degree + 10;
+            degree = degree + 6;
             calculateScale(newScale,degree);
             obj.setRotation2(new float[]{-10,degree, 0},
                     new float[]{0

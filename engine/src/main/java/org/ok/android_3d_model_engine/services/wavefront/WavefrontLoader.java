@@ -195,7 +195,7 @@ public class WavefrontLoader {
                     final Element element = meshData.getElements().get(e);
 
                     // log event
-                    Log.i("WavefrontLoader", "Processing element... " + element.getId());
+//                    Log.i("WavefrontLoader", "Processing element... " + element.getId());
 
                     // get material id
                     final String elementMaterialId = element.getMaterialId();
@@ -213,7 +213,7 @@ public class WavefrontLoader {
                         if (elementMaterial.getTextureFile() != null) {
 
                             // log event
-                            Log.i("WavefrontLoader", "Reading texture file... " + elementMaterial.getTextureFile());
+//                            Log.i("WavefrontLoader", "Reading texture file... " + elementMaterial.getTextureFile());
 
                             // read texture data
                             try (InputStream stream = ContentUtils.getInputStream(elementMaterial.getTextureFile())) {
