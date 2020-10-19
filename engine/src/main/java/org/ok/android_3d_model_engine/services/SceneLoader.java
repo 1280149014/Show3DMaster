@@ -816,7 +816,7 @@ public class SceneLoader implements LoadListener, EventListener {
                 case "wechat":
                     //参数是包名，类全限定名，注意直接用类名不行
                     cn=new ComponentName("com.tencent.mm",
-                            "com.tencent.mm.ui.LauncherUI");
+                            "com.tencent.mm.ui.SplashUI");
                     break;
                 case "settings":
                     //参数是包名，类全限定名，注意直接用类名不行

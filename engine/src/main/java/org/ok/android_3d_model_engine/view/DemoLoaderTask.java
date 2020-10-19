@@ -31,6 +31,9 @@ import java.util.Objects;
  */
 public class DemoLoaderTask extends LoaderTask {
     private Context mContext;
+    private String  appIconList[]={"assets://assets/models/Butten_1.obj","assets://assets/models/TxMusic.obj",
+            "assets://assets/models/TxCar.obj", "assets://assets/models/Calendar.obj",
+           "assets://assets/models/Clock.obj","assets://assets/models/Setting.obj"};
     /**
      * Build a new progress dialog for loading the data model asynchronously
      *
@@ -54,53 +57,8 @@ public class DemoLoaderTask extends LoaderTask {
         final List<Exception> errors = new ArrayList<>();
 
         try {
-            // 测试 通过数组生成立方体,  水壶正上方的obj
-            // test cube made of arrays
-//            Object3DData obj10 = Cube.buildCubeV1_with_normals();
-//            // rgba  alpha 0 为 最后一个数字 好像是亮度
-//            obj10.setColor(new float[] { 1f, 0f, 0f, 0f });
-//            obj10.setLocation(new float[] { -4f, -5f, 0f });
-//            obj10.setScale(0.5f, 0.5f, 0.5f);
-//            super.onLoad(obj10);
-
-            //通过线条实现 cube, 三角形立方体
-            // test cube made of wires (I explode it to see the faces better)
-//            Object3DData obj110 = Cube.buildCubeV1();
-//            obj110.setColor(new float[] { 1f, 1f, 0f, 0.5f });
-//            obj110.setLocation(new float[] { 1f, 2f, 0f });
-////            Exploder.centerAndScaleAndExplode(obj110, 2.0f, 1.5f);
-//            obj110.setId(obj110.getId() + "_exploded");
-//            obj110.setScale(0.5f, 0.5f, 0.5f);
-//            super.onLoad(obj110);
-
-            //每个面有不同的颜色
-            // test cube made of wires (I explode it to see the faces better)
-//            Object3DData obj12 = Cube.buildCubeV1_with_normals();
-//            obj12.setColor(new float[] { 1f, 0f, 1f, 1f });
-//            obj12.setLocation(new float[] { 0f, -5f, 0f });
-//            obj12.setScale(0.5f, 0.5f, 0.5f);
-//            super.onLoad(obj12);
-
-            //绿色的cube  , 指标
-            // test cube made of indices
-//            InputStream open11 = ContentUtils.getInputStream("phone.png");
-//            Object3DData obj11 = Square.buildCubeV3face(IOUtils.read(open11));
-//            open11.close();
-//            obj11.setColor(new float[] { 1f, 0f, 0, 0.75f });
-//            obj11.setLocation(new float[] { -2f, -5f, 0f });
-//            obj11.setScale(0.5f, 0.5f, 0.5f);
-//            super.onLoad(obj11);
-//
-//            Object3DData obj10 = Cube.buildCubeV1();
-//            obj10.setColor(new float[] { 0f, 1f, 0, 0.25f });
-//            obj10.setLocation(new float[] { -2f, -5f, 0f });
-//            obj10.setScale(0.5f, 0.5f, 0.5f);
-//            obj10.setFriend(obj11);
-//            obj10.getFriend().setFriend(obj10);
-//            super.onLoad(obj10);
 
             List<Object3DData> res = new ArrayList<>();
-
 
             float iconRotateAngle = -10;
 //            List<Object3DData> app0 = AppIconCube.createAppIconCube("setting_icon.png",
@@ -122,7 +80,7 @@ public class DemoLoaderTask extends LoaderTask {
                         Rescaler.rescale(obj53, 2f);
                         DemoLoaderTask.this.onLoad(obj53);
                     }
-                }).load(new URI("assets://assets/models/Setting.obj")).get(0);
+                }).load(new URI(appIconList[5])).get(0);
                 setId(app0,"settings");
                 res.add(app0);
                 //super.onLoad(obj53);
@@ -140,7 +98,7 @@ public class DemoLoaderTask extends LoaderTask {
                         Rescaler.rescale(obj53, 2f);
                         DemoLoaderTask.this.onLoad(obj53);
                     }
-                }).load(new URI("assets://assets/models/Clock.obj")).get(0);
+                }).load(new URI(appIconList[4])).get(0);
 //                setId(app1,"calendar");
                 setId(app1,"deskclock");
                 res.add(app1);
@@ -160,7 +118,7 @@ public class DemoLoaderTask extends LoaderTask {
                         Rescaler.rescale(obj53, 2f);
                         DemoLoaderTask.this.onLoad(obj53);
                     }
-                }).load(new URI("assets://assets/models/Calendar.obj")).get(0);
+                }).load(new URI(appIconList[3])).get(0);
                 setId(app2,"calendar");
                 res.add(app2);
                 //super.onLoad(obj53);
@@ -179,7 +137,7 @@ public class DemoLoaderTask extends LoaderTask {
                         Rescaler.rescale(obj53, 2f);
                         DemoLoaderTask.this.onLoad(obj53);
                     }
-                }).load(new URI("assets://assets/models/TxCar.obj")).get(0);
+                }).load(new URI(appIconList[2])).get(0);
 //                setId(app3,"wecar");
                 setId(app3,"wecar");
                 res.add(app3);
@@ -199,7 +157,7 @@ public class DemoLoaderTask extends LoaderTask {
                         Rescaler.rescale(obj53, 2f);
                         DemoLoaderTask.this.onLoad(obj53);
                     }
-                }).load(new URI("assets://assets/models/TxMusic.obj")).get(0);
+                }).load(new URI(appIconList[1])).get(0);
 //                setId(app4,"deskclock");
                 setId(app4,"wecarflow");
                 res.add(app4);
@@ -219,7 +177,7 @@ public class DemoLoaderTask extends LoaderTask {
                         Rescaler.rescale(obj53, 2f);
                         DemoLoaderTask.this.onLoad(obj53);
                     }
-                }).load(new URI("assets://assets/models/Butten_1.obj")).get(0);
+                }).load(new URI(appIconList[0])).get(0);
                 setId(app5,"wechat");
                 res.add(app5);
                 //super.onLoad(obj53);
