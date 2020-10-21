@@ -127,11 +127,6 @@ public class ModelSurfaceView extends GLSurfaceView implements EventListener {
 		scene.setAutoAnimation(isAutoAnimation);
 	}
 
-	public void rotateAnimate(){
-		if(isClickAble){
-			scene.setClicked(true);
-		}
-	}
 
 	/**
 	 * <pre>
