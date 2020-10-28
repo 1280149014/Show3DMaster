@@ -81,7 +81,7 @@ public class DemoLoaderTask extends LoaderTask {
                         DemoLoaderTask.this.onLoad(obj53);
                     }
                 }).load(new URI(appIconList[5])).get(0);
-                setId(app0,"settings");
+                setId(app0,"setting");
                 res.add(app0);
                 //super.onLoad(obj53);
             } catch (Exception ex) {
@@ -100,7 +100,7 @@ public class DemoLoaderTask extends LoaderTask {
                     }
                 }).load(new URI(appIconList[4])).get(0);
 //                setId(app1,"calendar");
-                setId(app1,"deskclock");
+                setId(app1,"clock");
                 res.add(app1);
                 //super.onLoad(obj53);
             } catch (Exception ex) {
@@ -139,7 +139,7 @@ public class DemoLoaderTask extends LoaderTask {
                     }
                 }).load(new URI(appIconList[2])).get(0);
 //                setId(app3,"wecar");
-                setId(app3,"wecar");
+                setId(app3,"wecarui");
                 res.add(app3);
                 //super.onLoad(obj53);
             } catch (Exception ex) {

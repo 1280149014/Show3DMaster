@@ -108,17 +108,12 @@ public class MyAnimatorUtil {
 
     public void startAnimation(Object3DData object3DData){
         if(map.containsKey(object3DData)){
+            Log.i(TAG, "动画启动:"+objects.toString());
             ObjectStatus status = map.get(object3DData);
             status.rotateAnimationObj(object3DData);
             map.put(object3DData,status);
         }
-        if(object3DData != null && map.containsKey(object3DData.getFriend())){
-            ObjectStatus status = map.get(object3DData.getFriend());
-            status.rotateAnimationObj(object3DData.getFriend());
-            map.put(object3DData.getFriend(),status);
-        }
     }
-
 
 
 }

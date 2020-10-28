@@ -197,10 +197,6 @@ public class SceneLoader implements LoadListener, EventListener {
      */
     private boolean isAutoAnimation = false;
 
-    /**
-     *  新增自定义属性, 点击之后会旋转一圈
-     */
-    private boolean isClicked = false;
 
     /**
      * time when model loading has started (for stats)
@@ -269,10 +265,6 @@ public class SceneLoader implements LoadListener, EventListener {
         isAutoAnimation = autoAnimation;
     }
 
-    public void setClicked(boolean flag){
-        isClicked = flag;
-    }
-
 
     /**
      * Hook for animating the objects before the rendering
@@ -289,7 +281,8 @@ public class SceneLoader implements LoadListener, EventListener {
         for (int i = 0; i < objects.size(); i++) {
             Object3DData obj = objects.get(i);
             if(obj.isNeedRotate()){
-                myAnimator.startAnimation(obj);
+                myAnimator.
+                        startAnimation(obj);
             }
         }
 
@@ -339,7 +332,6 @@ public class SceneLoader implements LoadListener, EventListener {
     public final synchronized List<Object3DData> getObjects() {
         return objects;
     }
-
     public final synchronized List<Object3DData> getGUIObjects() {
         return guiObjects;
     }
@@ -685,6 +677,55 @@ public class SceneLoader implements LoadListener, EventListener {
         myAnimator = new MyAnimatorUtil(getObjects());
     }
 
+    private void startActivity(String id){
+        Intent intent = new Intent();
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+        ComponentName cn = null;
+        try{
+            switch (id){
+                case "wechat":
+                    //参数是包名，类全限定名，注意直接用类名不行
+                    cn=new ComponentName("com.tencent.mm",
+                            "com.tencent.mm.ui.SplashUI");
+                    break;
+                case "setting":
+                    //参数是包名，类全限定名，注意直接用类名不行
+                    cn=new ComponentName("com.android.settings",
+                            "com.android.settings.Settings");
+                    break;
+                case "wecarui":
+                    //参数是包名，类全限定名，注意直接用类名不行
+                    cn=new ComponentName("com.tencent.wecar",
+                            "com.tencent.wecar.MainActivity");
+                    break;
+                case "wecarflow":
+                    //参数是包名，类全限定名，注意直接用类名不行
+                    cn=new ComponentName("com.tencent.wecarflow",
+                            "com.tencent.wecarflow.MainActivity");
+                    break;
+                case "calendar":
+                    //参数是包名，类全限定名，注意直接用类名不行
+                    cn=new ComponentName("com.android.calendar",
+                            "com.android.calendar.AllInOneActivity");
+                    break;
+                case "clock":
+                    //参数是包名，类全限定名，注意直接用类名不行
+                    cn=new ComponentName("com.android.deskclock",
+                            "com.android.deskclock.DeskClock");
+                    break;
+
+                default:
+                    break;
+            }
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setComponent(cn);
+            parent.startActivity(intent);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
     /**
      * 这个rescale 的目的是按照最大的尺寸进行缩放
      * @param objs
@@ -778,82 +819,21 @@ public class SceneLoader implements LoadListener, EventListener {
                 objectToSelect.setNeedRotate(true);
                 objectToSelect.setNeedScale(true);
                 String id = objectToSelect.getId();
-
+                Log.d(TAG,"选中.."+objectToSelect.toString());
 
                 new Handler().postDelayed(new Runnable(){
                     public void run() {
                         //execute the task
-                        startAvtivity(id);
+                        startActivity(id);
                     }
-                }, 1300);
+                }, 800);
 
-               
-//com.tencent.wecar/.MainActivity
-//
-//com.tencent.wecarflow/.MainActivity
-//
-//com.android.car.carlauncher/.AppGridActivity
-//com.android.car.carlauncher/.CarLauncher
-//
-//
-//com.android.settings/.Settings
-//com.android.car.settings/.common.CarSettingActivity
-//
-//
-//com.android.deskclock/.DeskClock
 
             }
         }
         return false;
     }
 
-    private void startAvtivity(String id){
-        Intent intent = new Intent();
-        intent.addCategory(Intent.CATEGORY_LAUNCHER);
-        ComponentName cn = null;
-        try{
-            switch (id){
-                case "wechat":
-                    //参数是包名，类全限定名，注意直接用类名不行
-                    cn=new ComponentName("com.tencent.mm",
-                            "com.tencent.mm.ui.SplashUI");
-                    break;
-                case "settings":
-                    //参数是包名，类全限定名，注意直接用类名不行
-                    cn=new ComponentName("com.android.settings",
-                            "com.android.settings.Settings");
-                    break;
-                case "wecar":
-                    //参数是包名，类全限定名，注意直接用类名不行
-                    cn=new ComponentName("com.tencent.wecar",
-                            "com.tencent.wecar.MainActivity");
-                    break;
-                case "wecarflow":
-                    //参数是包名，类全限定名，注意直接用类名不行
-                    cn=new ComponentName("com.tencent.wecarflow",
-                            "com.tencent.wecarflow.MainActivity");
-                    break;
-                case "calendar":
-                    //参数是包名，类全限定名，注意直接用类名不行
-                    cn=new ComponentName("com.android.calendar",
-                            "com.android.calendar.AllInOneActivity");
-                    break;
-                case "deskclock":
-                    //参数是包名，类全限定名，注意直接用类名不行
-                    cn=new ComponentName("com.android.deskclock",
-                            "com.android.deskclock.DeskClock");
-                    break;
-
-                default:
-                    break;
-            }
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.setComponent(cn);
-            parent.startActivity(intent);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 
 
     private void rescale(List<Object3DData> datas, float newScale, float[] newPosition) {

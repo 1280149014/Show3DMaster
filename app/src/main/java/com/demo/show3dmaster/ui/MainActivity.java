@@ -4,35 +4,27 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Point;
+import android.content.IntentFilter;
 import android.net.Uri;
-import android.opengl.GLSurfaceView;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.Display;
-import android.view.KeyCharacterMap;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
-import android.view.ViewTreeObserver;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.demo.show3dmaster.R;
 
+import org.ok.android_3d_model_engine.animation.MyAnimatorUtil;
 import org.ok.android_3d_model_engine.camera.CameraController;
 import org.ok.android_3d_model_engine.collision.CollisionController;
 import org.ok.android_3d_model_engine.controller.TouchController;
-import org.ok.android_3d_model_engine.controller.TouchEvent;
+import org.ok.android_3d_model_engine.model.Object3DData;
+import org.ok.android_3d_model_engine.receiver.VrBroadCastReceiver;
 import org.ok.android_3d_model_engine.view.ModelRenderer;
 import org.ok.android_3d_model_engine.view.ModelSurfaceView;
 
@@ -40,17 +32,14 @@ import org.ok.util.android.ContentUtils;
 import org.ok.util.event.EventListener;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.EventObject;
-import java.util.logging.Level;
-
-import javax.microedition.khronos.egl.EGL10;
-import javax.microedition.khronos.egl.EGLDisplay;
+import java.util.List;
 
 /**
  * 2020-9-17   能够显示 obj文件, 并且不会出现
- *
+ * <p>
  * 2020-9-18   独立出几个obj文件, 通过layout加载, 显示
- *
  */
 public class MainActivity extends AppCompatActivity implements EventListener {
 
@@ -59,40 +48,31 @@ public class MainActivity extends AppCompatActivity implements EventListener {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private ModelSurfaceView gLView;  // 这个就是真正的view
-    private ModelSurfaceView app1View;  //
+
     private TouchController touchController;
     private CollisionController collisionController;
-
-
+    MyAnimatorUtil myAnimator;
+    private List<Object3DData> objects = new ArrayList<>();
     private Handler handler;
     private CameraController cameraController;
 
-//    View app1Layout ;
-    View app2Layout ;
 
 
-    int mHeight = 0;
+    private IntentFilter mIntentFilter = null;
+
+    private VrBroadCastReceiver mMyBroadcastRecvier = null;
+    Object3DData objSingle = new Object3DData();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//        hideBottomUIMenu();
-//        Log.i("ModelActivity", getNavigationBarHeight(this)+"666");
 
         setContentView(R.layout.activity_main);
         startFuping3D();
         handler = new Handler(getMainLooper());
-        gLView = (ModelSurfaceView)findViewById(R.id.backView);
-//        app1View = findViewById(R.id.app1);
-//        app1Layout = findViewById(R.id.app1Layout);
-//
-//        app1Layout.setOnClickListener(v -> {
-//            Toast.makeText(MainActivity.this,"app1 icon is clicked",Toast.LENGTH_SHORT).show();
-//            app1View.rotateAnimate();
-//        });
+        gLView = (ModelSurfaceView) findViewById(R.id.backView);
 
-//        gLView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
-//        gLView.getScene().toggleLighting();
         gLView.setOnClickListener(v -> Log.i(TAG, "1111111111111 "));
 
         try {
@@ -103,18 +83,22 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         }
 
 
-        Log.i("ModelActivity", "Finished loading");
-
+        //过滤器
+        mIntentFilter = new IntentFilter(VrBroadCastReceiver.LAUNCHER_ACTION);
+        //创建广播接收者的对象
+        mMyBroadcastRecvier = new VrBroadCastReceiver();
+        //注册广播接收者的对象
+        registerReceiver(mMyBroadcastRecvier, mIntentFilter);
 
     }
 
 
-    private void startFuping3D(){
-        try{
+    private void startFuping3D() {
+        try {
             Intent intentLauncher = new Intent();
             intentLauncher.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intentLauncher.setComponent(new ComponentName(
-                    "jp.clouds_inc.android.renesaschina20","jp.clouds_inc.android.renesas.china20.MainActivity"));
+                    "jp.clouds_inc.android.renesaschina20", "jp.clouds_inc.android.renesas.china20.MainActivity"));
             ActivityOptions launcherOptions = null;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 launcherOptions = ActivityOptions.makeBasic();
@@ -123,28 +107,14 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                 launcherOptions.setLaunchDisplayId(1);
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                startActivity(intentLauncher,launcherOptions.toBundle());
+                startActivity(intentLauncher, launcherOptions.toBundle());
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
-//    protected void hideBottomUIMenu() {
-//        //隐藏虚拟按键，并且全屏
-//        //隐藏虚拟按键，并且全屏
-//        if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
-//            View v = this.getWindow().getDecorView();
-//            v.setSystemUiVisibility(View.GONE);
-//        } else if (Build.VERSION.SDK_INT >= 19) {
-//            //for new api versions.
-//            View decorView = getWindow().getDecorView();
-//            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-//                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
-//            decorView.setSystemUiVisibility(uiOptions);
-//        }
-//
-//    }
+
 
     @Override
     protected void onResume() {
@@ -152,7 +122,14 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         try {
             Log.i("ModelActivity", "Loading TouchController...");
             touchController = new TouchController(this);
-            touchController.addListener(this);
+            touchController.addListener(new EventListener() {
+                @Override
+                public boolean onEvent(EventObject event) {
+//                    Object3DData objectToSelect = ((CollisionEvent) event).getObject();
+                    Log.d("SceneLoader...", event.toString());
+                    return false;
+                }
+            });
         } catch (Exception e) {
             Log.e("ModelActivity", e.getMessage(), e);
             Toast.makeText(this, "Error loading TouchController:\n" + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -160,18 +137,13 @@ public class MainActivity extends AppCompatActivity implements EventListener {
 
         try {
             Log.i("ModelActivity", "Loading CollisionController...");
-            collisionController = new CollisionController(gLView, gLView.getScene()){
+            collisionController = new CollisionController(gLView, gLView.getScene()) {
                 @Override
                 public boolean onEvent(EventObject event) {
-                    if(event instanceof TouchEvent){
-                        TouchEvent touchEvent = (TouchEvent)event;
-                        if (touchEvent.getAction() == TouchEvent.CLICK) {
-                            gLView.rotateAnimate();
-                        }
-                    }
                     return super.onEvent(event);
                 }
             };
+            //可以将点击事件移交到这处理
             collisionController.addListener(gLView.getScene());
             touchController.addListener(collisionController);
             touchController.addListener(gLView.getScene());
@@ -194,9 +166,38 @@ public class MainActivity extends AppCompatActivity implements EventListener {
         gLView.getScene().toggleLighting();
         try {
             gLView.setTouchController(touchController);
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+        objects = gLView.getScene().getObjects();
+        if (objects != null && objects.size() > 0) {
+            myAnimator = new MyAnimatorUtil(objects);
+        }
+
+        mMyBroadcastRecvier.setVolumeChangeListener(new VrBroadCastReceiver.VoiceChangeListener() {
+            @Override
+            public void VoiceChanged(String id) {
+                objects = gLView.getScene().getObjects();
+                if (objects != null && objects.size() > 0) {
+                    myAnimator = new MyAnimatorUtil(objects);
+                    Log.i("ModelActivity", "Finished loading");
+                    Log.i("ModelActivity", objects.toString());
+                    Log.i(TAG, "收到广播执行动画id" + id);
+                    for (int i = 0; i < objects.size(); i++) {
+                        Object3DData obj = objects.get(i);
+                        if (obj.getId().equals(id)) {
+                            objSingle=obj;
+                            objSingle.setNeedScale(true);
+                            objSingle.setNeedRotate(true);
+                            myAnimator.startAnimation(objSingle);
+                            Log.i("ModelActivity", "执行动画完成");
+                        }
+
+                    }
+                }
+                Toast.makeText(MainActivity.this, "发送成功", Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 
@@ -254,21 +255,28 @@ public class MainActivity extends AppCompatActivity implements EventListener {
                     }
                 }
 
-            }
+        }
     }
 
     @Override
-    public boolean onEvent (EventObject event){
+    public boolean onEvent(EventObject event) {
         if (event instanceof ModelRenderer.ViewEvent) {
             ModelRenderer.ViewEvent viewEvent = (ModelRenderer.ViewEvent) event;
             if (viewEvent.getCode() == ModelRenderer.ViewEvent.Code.SURFACE_CHANGED) {
-                Log.d(TAG," viewEvent.getWidth() = " + viewEvent.getWidth() +
-                        ", viewEvent.getWidth()=" +  viewEvent.getHeight());
+                Log.d(TAG, " viewEvent.getWidth() = " + viewEvent.getWidth() +
+                        ", viewEvent.getWidth()=" + viewEvent.getHeight());
                 touchController.setSize(viewEvent.getWidth(), viewEvent.getHeight());
                 gLView.setTouchController(touchController);
             }
         }
         return true;
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mMyBroadcastRecvier);
+    }
+
 
 }
