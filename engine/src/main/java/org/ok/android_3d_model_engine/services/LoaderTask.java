@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import org.ok.android_3d_model_engine.model.Object3DData;
+import org.ok.android_3d_model_engine.view.FullScreenDialog;
 
 import java.net.URI;
 import java.util.List;
@@ -27,7 +28,7 @@ public abstract class LoaderTask extends AsyncTask<Void, String, List<Object3DDa
 	/**
 	 * The dialog that will show the progress of the loading
 	 */
-	private final ProgressDialog dialog;
+	private final FullScreenDialog dialog;
 
 	/**
 	 * Build a new progress dialog for loading the data model asynchronously
@@ -36,7 +37,7 @@ public abstract class LoaderTask extends AsyncTask<Void, String, List<Object3DDa
 	 */
 	public LoaderTask(Context parent, URI uri, LoadListener callback) {
 		this.uri = uri;
-		this.dialog = new ProgressDialog(parent);
+		this.dialog = new FullScreenDialog(parent);
 		this.callback = callback;
 	}
 
@@ -44,8 +45,7 @@ public abstract class LoaderTask extends AsyncTask<Void, String, List<Object3DDa
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
-		this.dialog.setMessage("Loading...");
-		this.dialog.setCancelable(false);
+		this.dialog.startAnimation();
 		//this.dialog.getWindow().setGravity(Gravity.BOTTOM);
 		this.dialog.show();
 	}
@@ -74,13 +74,14 @@ public abstract class LoaderTask extends AsyncTask<Void, String, List<Object3DDa
 	@Override
 	protected void onProgressUpdate(String... values) {
 		super.onProgressUpdate(values);
-		this.dialog.setMessage(values[0]);
+
 	}
 
 	@Override
 	protected void onPostExecute(List<Object3DData> data) {
 		super.onPostExecute(data);
 		if (dialog.isShowing()) {
+			this.dialog.stopAnimation();
 			dialog.dismiss();
 		}
 	}
